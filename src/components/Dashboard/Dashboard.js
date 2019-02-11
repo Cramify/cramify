@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import axios from 'axios';
+import {Link} from 'react-router-dom'
 
 export default class DashBoard extends Component {
     constructor(props) {
@@ -10,10 +12,15 @@ export default class DashBoard extends Component {
         }
     }
 
+    logout = () => {
+        axios.post('/auth/logout')
+    }
+
     render() {
         return (
             <div>
-                DashBoard
+                Dashboard
+                <Link to='/'><button onClick={this.logout}>Logout</button></Link>
             </div>
         )
     }

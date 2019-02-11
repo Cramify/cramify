@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Register from './Register'
+import Login from './Login'
 
 export default class Home extends Component {
     constructor(props) {
@@ -15,6 +16,7 @@ export default class Home extends Component {
         return (
             <div>
                 <Register />
+                <Login />
                 Home
             </div>
         )
