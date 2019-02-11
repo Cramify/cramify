@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Register from './Register'
 
 export default class Home extends Component {
     constructor(props) {
@@ -13,6 +14,7 @@ export default class Home extends Component {
     render() {
         return (
             <div>
+                <Register />
                 Home
             </div>
         )
