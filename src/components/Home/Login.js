@@ -24,8 +24,7 @@ class Login extends Component {
     const { email, password } = this.state;
     const res = await axios.post("/auth/login", { email, password });
     this.props.history.push('/dashboard')
-    console.log(res.data.userData.username)
-    this.props.updateUser(res.data.userData.username)
+    this.props.updateUser(res.data.userData)
   };
 
   render() {

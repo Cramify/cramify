@@ -28,8 +28,9 @@ class Register extends Component{
             return alert('Check YoSelf')
         }
         const res = await axios.post('/auth/register', {email, username, password})
-        this.props.history.push('/dashboard')
-        this.props.updateUser(username)
+        if (res.data.loggedIn) this.props.history.push('/dashboard')
+        if (!res.data.loggedIn) alert(res.data.message)
+        this.props.updateUser(res.data.userData)
     }
 
 

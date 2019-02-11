@@ -25,11 +25,12 @@ app.use(
   })
 );
 
-//register/login endpoints
-
+// Account Endpoints
 app.post("/auth/register", ac.register);
 app.post("/auth/login", ac.login);
 app.post("/auth/logout", ac.logout);
+app.put("/auth/edit/:id", ac.changeUser);
+app.get("/auth/user", ac.getUser);
 
 //require in db through massive, listen to server for connection
 massive(CONNECTION_PORT).then(connection => {
