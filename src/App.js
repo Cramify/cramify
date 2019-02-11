@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import routes from './routes'
 
 //imported components
 
@@ -10,6 +11,7 @@ class App extends Component {
     return (
       <div className="App">
         It's working
+        {routes}
       </div>
     );
   }
