@@ -1,7 +1,10 @@
 import React, {Component} from 'react';
 import axios from 'axios'
+import {withRouter} from 'react-router-dom'
+import {connect} from 'react-redux'
+import {updateUser} from '../../ducks/reducer'
 
-export default class Register extends Component{
+class Register extends Component{
     constructor(props){
         super(props);
         
@@ -25,6 +28,9 @@ export default class Register extends Component{
             return alert('Check YoSelf')
         }
         const res = await axios.post('/auth/register', {email, username, password})
+        if (res.data.loggedIn) this.props.history.push('/dashboard')
+        if (!res.data.loggedIn) alert(res.data.message)
+        this.props.updateUser(res.data.userData)
     }
 
 
@@ -41,3 +47,9 @@ export default class Register extends Component{
         )
     }
 }
+
+const mapStateToProps = (store) => {
+    return {store}
+}
+
+export default connect(mapStateToProps, {updateUser})(withRouter(Register))
