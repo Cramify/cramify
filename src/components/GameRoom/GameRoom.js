@@ -1,3 +1,6 @@
+import React, {Component} from 'react'
+
+
 export default class GameRoom extends Component {
     constructor(props) {
         super(props)
