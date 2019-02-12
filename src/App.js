@@ -9,7 +9,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        It's working
+        Cramify
         {routes}
       </div>
     );
