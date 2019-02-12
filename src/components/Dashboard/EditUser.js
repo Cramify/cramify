@@ -31,14 +31,27 @@ class EditUser extends Component {
   };
 
   saveChanges = () => {
-    const {username, email, imgURL, password, passwordCheck, oldPassword} = this.state
+    const {
+      username,
+      email,
+      imgURL,
+      password,
+      passwordCheck,
+      oldPassword
+    } = this.state;
     if (password === passwordCheck) {
-      const body = {username, email, img_url: imgURL, newPassword: password, oldPassword}
+      const body = {
+        username,
+        email,
+        img_url: imgURL,
+        newPassword: password,
+        oldPassword
+      };
       axios.put(`/auth/edit/${this.props.user.id}`, body).then(res => {
         alert("edited");
       });
     }
-    this.props.toggleFn()
+    this.props.toggleFn();
   };
 
   render() {

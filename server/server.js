@@ -1,5 +1,4 @@
 //imported libraries
-
 const express = require("express");
 require("dotenv").config();
 const massive = require("massive");
@@ -25,6 +24,16 @@ app.use(
   })
 );
 
+// Set up Socket.io
+  const io = socket(app.listen(SERVER_PORT, () => console.log(`Our Group Project is over ${SERVER_PORT}`)))
+  io.on('connection', socket => {
+    console.log('socket connected')
+    socket.on('join room', data => {
+      socket.join(data.room)
+      socket.emit('display name', data)
+    })
+  })
+
 // Account Endpoints
 app.post("/auth/register", ac.register);
 app.post("/auth/login", ac.login);
@@ -35,7 +44,5 @@ app.get("/auth/user", ac.getUser);
 //require in db through massive, listen to server for connection
 massive(CONNECTION_PORT).then(connection => {
   app.set("db", connection);
-  app.listen(SERVER_PORT, () =>
-    console.log(`Our Group Project is over ${SERVER_PORT}`)
-  );
+  console.log('Connected to Database')
 });
