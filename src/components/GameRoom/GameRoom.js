@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import io from "socket.io-client";
 import { connect } from "react-redux";
+import { updateUser } from '../../ducks/reducer'
+
+import axios from "axios";
 
 class GameRoom extends Component {
   constructor(props) {
@@ -18,6 +21,14 @@ class GameRoom extends Component {
   }
 
   componentDidMount = async () => {
+    if (!this.props.user.username) {
+      try {
+        const loginData = await axios.get('/auth/user')
+        this.props.updateUser(loginData)
+      } catch (e) {
+        console.log(e)
+      }
+    }
     // Get user info, if none exists set as guest
     if (this.props.user.username) {
       await this.setState({
@@ -26,13 +37,13 @@ class GameRoom extends Component {
     }
 
     // Join the room
-    this.socket.emit("join room", {
+    await this.socket.emit("join room", {
       room: this.props.roomID,
       username: this.state.currentUser
     });
 
     // display names
-    this.socket.emit("display name", {
+    await this.socket.emit("display name", {
       room: this.props.roomID,
       username: this.state.currentUser
     });
@@ -75,4 +86,4 @@ class GameRoom extends Component {
 
 const mapStateToProps = store => store;
 
-export default connect(mapStateToProps)(GameRoom);
+export default connect(mapStateToProps, {updateUser})(GameRoom);

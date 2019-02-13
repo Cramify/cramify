@@ -6,7 +6,6 @@ const session = require("express-session");
 const socket = require("socket.io");
 const app = express();
 // working to this point
-// const server = require('http').createServer(app)
 const sharedSession = require("express-socket.io-session");
 //all libraries have been installed, double check package.json
 //main and proxy set up in package.json to "main":"server/server.js", "proxy":"http://localhost:4000"
@@ -41,7 +40,8 @@ io.use(
       secret: SECRET,
       resave: false,
       saveUninitialized: false
-    })
+    }),
+    { autoSave: true }
   )
 );
 
@@ -51,20 +51,25 @@ io.on("connection", socket => {
 
   //Join Room
   socket.on("join room", data => {
-    socket.join(data.room);
-    socket.handshake.session.userdata = data;
-    socket.handshake.session.save();
-    console.log("joined room ", data.room);
-    io.to(data.room).emit("room joined", data);
+    console.log(socket.handshake.session);
+    if (!socket.handshake.session.socketSession) {
+      socket.handshake.session.socketSession = data;
+      socket.handshake.session.save();
+    }
+    const { socketSession } = socket.handshake.session;
+    socket.join(socketSession.room);
+    console.log("joined room ", socketSession.room);
+    io.to(socketSession.room).emit("room joined", socketSession);
   });
 
   // Add name to users array
   socket.on("display name", data => {
-    if (socket.handshake.session.players) socket.handshake.session.players.push(data.username)
-    else {
-      socket.handshake.session.players = [data.username];
-    }
+    if (!socket.handshake.session.players)
+      socket.handshake.session.players = [];
+    const { players } = socket.handshake.session;
+    players.push(data.username);
     socket.handshake.session.save();
+
     console.log("room socket hit: blast", socket.handshake.session.players);
     io.to(data.room).emit(
       "display name response",
@@ -73,9 +78,9 @@ io.on("connection", socket => {
   });
 
   // Update everyone's users arrays
-  socket.on('users array changed', data => {
-    io.to(data.room).emit('update users array', data.users)
-  })
+  socket.on("users array changed", data => {
+    io.to(data.room).emit("update users array", data.users);
+  });
 });
 
 // Account Endpoints
