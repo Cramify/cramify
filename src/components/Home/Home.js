@@ -2,11 +2,17 @@ import React, {Component} from "react";
 import Register from "./Register";
 import Login from "./Login";
 import './Home.scss'
+// import {useTransition, animated, useSpring} from 'react-spring'; 
 
 export default class Home extends Component {
-  state = {
-    register: false,
-    login: false
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      register: false,
+      login: false
+    }
+
   }
 
   registerToggle = () => {
@@ -24,10 +30,17 @@ export default class Home extends Component {
     })
   }
 
+  // flipModal = () => {
+  //   loginToggle();
+  //   registerToggle();
+  // }
+
 
 
   render() {
     const {register, login} = this.state;
+    // const props = useSpring({ opacity: 1, from: { opacity: 0 } })
+    
     return (
       <div className='home'>
         <div className='big-triangle'></div>
@@ -41,10 +54,10 @@ export default class Home extends Component {
         <div className='hero'>
           <div className='hook'>
             <h2>Want to study some great coding material? You are at the right place my friends. :)</h2>
-            <div>Play Now!</div>
+            <div className='hero-button' onClick={() => this.loginToggle()}>Play Now!</div>
           </div>
-          {register ? <Register regFn={this.registerToggle}/> : null}
-          {login ? <Login logFn={this.loginToggle}/> : null}
+          {register ? <Register regFn={this.registerToggle} logFn={this.loginToggle}/> : null}
+          {login ? <Login logFn={this.loginToggle} regFn={this.registerToggle}/> : null}
         </div>
       </div>
     );
