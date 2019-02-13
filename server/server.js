@@ -14,7 +14,7 @@ const sharedSession = require("express-socket.io-session");
 //deconstruct of .env file:
 const { SECRET, CONNECTION_PORT, SERVER_PORT } = process.env;
 //controller imports
-const mc = require("./controllers/mainController");
+const qc = require("./controllers/questionsController");
 const ac = require("./controllers/authController");
 
 //Middleware
@@ -84,18 +84,24 @@ app.post("/auth/login", ac.login);
 app.post("/auth/logout", ac.logout);
 app.put("/auth/edit/:id", ac.changeUser);
 app.get("/auth/user", ac.getUser);
+app.delete('/auth/user/delete', ac.deleteUser);
 
 //Question_sets endpoints
-app.get('/set/user', mc.getSets); //this is the users question_sets for his dashboard.
-app.get('/set/all', mc.allGameSets); // this is both the user and our question_sets for the create game page
-app.post('/set/user/create', mc.createNewSet); //this creates a new empty set for specific user
-app.delete('/set/user/delete/:set_id', mc.deleteQuestionSets); // delete sets
+app.get('/set/user', qc.getSets); //this is the users question_sets for his dashboard.
+app.get('/set/all', qc.allGameSets); // this is both the user and our question_sets for the create game page
+app.post('/set/user/create', qc.createNewSet); //this creates a new empty set for specific user
+app.delete('/set/user/delete/:setID', qc.deleteQuestionSets); // delete sets
+
+app.get('/set/getedit/:setID', qc.getSpecificSet); // this is to get the specific set by id to edit
 
 //added questions to new sets per user
-app.post('/set/user/question/', mc.addQuestionsToSet);
+app.post('/set/user/question/', qc.addQuestionsToSet);
+
+//delete specific question from users set
+app.delete('/set/user/edit/delete/', qc.editQuestionDelete)
 
 //question endpoints
-app.get('/question/all', mc.getAllQuestions);
+app.get('/question/all', qc.getAllQuestions);
 
 //require in db through massive, listen to server for connection
 massive(CONNECTION_PORT).then(connection => {

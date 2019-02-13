@@ -85,5 +85,11 @@ module.exports = {
       username: result[0].username
     };
     res.send({ message: "updated account", userData: req.session.user });
+  },
+  deleteUser: async (req,res) => {
+    const {id} = req.session.user;
+    const deleteUser = await db.delete_user({user_id: id});
+    req.session.destroy();
+    res.status(200).send(deleteUser)
   }
 };
