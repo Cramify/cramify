@@ -7,6 +7,7 @@ import CreateRoom from './components/CreateRoom/CreateRoom';
 import Dashboard from './components/Dashboard/Dashboard';
 import GameRoom from './components/GameRoom/GameRoom';
 import JoinRoom from './components/JoinRoom/JoinRoom';
+import CreateSet from './components/Dashboard/CreateSet';
 
 
 export default (
@@ -16,5 +17,6 @@ export default (
         <Route path = '/dashboard' component={Dashboard}></Route>
         <Route path = '/gameroom' component={GameRoom}></Route>
         <Route path = '/join' component={JoinRoom}></Route>
+        <Route path = '/newset' component={CreateSet}></Route>
     </Switch>
 )
