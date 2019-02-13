@@ -54,11 +54,12 @@ module.exports  = {
         const getSpecific = await db.get_specific_set({set_id: setID})
         res.status(200).send(getSpecific)
     },
-    updateQuestionSets: async (req, res) => {
+    editQuestionDelete: async (req,res) => {
         const db = req.app.get('db');
         const {id} = req.session.user;
-        const {setID, questionID} = req.body;
-        const updateSet = await db.update_question_sets({set_id: setID, question_id: questionID})
-        res.status(200).send(updateSet)
-    } 
+        const {setID, junctionID} = req.query;
+        console.log(req.query)
+        const editQuestionDelete = await db.edit_question_delete({set_id: setID, junction_id: junctionID});
+        res.status(200).send(editQuestionDelete)
+    }
 }

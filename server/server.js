@@ -91,10 +91,14 @@ app.get('/set/user', qc.getSets); //this is the users question_sets for his dash
 app.get('/set/all', qc.allGameSets); // this is both the user and our question_sets for the create game page
 app.post('/set/user/create', qc.createNewSet); //this creates a new empty set for specific user
 app.delete('/set/user/delete/:setID', qc.deleteQuestionSets); // delete sets
+
 app.get('/set/getedit/:setID', qc.getSpecificSet); // this is to get the specific set by id to edit
 
 //added questions to new sets per user
 app.post('/set/user/question/', qc.addQuestionsToSet);
+
+//delete specific question from users set
+app.delete('/set/user/edit/delete/', qc.editQuestionDelete)
 
 //question endpoints
 app.get('/question/all', qc.getAllQuestions);

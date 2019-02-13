@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
 import EditUser from './EditUser';
-import EditSet from './EditSet';
-// import CreateSet from './CreateSet'
 
 export default class DashBoard extends Component {
     constructor(props) {
@@ -50,7 +48,6 @@ export default class DashBoard extends Component {
 
     render() {
         let sets = this.state.sets.map((set,i) => {
-            console.log(set.set_id)
             return (
                 <div key={i}>
                 <p >{set.set_name}</p>
