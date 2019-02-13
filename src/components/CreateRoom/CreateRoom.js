@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { updateRoomID } from "../../ducks/reducer";
 import axios from 'axios';
+import { updateRoomID, updateCreator } from "../../ducks/reducer";
 
 class CreateRoom extends Component {
   constructor(props) {
@@ -27,7 +27,8 @@ class CreateRoom extends Component {
 
   createRoom = () => {
     this.props.updateRoomID(this.state.roomID);
-    this.props.history.push("/gameroom");
+    this.props.updateCreator();
+    this.props.history.push(`/gameroom`);
   };
 
   handleInput = (prop, e) => {
@@ -47,7 +48,7 @@ class CreateRoom extends Component {
     return (
       <div>
         <h2>Room ID: {this.state.roomID}</h2>
-        <input
+        {/* <input
           placeholder="Room Name"
           value={this.state.roomName}
           onChange={e => this.handleInput("roomName", e)}
@@ -55,6 +56,8 @@ class CreateRoom extends Component {
         />
         <button onClick={this.createRoom}>Create Room</button>
         <h2>Game Sets: {sets}</h2>
+        /> */}
+        <button onClick={() => this.createRoom()}>Create Room</button>
       </div>
     );
   }
@@ -64,5 +67,5 @@ const mapStateToProps = store => store;
 
 export default connect(
   mapStateToProps,
-  { updateRoomID }
+  { updateRoomID, updateCreator }
 )(CreateRoom);
