@@ -35,14 +35,14 @@ export default class DashBoard extends Component {
 
     deleteSet = async (set_id) => {
         const res = await axios.delete(`/set/user/delete/${set_id}`)
-        this.setState({
+        await this.setState({
             sets: res.data 
         })
-
-        await axios.get('/set/user');
-        this.setState({
-            sets: res.data
-        })
+        this.componentDidMount()
+    //     await axios.get('/set/user');
+    //    await this.setState({
+    //         sets: res.data
+    //     })
     }
 
 
