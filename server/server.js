@@ -85,6 +85,18 @@ app.post("/auth/logout", ac.logout);
 app.put("/auth/edit/:id", ac.changeUser);
 app.get("/auth/user", ac.getUser);
 
+//Question_sets endpoints
+app.get('/set/user', mc.getSets); //this is the users question_sets for his dashboard.
+app.get('/set/all', mc.allGameSets); // this is both the user and our question_sets for the create game page
+app.post('/set/user/create', mc.createNewSet); //this creates a new empty set for specific user
+app.delete('/set/user/delete/:set_id', mc.deleteQuestionSets); // delete sets
+
+//added questions to new sets per user
+app.post('/set/user/question/', mc.addQuestionsToSet);
+
+//question endpoints
+app.get('/question/all', mc.getAllQuestions);
+
 //require in db through massive, listen to server for connection
 massive(CONNECTION_PORT).then(connection => {
   app.set("db", connection);
