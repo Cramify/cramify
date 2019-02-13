@@ -3,7 +3,7 @@ import axios from 'axios'
 import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {updateUser} from '../../ducks/reducer'
-import './Register.scss'
+import '../../modal.scss';
 
 class Register extends Component{
     constructor(props){
@@ -39,14 +39,23 @@ class Register extends Component{
         return(
             <div className='modal'>
                 <div className='content'>
-                    <div className='cancel' onClick={() => this.props.regFn()}>X</div>
+                    <i onClick={() => this.props.regFn()} class="fas fa-times-circle fa-2x"></i>
+                    <h2>Register</h2>
                     <div className='user-input'>
-                        <h2>Register</h2>
                         <input onChange={(e)=>this.handleInput('email', e)} type="text" placeholder='email'/>
                         <input onChange={(e)=>this.handleInput('username', e)} type="text" placeholder='username'/>
                         <input onChange={(e)=>this.handleInput('password', e)} type="password" placeholder='password'/>
                         <input onChange={(e)=>this.handleInput('checkPassword', e)} type="password" placeholder='confirm password'/>
-                        <div className='register' onClick={this.register}>Register</div>
+                    </div>
+                    <div className='button' onClick={this.register}>Register</div>
+                    <div className='switch-modal'>
+                        <h4>Already Have an Account?</h4>
+                        <div onClick={() => {
+                            this.props.regFn();
+                            this.props.logFn();
+                        }} className='button'>
+                        Login
+                    </div>
                     </div>
                 </div>
             </div>
