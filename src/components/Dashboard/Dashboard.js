@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import EditUser from "./EditUser";
-import CreateSet from "./CreateSet";
 import Swal from "sweetalert2";
 import "./Dashboard.scss";
 
@@ -84,7 +83,7 @@ export default class DashBoard extends Component {
       <div className="dashboard">
         <div className="user-info">
           <div className="profile-pic">
-            <img src="" alt="profile picture" />
+            <img src="" alt="" />
           </div>
           <i className="fas fa-pen" onClick={this.toggleEdit} />
           <button onClick={this.logout}>Logout</button>

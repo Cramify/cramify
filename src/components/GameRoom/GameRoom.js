@@ -3,8 +3,9 @@ import io from "socket.io-client";
 import { connect } from "react-redux";
 import { updateUser } from "../../ducks/reducer";
 import Results from "./Results";
-
 import axios from "axios";
+import Timer from './Timer'
+
 
 class GameRoom extends Component {
   constructor(props) {
@@ -89,6 +90,7 @@ class GameRoom extends Component {
     return (
       <div>
         <h2>GameRoom</h2>
+        <Timer />
         {this.state.users.map((user, i) => (
           <h3 key={i}>{user}</h3>
         ))}
