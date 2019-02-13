@@ -5,7 +5,7 @@ import './Home.scss'
 
 export default class Home extends Component {
   state = {
-    register: true,
+    register: false,
     login: false
   }
 
