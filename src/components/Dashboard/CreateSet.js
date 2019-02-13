@@ -30,7 +30,7 @@ export default class CreateSet extends Component {
         const {setID} = this.state
         console.log(setID)
         this.state.set.map((question) => {
-            axios.post('/set/user/question', { setID, questionID: question.question_id })
+            return axios.post('/set/user/question', { setID, questionID: question.question_id })
         })
     }
 
@@ -44,7 +44,7 @@ export default class CreateSet extends Component {
     }
 
     createNewSet = async() => {
-        const {setName} = this.state;
+       const {setName} = this.state;
        const res = await axios.post('/set/user/create', {setName})
        this.setState({
            setID: res.data[0].set_id,
@@ -72,7 +72,7 @@ export default class CreateSet extends Component {
         return (
             <div>
                 Create New Set
-                <input onChange={(e)=>this.handleInput('setName', e)} value={this.state.setName} type="text" placeholder="Your Set's Name" placeholder='New Set Name' />
+                <input onChange={(e)=>this.handleInput('setName', e)} value={this.state.setName} type="text" placeholder="Your Set's Name"/>
                 <button onClick={this.createNewSet}>Create New Set</button>
                 <h2>Questions to Add: {questions}</h2>
                 <hr/>
