@@ -8,7 +8,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import GameRoom from './components/GameRoom/GameRoom';
 import JoinRoom from './components/JoinRoom/JoinRoom';
 import CreateSet from './components/Dashboard/CreateSet';
-
+import EditSet from './components/Dashboard/EditSet'
 
 export default (
     <Switch>
@@ -18,5 +18,6 @@ export default (
         <Route path = '/gameroom' component={GameRoom}></Route>
         <Route path = '/join' component={JoinRoom}></Route>
         <Route path = '/newset' component={CreateSet}></Route>
+        <Route path = '/editset/:setID' component={EditSet}></Route>
     </Switch>
 )
