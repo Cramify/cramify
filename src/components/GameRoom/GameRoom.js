@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import io from "socket.io-client";
 import { connect } from "react-redux";
-import { updateUser } from '../../ducks/reducer'
+import { updateUser } from "../../ducks/reducer";
+import Results from "./Results";
 
 import axios from "axios";
 
@@ -9,8 +10,18 @@ class GameRoom extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      gameStarted: false,
+      questionDisplay: false,
       pointCount: 0,
-      questions: [],
+      questions: [
+        {
+          question: "What is not a sorting algorithm?",
+          correct_answer: "JimSort",
+          answer_2: "Merge Sort",
+          answer_3: "Bubble Sort",
+          answer_4: "TimSort"
+        }
+      ],
       correctAnswer: "",
       users: [],
       currentUser: "Guest"
@@ -23,10 +34,10 @@ class GameRoom extends Component {
   componentDidMount = async () => {
     if (!this.props.user.username) {
       try {
-        const loginData = await axios.get('/auth/user')
-        this.props.updateUser(loginData)
+        const loginData = await axios.get("/auth/user");
+        this.props.updateUser(loginData);
       } catch (e) {
-        console.log(e)
+        console.log(e);
       }
     }
     // Get user info, if none exists set as guest
@@ -50,7 +61,10 @@ class GameRoom extends Component {
   };
 
   componentDidUpdate = (prevProps, prevState) => {
-    if (prevState.users.length < this.state.users.length && this.props.creator) {
+    if (
+      prevState.users.length < this.state.users.length &&
+      this.props.creator
+    ) {
       this.socket.emit("users array changed", {
         room: this.props.roomID,
         users: this.state.users
@@ -79,6 +93,11 @@ class GameRoom extends Component {
           <h3 key={i}>{user}</h3>
         ))}
         {this.props.creator && <button>Begin!</button>}
+        <Results
+          question={this.state.questions[0]}
+          correctAnswer={this.state.questions}
+          users={this.state.users}
+        />
       </div>
     );
   }
@@ -86,4 +105,7 @@ class GameRoom extends Component {
 
 const mapStateToProps = store => store;
 
-export default connect(mapStateToProps, {updateUser})(GameRoom);
+export default connect(
+  mapStateToProps,
+  { updateUser }
+)(GameRoom);
