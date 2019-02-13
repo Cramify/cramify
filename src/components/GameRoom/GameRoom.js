@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import io from "socket.io-client";
 import { connect } from "react-redux";
 import Timer from './Timer'
+import Question from './Question'
 
 
 class GameRoom extends Component {
@@ -66,11 +67,12 @@ class GameRoom extends Component {
     return (
       <div>
         <h2>GameRoom</h2>
-        <Timer />
+        {/*<Timer />*/}
         {this.state.users.map((user, i) => (
           <h3 key={i}>{user}</h3>
         ))}
         {this.props.creator && <button>Begin!</button>}
+        <Question />
       </div>
     );
   }
