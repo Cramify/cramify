@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import Timer from './Timer'
 
 export default class Question extends Component{
     constructor(props){
@@ -19,6 +20,7 @@ export default class Question extends Component{
         return(
             <div>
                 Questions
+                <Timer />
             </div>
         )
     }
