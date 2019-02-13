@@ -1,0 +1,42 @@
+@import url("https://fonts.googleapis.com/css?family=Catamaran:400,800|Merriweather");
+$mainFont: "Catamaran", sans-serif;
+$secondaryFont: "Merriweather", serif;
+$fontColor: #4b4c53;
+
+.dashboard {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  height: 100vh;
+  width: 100vw;
+  h2 {
+    font-size: 2em;
+    font-family: $mainFont;
+    color: $fontColor;
+  }
+}
+
+.set-window {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  .profile-pic {
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    background-color: lightblue;
+    overflow: hidden;
+  }
+}
+
+.game-options {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}

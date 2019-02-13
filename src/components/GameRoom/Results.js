@@ -1,21 +1,11 @@
-import React, {Component} from 'react'
+import React, { Component } from "react";
 
-export default class Results extends Component{
-    constructor(props){
-        super(props)
-        this.state = {
-            // dont think we need this. users in gameRoom array
-            users: [],
-            // dont think we need this. correctAnswer is GameRoom
-            correctAnswer: ''
-        }
-    }
-
-    render(){
-        return(
-            <div>
-                Results
-            </div>
-        )
-    }
+export default function Results(props) {
+  return (
+    <div>
+      <h1>{props.question}</h1>
+      <h2>{props.correctAnswer}</h2>
+      
+    </div>
+  );
 }
