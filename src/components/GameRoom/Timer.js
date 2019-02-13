@@ -4,18 +4,19 @@ import {withRouter} from 'react-router-dom'
 
 class Timer extends Component{
 
-    func = () => {
+    reDirect = () => {
         this.props.history.push('/dashboard')
     }
 
     render(){
         return(
             <div>
-                <ReactCountdownClock seconds={3}
+                {/* Timer from react-countdown-clock*/}
+                <ReactCountdownClock seconds={10}
                      color="#000"
                      alpha={0.9}
                      size={100}
-                     onComplete={this.func} />
+                     onComplete={this.reDirect} />
             </div>
         )
     }
