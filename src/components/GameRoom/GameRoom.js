@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import io from "socket.io-client";
 import { connect } from "react-redux";
-import { updateUser } from "../../ducks/reducer";
+import { updateUser, destroyCreator } from "../../ducks/reducer";
 import Results from "./Results";
 import axios from "axios";
 import Question from './Question'
+import Swal from 'sweetalert2'
 
 
 class GameRoom extends Component {
@@ -18,11 +19,14 @@ class GameRoom extends Component {
       correctAnswer: "",
       users: [],
       currentUser: "Guest",
-      setID: null
+      setID: null,
+      myID: null
     };
     this.socket = io.connect(":4000");
     this.socket.on("display name response", data => this.displayName(data));
     this.socket.on("update users array", data => this.updateUsersArr(data));
+    this.socket.on('run begin function', data => this.startGame())
+    this.socket.on('kick everyone out', data => this.kick())
   }
 
   componentDidMount = async () => {
@@ -37,12 +41,12 @@ class GameRoom extends Component {
           console.log(e);
         }
       }
-      // Get user info, if none exists set as guest
-      if (this.props.user.username) {
-        await this.setState({
-          currentUser: this.props.user.username
-        });
-      }
+    }
+    // Get user info, if none exists set as guest
+    if (this.props.user.username) {
+      await this.setState({
+        currentUser: this.props.user.username
+      });
     }
     // Join the room
     await this.socket.emit("join room", {
@@ -61,7 +65,7 @@ class GameRoom extends Component {
   
     componentDidUpdate = (prevProps, prevState) => {
       if (
-        prevState.users.length < this.state.users.length &&
+        prevState.users.length !== this.state.users.length &&
         this.props.creator
       ) {
         this.socket.emit("users array changed", {
@@ -72,10 +76,32 @@ class GameRoom extends Component {
       }
     };
 
+    componentWillUnmount = async () => {
+      console.log('unmounted')
+      if (this.props.creator) {
+        await this.socket.emit('host has left', {room: this.state.roomID})
+        this.props.destroyCreator()
+      }
+      this.state.users.map((user, i)=> {
+        if(user.playerID  === this.state.myID){
+          this.state.users.splice(i, 1)
+        }
+      })
+      this.socket.emit('users array changed', {
+        room: this.props.roomID,
+        users: this.state.users,
+        setID: this.state.setID
+      })
+      console.log(this.state.users)
+      console.log('unmounted again')
+    }
+
     displayName = data => {
-      const newUsersArr = [...this.state.users, data.players];
+      const player = {username: data.players[0], playerID: data.playerID, points: 0};
+      const newUsersArr = [...this.state.users, player];
       this.setState({
-        users: newUsersArr
+        users: newUsersArr,
+        myID: data.playerID
       });
     };
 
@@ -84,13 +110,29 @@ class GameRoom extends Component {
         users: data.users,
         setID: data.setID
       });
+      console.log(data)
     };
 
     startGame = async () => {
+      if(this.props.creator) {
+        this.socket.emit('game start', {room: this.props.roomID})
+      }
       let res = await axios.get(`/game/set/${this.state.setID}`)
       this.setState({
         set: res.data,
         questionDisplay: true
+      })
+    }
+
+    kick = () => {
+      console.log('kick')
+      Swal.fire({
+        title: 'Host has left',
+        message: 'Leaving room',
+        timer: 1500,
+        type: 'error'
+      }).then(() => {
+        this.props.history.push('/')
       })
     }
 
@@ -100,17 +142,17 @@ class GameRoom extends Component {
         <div>
           <h2>GameRoom</h2>
           {this.state.users.map((user, i) => (
-            <h3 key={i}>{user}</h3>
+            <h3 key={i}>{user.username}</h3>
           ))}
           {this.props.creator && <button onClick={this.startGame}>Begin!</button>}
           {this.state.questionDisplay && <Question questionData={this.state.set[0]} />}
           {this.state.resultsDisplay && <h1>Results here</h1>}
+          <button onClick={()=>{this.setState({questionDisplay: true})}}></button>
           {/* <Results
             question={this.state.set[0]}
             correctAnswer={this.state.set}
             users={this.state.users}
           /> */}
-          <Question />
         </div>
       );
     }
@@ -121,5 +163,5 @@ class GameRoom extends Component {
 
   export default connect(
     mapStateToProps,
-    { updateUser }
+    { updateUser, destroyCreator }
   )(GameRoom);

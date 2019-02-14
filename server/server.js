@@ -46,6 +46,7 @@ io.use(
   )
 );
 
+let playerID = 1;// used in sockets for guest ID
 // Socket.io Listeners
 io.on("connection", socket => {
   console.log("connected to socket");
@@ -65,6 +66,7 @@ io.on("connection", socket => {
 
   // Add name to users array
   socket.on("display name", data => {
+
     if (!socket.handshake.session.players)
       socket.handshake.session.players = [];
     const { players } = socket.handshake.session;
@@ -74,8 +76,9 @@ io.on("connection", socket => {
     console.log("room socket hit: blast", socket.handshake.session.players);
     io.to(data.room).emit(
       "display name response",
-      {players: socket.handshake.session.players, setID: data.setID}
+      {players: socket.handshake.session.players, setID: data.setID, playerID }
     );
+    ++playerID;
   });
 
   // Update everyone's users arrays & setID
@@ -83,6 +86,19 @@ io.on("connection", socket => {
     io.to(data.room).emit('update users array', data)
     console.log('update', data)
   })
+
+  // begin the game
+  socket.on('game start', data => {
+    socket.to(data.room).broadcast.emit('run begin function', data)
+    console.log('game start', data)
+  })
+
+  // host has left, kick everyone out
+  socket.on('host has left', data => {
+    socket.to(data.room).broadcast.emit('kick everyone out', data)
+    console.log('host has left. kick out. this is a test.')
+  })
+
 });
 
 // Account Endpoints
