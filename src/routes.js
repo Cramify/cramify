@@ -15,7 +15,7 @@ export default (
         <Route exact path = '/' component={Home}></Route>
         <Route path = '/create' component={CreateRoom}></Route>
         <Route path = '/dashboard' component={Dashboard}></Route>
-        <Route path = '/gameroom/:setID' component={GameRoom}></Route>
+        <Route path = '/gameroom' component={GameRoom}></Route>
         <Route path = '/join' component={JoinRoom}></Route>
         <Route path = '/newset' component={CreateSet}></Route>
         <Route path = '/editset/:setID' component={EditSet}></Route>

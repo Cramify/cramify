@@ -31,7 +31,7 @@ class CreateRoom extends Component {
   createRoom = (setID) => {
     this.props.updateRoomID(this.state.roomID);
     this.props.updateCreator();
-    this.props.history.push(`/gameroom/${setID}`);
+    this.props.history.push(`/gameroom?${setID}`);
   };
 
   handleInput = (prop, e) => {

@@ -61,6 +61,7 @@ io.on("connection", socket => {
 
   // Add name to users array
   socket.on("display name", data => {
+    console.log(data)
     if (socket.handshake.session.players) socket.handshake.session.players.push(data.username)
     else {
       socket.handshake.session.players = [data.username];
@@ -69,13 +70,14 @@ io.on("connection", socket => {
     console.log("room socket hit: blast", socket.handshake.session.players);
     io.to(data.room).emit(
       "display name response",
-      socket.handshake.session.players
+      {players: socket.handshake.session.players, setID: data.setID}
     );
   });
 
-  // Update everyone's users arrays
+  // Update everyone's users arrays & setID
   socket.on('users array changed', data => {
-    io.to(data.room).emit('update users array', data.users)
+    io.to(data.room).emit('update users array', data)
+    console.log('update', data)
   })
 });
 
