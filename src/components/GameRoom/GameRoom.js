@@ -130,14 +130,14 @@ class GameRoom extends Component {
     toResults = () => {
       console.log(this.state.currentQuestion)
       console.log(this.state.set.length)
-      this.setState({questionDisplay: false})
+      this.setState({questionDisplay: !this.state.questionDisplay})
     }
     
     nextQuestion = () => {
-      this.setState({currentQuestion: this.state.currentQuestion + 1, questionDisplay: true})
+      this.setState({currentQuestion: this.state.currentQuestion + 1, questionDisplay: !this.state.questionDisplay})
       if (this.state.currentQuestion + 2 > this.state.set.length) {
         //get rid of the timer
-        return this.setState({showTimer: false, questionDisplay: false})
+        return this.setState({showTimer: false, questionDisplay: true})
       }
     }
 
