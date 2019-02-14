@@ -51,26 +51,34 @@ font-family: $mainFont;
     // padding-left: 8em;
   }
 }
-.big-triangle {
-  // height: 90vh;
-  // width: 100vw;
-  // background-color: blue;
-  // position: absolute;
-  // left: 20vw;
-  // bottom: 40vh;
-  // transform: rotate(45deg);
-  // z-index: -1;
-  height: 0;
-  width: 0;
-  background-color: transparent;
+.triangle-container {
+  width: 100%;
+  height: 100%;
   position: absolute;
-  border-top: 900px solid #006BF6;
-  border-bottom: 900px solid transparent;
-  border-left: 900px solid transparent;
-  border-right: 900px solid transparent;
-  z-index: -1;
-  top: 0;
+  overflow: hidden;
+  z-index: -2;
+}
+.big-triangle {
+  height: 200vh;
+  width: 70vw;
+  background: linear-gradient(135deg, #006BF6, #6CABFE);
+  position: relative;
   left: 200px;
+  bottom: 200vh;
+  transform-origin: bottom left;
+  transform: rotate(45deg);
+  z-index: -1;
+  // height: 0;
+  // width: 0;
+  // background-color: transparent;
+  // position: absolute;
+  // border-top: 900px solid #006BF6;
+  // border-bottom: 900px solid transparent;
+  // border-left: 900px solid transparent;
+  // border-right: 900px solid transparent;
+  // z-index: -1;
+  // top: 0;
+  // left: 200px;
   
 }
 
