@@ -77,7 +77,7 @@ export default class Question extends Component{
         return(
             <div>
                 <h1>Question:</h1>
-                <Timer/>
+                <Timer timerFn={this.props.toResFn} time={4}/>
 
                 {/* this will be a prop from GameRoom.state.questions*/}
                 <h1>{this.props.questionData.question}</h1>
