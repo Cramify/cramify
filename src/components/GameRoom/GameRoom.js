@@ -141,6 +141,7 @@ class GameRoom extends Component {
       return (
         <div>
           <h2>GameRoom</h2>
+          <h3>Room ID: {this.props.roomID}</h3>
           {this.state.users.map((user, i) => (
             <h3 key={i}>{user.username}</h3>
           ))}

@@ -9,7 +9,8 @@ export default class CreateSet extends Component {
             set: [],
             setName: '',
             questions: [],
-            setID: {}
+            setID: {},
+            limitReached: false
         }
     }
 
@@ -37,6 +38,11 @@ export default class CreateSet extends Component {
     addToSet = (i) => {
         const newSet = this.state.set.slice();
         newSet.push(this.state.questions.splice(i, 1)[0]);
+        if(this.state.set.length >= 19){
+            this.setState({
+                limitReached: true
+            })
+        }
 
         this.setState({
             set: newSet
@@ -76,7 +82,7 @@ export default class CreateSet extends Component {
                 Create New Set
                 <input onChange={(e)=>this.handleInput('setName', e)} value={this.state.setName} type="text" placeholder="Your Set's Name"/>
                 <button onClick={this.createNewSet}>Create New Set</button>
-                <h2>Questions to Add: {questions}</h2>
+                {this.state.limitReached === false && <h2>Questions to Add: {questions}</h2>}
                 <hr/>
                 <h2>Your Questions: {set}</h2> {/*Change 'your questions' to the actual name of set created in Dashboard */}
                 <button onClick={this.addQuestionToSet}>Add New Set</button>
