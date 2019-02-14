@@ -3,6 +3,7 @@ import io from "socket.io-client";
 import { connect } from "react-redux";
 import Timer from './Timer'
 import Question from './Question'
+import axios from "axios";
 
 
 class GameRoom extends Component {
@@ -10,7 +11,7 @@ class GameRoom extends Component {
     super(props);
     this.state = {
       pointCount: 0,
-      questions: [],
+      set: [],
       correctAnswer: "",
       users: [],
       currentUser: "Guest"
@@ -39,6 +40,7 @@ class GameRoom extends Component {
       room: this.props.roomID,
       username: this.state.currentUser
     });
+
   };
 
   componentDidUpdate = (prevProps, prevState) => {
