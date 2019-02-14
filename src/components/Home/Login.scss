@@ -3,71 +3,68 @@ $mainFont: 'Catamaran', sans-serif;
 $secondaryFont: 'Merriweather', serif;
 $fontColor: #4B4C53;
 
-.modal {
-  color: white;
-  position: absolute;
-  top: 0;
-  background-color: #d3d3d3E8;
-  height: 100vh;
-  width: 100vw;
-  z-index: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  .content {
-    position: relative;
-    background-color: blue;
-    height: 30rem;
-    width: 22rem;
-    z-index: 2;
-    border: 1px solid #FFED17;
-    border-radius: 3rem;
-    .cancel {
-      height: 2em;
-      width: 2em;
-      position: absolute;
-      right: 1rem;
-      top: 1rem;
-      background-color: lightgray;
-      border-radius: 1em;
-      text-align: center;
-      line-height: 1.95em;
-      font-family: $mainFont;
-      color: black;
-    }
-    .cancel:hover {
-      cursor: pointer;
-      background-color: rgb(206, 137, 137);
-    }
-    .user-input {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      > h2 {
-        font-family: $mainFont;
-        font-size: 2em;
-        margin-top: 1.2em;
-      }
-      .login {
-        margin-top: 2em;
-        padding: .5em 1.6em;
-        border: 1px #FFED17 solid;
-        border-radius: .55em;
-      }
-      .flip-modal {
-        .register {
-          padding: .5em 1.6em;
-          border: 1px #FFED17 solid;
-          border-radius: .55em;
-        }
-        margin-top: 2em;
-      }
+// .modal {
+//   color: white;
+//   position: absolute;
+//   top: 0;
+//   background-color: #d3d3d3E8;
+//   height: 100vh;
+//   width: 100vw;
+//   z-index: 1;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   font-family: $mainFont;
+//   .content {
+//     position: relative;
+//     background: linear-gradient(145deg, #006BF6, #6CABFE);
+//     height: 30rem;
+//     width: 22rem;
+//     z-index: 2;
+//     // border: 1px solid #FFED17;
+//     border-radius: 1.1rem;
+//     .cancel, i {
+//       position: absolute;
+//       right: .5rem;
+//       top: .5rem;
+//     }
+//     .cancel:hover {
+//       cursor: pointer;
+//       background-color: #FFED17;
+//       opacity: 1;
+//     }
+//     .user-input {
+//       height: 100%;
+//       display: flex;
+//       flex-direction: column;
+//       align-items: center;
+//       > h2 {
+//         font-family: $mainFont;
+//         font-size: 2em;
+//         margin-top: 1.2em;
+//       }
+//       .login {
+//         margin-top: 2em;
+//         padding: .5em 1.6em;
+//         border: 1px #FFED17 solid;
+//         border-radius: .55em;
+//       }
+//       .flip-modal {
+//         .register {
+//           display: flex;
+//           justify-content: center;
+//           align-items: center;
+//           padding: .5em 1.6em;
+//           border: 1px #FFED17 solid;
+//           border-radius: .55em;
+//         }
+//         margin-top: 2em;
+//       }
       
-      input {
-        margin-top: 2em;
-        width: 20em;
-      }
-    }
-  }
-}
+//       input {
+//         margin-top: 2em;
+//         width: 20em;
+//       }
+//     }
+//   }
+// }

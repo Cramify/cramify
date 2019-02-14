@@ -3,7 +3,7 @@ import axios from "axios";
 import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {updateUser} from '../../ducks/reducer';
-import './Login.scss';
+import '../../modal.scss';
 
 class Login extends Component {
   constructor(props) {
@@ -32,9 +32,9 @@ class Login extends Component {
     return (
       <div className='modal'>
         <div className='content'>
-          <div className='cancel' onClick={() => this.props.logFn()}><p>X</p></div>
+        <i onClick={() => this.props.logFn()} class="fas fa-times-circle fa-2x"></i>
+          <h2>Login</h2>
           <div className='user-input'>
-            <h2>Login</h2>
             <input
               placeholder="Email"
               onChange={e => this.handleInput("email", e)}
@@ -45,12 +45,16 @@ class Login extends Component {
               onChange={e => this.handleInput("password", e)}
               type="password"
             />
-            <div className='login' onClick={this.login}>Login</div>
-            <div className='flip-modal'>
-              <div>Need an account?</div>
-              <div className='register'>Register</div>
             </div>
-            
+            <div className='button' onClick={this.login}>Login</div>
+            <div className='switch-modal'>
+              <h4>Need an account?</h4>
+              <div onClick={() => {
+                this.props.logFn()
+                this.props.regFn() 
+                }} className='button'>Register</div>
+              <div>
+            </div>
           </div>
         </div>
       </div>

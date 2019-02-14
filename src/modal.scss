@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css?family=Catamaran:400,800|Merriweather');
+$mainFont: 'Catamaran', sans-serif;
+$secondaryFont: 'Merriweather', serif;
+$fontColor: rgb(24, 29, 66);
+
+.modal {
+  color: white;
+  position: absolute;
+  top: 0;
+  background-color: #d3d3d3E8;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: $mainFont;
+  .content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    background: linear-gradient(145deg, #006BF6, #6CABFE);
+    height: 30rem;
+    width: 22rem;
+    border-radius: 1.1rem;
+    i {
+      position: absolute;
+      right: .5rem;
+      top: .5rem;
+      cursor: pointer;
+      transition: .2s;
+    }
+    i:hover {
+      color: #FFED17;
+      opacity: 1;
+    }
+    h2 {
+      font-family: $mainFont;
+      font-size: 2em;
+      margin-top: 1.2em;
+    }
+    .button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: .5em 1.6em;
+      border: 1px #FFED17 solid;
+      border-radius: .55em;
+      transition: .2s;
+      &:hover {
+        cursor: pointer;
+        opacity: 0.8;
+        background: #FFED17;
+        color: $fontColor;
+      }
+    }
+    .switch-modal {
+      margin-top: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      h4 {
+        margin-bottom: 5px;
+      }
+    }
+  }
+}
+.user-input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  input {
+    margin-top: 2em;
+    width: 20em;
+    padding: 4px 8px;
+    background: transparent;
+    font-size: 1rem;
+    border: none;
+    border-bottom: 1px solid white;
+    color: white;
+    transition: .3s;
+    &::placeholder {
+      font-family: $mainFont;
+      color: white;
+    }
+    &:focus {
+      outline: none;
+      background-color: #6CABFE;
+      border-radius: 5px;
+    }
+  }
+}

@@ -3,6 +3,7 @@ import io from "socket.io-client";
 import { connect } from "react-redux";
 import axios from "axios";
 // import Timer from './Timer'
+import Question from './Question'
 
 
 class GameRoom extends Component {
@@ -80,6 +81,7 @@ class GameRoom extends Component {
           <h3 key={i}>{user}</h3>
         ))}
         {this.props.creator && <button>Begin!</button>}
+        <Question />
       </div>
     );
   }
