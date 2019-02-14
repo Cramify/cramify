@@ -1,0 +1,18 @@
+@import '../../sassVars.scss';
+
+.results {
+  background: linear-gradient(45deg, #006BF6, #6CABFE);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 100vh;
+  font-family: $mainFont;
+  color: $fontColor;
+  h1 {
+    font-size: 2em;
+  }
+  h2 {
+    font-size: 1.5em;
+  }
+}
