@@ -66,7 +66,9 @@ export default class CreateSet extends Component {
         })
         let set = this.state.set.map((question) => {
             return (
-                <div>{question.question}</div>
+                <div>
+                {question.question}
+                </div>
             )
         })
         return (

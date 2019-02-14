@@ -5,6 +5,7 @@ import { updateUser } from "../../ducks/reducer";
 import Results from "./Results";
 import axios from "axios";
 import Timer from './Timer'
+import Question from './Question'
 
 
 class GameRoom extends Component {
@@ -90,7 +91,7 @@ class GameRoom extends Component {
     return (
       <div>
         <h2>GameRoom</h2>
-        <Timer />
+        {/*<Timer />*/}
         {this.state.users.map((user, i) => (
           <h3 key={i}>{user}</h3>
         ))}
@@ -100,6 +101,7 @@ class GameRoom extends Component {
           correctAnswer={this.state.questions}
           users={this.state.users}
         />
+        <Question />
       </div>
     );
   }

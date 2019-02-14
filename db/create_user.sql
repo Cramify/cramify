@@ -14,7 +14,4 @@ ${img_url},
 0
 )
 
-RETURNING
-username,
-email,
-img_url
+RETURNING *;

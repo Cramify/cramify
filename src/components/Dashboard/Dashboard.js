@@ -13,6 +13,7 @@ export default class DashBoard extends Component {
       imgURL: "",
       score: 0,
       edit: false,
+      editSet: false,
       sets: [],
       setName: ""
     };
@@ -41,10 +42,10 @@ export default class DashBoard extends Component {
       sets: res.data
     });
     this.componentDidMount();
-    //     await axios.get('/set/user');
-    //    await this.setState({
-    //         sets: res.data
-    //     })
+  };
+
+  editSet = async setID => {
+    this.props.history.push(`/editset/${setID}`);
   };
 
   deleteAccount = () => {
@@ -70,11 +71,18 @@ export default class DashBoard extends Component {
 
   render() {
     let sets = this.state.sets.map((set, i) => {
-      console.log(set.set_id);
       return (
         <div key={i}>
           <p>{set.set_name}</p>
           <button onClick={() => this.deleteSet(set.set_id)}>Delete</button>
+          <button onClick={() => this.editSet(set.set_id)}>
+            Edit Your Set
+          </button>
+          {/* {this.state.editSet && 
+                    <EditSet
+                        setName={this.state.setName}
+                        setID ={set.set_id}
+                     />} */}
         </div>
       );
     });

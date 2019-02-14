@@ -10,9 +10,15 @@ $fontColor: #4B4C53;
   overflow: hidden;
   max-width: 100%;
   // border: 1px black solid;
-
+font-family: $mainFont;
 }
 .header {
+  height: 4em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1em;
+  overflow: hidden;
   > h1 {
     font-family: $mainFont;
     font-weight: 800;
@@ -25,21 +31,25 @@ $fontColor: #4B4C53;
   }
   > div {
     > div {
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       padding: .5em 1.6em;
       border: 1px #FFED17 solid;
       color: white;
       border-radius: .55em;
       margin: 0 .8em;
+      transition: .2s;
+      &:hover {
+        cursor: pointer;
+        background: #FFED17;
+        color: $fontColor;
+      }
     }
     display: flex;
     // padding-left: 8em;
   }
-  height: 4em;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 1em;
-  overflow: hidden;
 }
 .big-triangle {
   // height: 90vh;
@@ -54,7 +64,7 @@ $fontColor: #4B4C53;
   width: 0;
   background-color: transparent;
   position: absolute;
-  border-top: 900px solid blue;
+  border-top: 900px solid #006BF6;
   border-bottom: 900px solid transparent;
   border-left: 900px solid transparent;
   border-right: 900px solid transparent;
@@ -78,10 +88,19 @@ $fontColor: #4B4C53;
     font-size: 3em;
     font-weight: 400;
   }
-  > div {
-    padding: .5em 1.6em;
+  > .hero-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: .8em 2em;
     background-color: #FFED17;
     color: rgb(116, 116, 116);
     border-radius: .55em;
+    transition: .3s;
+    &:hover {
+      background-color: #006BF6;
+      color: white;
+      cursor: pointer;
+    }
   }
 }
