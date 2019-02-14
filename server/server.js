@@ -16,6 +16,7 @@ const { SECRET, CONNECTION_PORT, SERVER_PORT } = process.env;
 //controller imports
 const qc = require("./controllers/questionsController");
 const ac = require("./controllers/authController");
+const gc = require("./controllers/gameController")
 
 //Middleware
 app.use(express.json());
@@ -102,6 +103,9 @@ app.delete('/set/user/edit/delete/', qc.editQuestionDelete)
 
 //question endpoints
 app.get('/question/all', qc.getAllQuestions);
+
+//Game Room Endpoints
+app.get('/game/set/:setID', gc.getGameSets)
 
 //require in db through massive, listen to server for connection
 massive(CONNECTION_PORT).then(connection => {

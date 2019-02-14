@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import io from "socket.io-client";
 import { connect } from "react-redux";
-import Timer from './Timer'
+import axios from "axios";
+// import Timer from './Timer'
 
 
 class GameRoom extends Component {
@@ -9,10 +10,10 @@ class GameRoom extends Component {
     super(props);
     this.state = {
       pointCount: 0,
-      questions: [],
+      set: [],
       correctAnswer: "",
       users: [],
-      currentUser: "Guest"
+      currentUser: "Guest",
     };
     this.socket = io.connect(":4000");
     this.socket.on("display name response", data => this.displayName(data));
@@ -20,11 +21,19 @@ class GameRoom extends Component {
   }
 
   componentDidMount = async () => {
+    const {setID} = this.props.match.params
     // Get user info, if none exists set as guest
     if (this.props.user.username) {
       await this.setState({
         currentUser: this.props.user.username
       });
+
+      let res = await axios.get(`/game/set/${setID}`)
+      console.log(res.data)
+      this.setState({
+        set: res.data
+      })
+      console.log(this.state.set)
     }
 
     // Join the room
@@ -44,7 +53,7 @@ class GameRoom extends Component {
     if (prevState.users.length < this.state.users.length && this.props.creator) {
       this.socket.emit("users array changed", {
         room: this.props.roomID,
-        users: this.state.users
+        users: this.state.users,
       });
     }
   };
@@ -66,7 +75,7 @@ class GameRoom extends Component {
     return (
       <div>
         <h2>GameRoom</h2>
-        <Timer />
+        {/* <Timer /> */}
         {this.state.users.map((user, i) => (
           <h3 key={i}>{user}</h3>
         ))}
