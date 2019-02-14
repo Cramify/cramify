@@ -155,17 +155,17 @@ class GameRoom extends Component {
 
     render() {
       console.log(this.state.setID)
-      
+      const {users, questionDisplay, gameStarted, currentQuestion, set, showTimer} = this.state;
       return (
         <div>
           <h2>GameRoom</h2>
           <h3>Room ID: {this.props.roomID}</h3>
-          {this.state.users.map((user, i) => (
+          {users.map((user, i) => (
             <h3 key={i}>{user.username}</h3>
           ))}
           {this.props.creator && <button onClick={this.startGame}>Begin!</button>}
-          {this.state.questionDisplay && <Question toResFn={this.toResults} questionData={this.state.set[this.state.currentQuestion]} />}
-          {this.state.gameStarted && !this.state.questionDisplay ? <Results nextQFn={this.nextQuestion} questionData={this.state.set[this.state.currentQuestion]} timerDisplay={this.state.showTimer}/> : null}
+          {questionDisplay && <Question toResFn={this.toResults} questionData={set[currentQuestion]} />}
+          {gameStarted && !questionDisplay ? <Results nextQFn={this.nextQuestion} questionData={set[currentQuestion]} timerDisplay={showTimer}/> : null}
           <button onClick={()=>{this.setState({questionDisplay: true})}}></button>
           {/* {gameDisplay} */}
         </div>
