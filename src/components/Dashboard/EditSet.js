@@ -61,7 +61,6 @@ export default class EditSet extends Component {
     }
 
     render() {
-        const {junctionID} = this.state
         let userQuestions = this.state.set.map((question, index) => {
             return (
                 <div>

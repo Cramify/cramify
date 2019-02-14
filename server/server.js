@@ -15,6 +15,7 @@ const { SECRET, CONNECTION_PORT, SERVER_PORT } = process.env;
 //controller imports
 const qc = require("./controllers/questionsController");
 const ac = require("./controllers/authController");
+const gc = require("./controllers/gameController")
 
 //Middleware
 app.use(express.json());
@@ -73,14 +74,15 @@ io.on("connection", socket => {
     console.log("room socket hit: blast", socket.handshake.session.players);
     io.to(data.room).emit(
       "display name response",
-      socket.handshake.session.players
+      {players: socket.handshake.session.players, setID: data.setID}
     );
   });
 
-  // Update everyone's users arrays
-  socket.on("users array changed", data => {
-    io.to(data.room).emit("update users array", data.users);
-  });
+  // Update everyone's users arrays & setID
+  socket.on('users array changed', data => {
+    io.to(data.room).emit('update users array', data)
+    console.log('update', data)
+  })
 });
 
 // Account Endpoints
@@ -107,6 +109,9 @@ app.delete('/set/user/edit/delete/', qc.editQuestionDelete)
 
 //question endpoints
 app.get('/question/all', qc.getAllQuestions);
+
+//Game Room Endpoints
+app.get('/game/set/:setID', gc.getGameSets)
 
 //require in db through massive, listen to server for connection
 massive(CONNECTION_PORT).then(connection => {
