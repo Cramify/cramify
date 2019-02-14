@@ -14,7 +14,13 @@ $fontColor: #4B4C53;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: $mainFont;
+
   .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: space-between;
     position: relative;
     background-color: blue;
     height: 30rem;
@@ -22,29 +28,36 @@ $fontColor: #4B4C53;
     z-index: 2;
     border: 1px solid #FFED17;
     border-radius: 3rem;
-    .cancel {
-      height: 2em;
-      width: 2em;
+    i {
       position: absolute;
       right: 1rem;
       top: 1rem;
-      background-color: lightgray;
-      border-radius: 1em;
-      text-align: center;
-      line-height: 1.95em;
-      font-family: $mainFont;
-      color: black;
     }
     .user-input {
       height: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
+      input {
+        color: white;
+        background: transparent;
+        border: none;
+        border-bottom: 1px solid white;
+      }
       .register {
-        margin-top: 2em;
         padding: .5em 1.6em;
         border: 1px #FFED17 solid;
         border-radius: .55em;
+        margin-top: 1.5em;
+      }
+      > h4 {
+        margin-top: 2em;
+      }
+      .login {
+        padding: .5em 1.6em;
+        border: 1px #FFED17 solid;
+        border-radius: .55em;
+        margin-top: 0;
       }
     }
   }

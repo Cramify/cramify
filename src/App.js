@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import routes from './routes'
-import './reset.scss';
+import './reset.scss'
 
 //imported components
 

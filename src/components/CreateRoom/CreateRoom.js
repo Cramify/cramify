@@ -8,8 +8,9 @@ class CreateRoom extends Component {
     super(props);
     this.state = {
       roomName: "",
-      set: [],
-      roomID: null
+      sets: [],
+      roomID: null,
+      setID: {}
     };
   }
 
@@ -20,15 +21,17 @@ class CreateRoom extends Component {
     this.setState({ roomID });
 
     const res = await axios.get('/set/all');
+    console.log(res.data)
     this.setState({
-        sets: res.data
+        sets: res.data,
     })
+    // console.log(this.state.setID)
   };
 
-  createRoom = () => {
+  createRoom = (setID) => {
     this.props.updateRoomID(this.state.roomID);
     this.props.updateCreator();
-    this.props.history.push(`/gameroom`);
+    this.props.history.push(`/gameroom?${setID}`);
   };
 
   handleInput = (prop, e) => {
@@ -42,6 +45,8 @@ class CreateRoom extends Component {
       return (
         <div>
           {set.set_name} {/* Seperate sets by admin/user*/}
+        <button onClick={() => this.createRoom(set.set_id)}>Create Room</button>
+
         </div>
       )
     })
@@ -57,7 +62,6 @@ class CreateRoom extends Component {
         <button onClick={this.createRoom}>Create Room</button>
         <h2>Game Sets: {sets}</h2>
         />
-        <button onClick={() => this.createRoom()}>Create Room</button>
       </div>
     );
   }

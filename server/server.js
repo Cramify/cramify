@@ -6,7 +6,6 @@ const session = require("express-session");
 const socket = require("socket.io");
 const app = express();
 // working to this point
-// const server = require('http').createServer(app)
 const sharedSession = require("express-socket.io-session");
 //all libraries have been installed, double check package.json
 //main and proxy set up in package.json to "main":"server/server.js", "proxy":"http://localhost:4000"
@@ -16,6 +15,7 @@ const { SECRET, CONNECTION_PORT, SERVER_PORT } = process.env;
 //controller imports
 const qc = require("./controllers/questionsController");
 const ac = require("./controllers/authController");
+const gc = require("./controllers/gameController")
 
 //Middleware
 app.use(express.json());
@@ -41,41 +41,64 @@ io.use(
       secret: SECRET,
       resave: false,
       saveUninitialized: false
-    })
+    }),
+    { autoSave: true }
   )
 );
 
+let playerID = 1;// used in sockets for guest ID
 // Socket.io Listeners
 io.on("connection", socket => {
   console.log("connected to socket");
 
   //Join Room
   socket.on("join room", data => {
-    socket.join(data.room);
-    socket.handshake.session.userdata = data;
-    socket.handshake.session.save();
-    console.log("joined room ", data.room);
-    io.to(data.room).emit("room joined", data);
+    console.log(socket.handshake.session);
+    if (!socket.handshake.session.socketSession) {
+      socket.handshake.session.socketSession = data;
+      socket.handshake.session.save();
+    }
+    const { socketSession } = socket.handshake.session;
+    socket.join(socketSession.room);
+    console.log("joined room ", socketSession.room);
+    io.to(socketSession.room).emit("room joined", socketSession);
   });
 
   // Add name to users array
   socket.on("display name", data => {
-    if (socket.handshake.session.players) socket.handshake.session.players.push(data.username)
-    else {
-      socket.handshake.session.players = [data.username];
-    }
+
+    if (!socket.handshake.session.players)
+      socket.handshake.session.players = [];
+    const { players } = socket.handshake.session;
+    players.push(data.username);
     socket.handshake.session.save();
+
     console.log("room socket hit: blast", socket.handshake.session.players);
     io.to(data.room).emit(
       "display name response",
-      socket.handshake.session.players
+      {players: socket.handshake.session.players, setID: data.setID, playerID }
     );
+    ++playerID;
   });
 
-  // Update everyone's users arrays
+  // Update everyone's users arrays & setID
   socket.on('users array changed', data => {
-    io.to(data.room).emit('update users array', data.users)
+    io.to(data.room).emit('update users array', data)
+    console.log('update', data)
   })
+
+  // begin the game
+  socket.on('game start', data => {
+    socket.to(data.room).broadcast.emit('run begin function', data)
+    console.log('game start', data)
+  })
+
+  // host has left, kick everyone out
+  socket.on('host has left', data => {
+    socket.to(data.room).broadcast.emit('kick everyone out', data)
+    console.log('host has left. kick out. this is a test.')
+  })
+
 });
 
 // Account Endpoints
@@ -102,6 +125,9 @@ app.delete('/set/user/edit/delete/', qc.editQuestionDelete)
 
 //question endpoints
 app.get('/question/all', qc.getAllQuestions);
+
+//Game Room Endpoints
+app.get('/game/set/:setID', gc.getGameSets)
 
 //require in db through massive, listen to server for connection
 massive(CONNECTION_PORT).then(connection => {
