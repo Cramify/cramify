@@ -21,13 +21,13 @@ $fontColor: rgb(24, 29, 66);
     justify-content: space-between;
     align-items: center;
     position: relative;
-    background: linear-gradient(145deg, #006BF6, #6CABFE);
+    background: linear-gradient(145deg, #3d6cb9, #00d1ff);
     height: 30rem;
     width: 22rem;
     border-radius: 1.1rem;
     i {
       position: absolute;
-      right: .5rem;
+      right: .8rem;
       top: .5rem;
       cursor: pointer;
       transition: .2s;
@@ -43,17 +43,25 @@ $fontColor: rgb(24, 29, 66);
     }
     .button {
       display: flex;
+      font-size: 1rem;
+      background: transparent;
+      color: white;
       justify-content: center;
       align-items: center;
       padding: .5em 1.6em;
       border: 1px #FFED17 solid;
       border-radius: .55em;
       transition: .2s;
+      cursor: pointer;
       &:hover {
-        cursor: pointer;
         opacity: 0.8;
         background: #FFED17;
         color: $fontColor;
+      }
+      &:focus {
+        color: $fontColor;
+        background: #FFED17;
+        outline: none;
       }
     }
     .switch-modal {
