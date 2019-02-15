@@ -82,7 +82,6 @@ class GameRoom extends Component {
   };
 
   componentWillUnmount = async () => {
-    console.log('unmounted')
     if (this.props.creator) {
       await this.socket.emit('host has left', { room: this.state.roomID })
       this.props.destroyCreator()
@@ -98,8 +97,6 @@ class GameRoom extends Component {
       users: this.state.users,
       setID: this.state.setID
     })
-    console.log(this.state.users)
-    console.log('unmounted again')
   }
 
   displayName = data => {
@@ -176,7 +173,8 @@ class GameRoom extends Component {
     const index = this.state.users.findIndex((user, i) => {
       return user.playerID === playerID
     })
-    let userObj = this.state.users.splice(index, 1);
+    let usersArrCopy = [...this.state.users]
+    let userObj = usersArrCopy.splice(index, 1);
     console.log(userObj)
     userObj[0].points += pts;
     if (this.props.creator) {
