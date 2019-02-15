@@ -1,0 +1,73 @@
+@import '../../sassVars.scss';
+.create {
+  padding: 2em;
+  font-family: $mainFont;
+  background: linear-gradient(to left, #00d1ff, #3d6cb9);
+  height: 100vh;
+  max-width: 100%;
+  color: #FFFCF2;
+  .back-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 2em;
+    width: 5em;
+    border: 1px #FFED17 solid;
+    border-radius: 0.5em;
+    font-size: 1.2em;
+    margin-bottom: 2em;
+    align-self: center;
+    background: #1da0dd;
+    color: #FFFCF2;
+    &:hover {
+      cursor: pointer;
+      background:#FFED17;
+      color: $fontColor;
+      transition: 0.3s;
+    }
+  }
+  .set-container {
+    color: $fontColor;
+    display: flex;
+    flex-direction: column;
+    font-size: 1.8em;
+    border-radius: .5em;
+    background: #FFFCF2;
+    box-shadow: 5px 5px 15px #333;
+    font-weight: 500;
+    padding: 0.5em 0;
+    > h2 {
+      font-size: 2em;
+      margin: 0 auto;
+    }
+    .set {
+      display: flex;
+      // flex-direction: row;
+      justify-content: space-between;
+      margin: 0.3em 2em;
+      border-bottom: 0.5px darkgray solid;
+      padding: 0.15em;
+      align-items: center;
+    }
+    .create-button {
+      padding: 0.35em 0.65em;
+      border: 1px solid #3d6cb9;
+      border-radius: 0.3em;
+      opacity: 0.8;
+      box-shadow: 0.5px 0.5px 5px #333;
+      font-size: 0.75em;
+      &:hover {
+        cursor: pointer;
+        color: #FFFCF2;
+        background: #00d1ff;
+        opacity: 1;
+        transition: 0.2s;
+        border: 1px solid #FFED17;
+      }
+    }
+    width: 50%;
+  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
