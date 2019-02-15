@@ -6,7 +6,7 @@ class JoinRoom extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      roomID: null
+      roomID: ''
     };
   }
 

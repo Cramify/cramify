@@ -81,6 +81,11 @@ io.on("connection", socket => {
     ++playerID;
   });
 
+  // Update only my id
+  socket.on('update my id', data => {
+    socket.emit('set myid on state', data)
+  })
+
   // Update everyone's users arrays & setID
   socket.on('users array changed', data => {
     io.to(data.room).emit('update users array', data)
