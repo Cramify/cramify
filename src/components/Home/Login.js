@@ -32,7 +32,7 @@ class Login extends Component {
     return (
       <div className='modal'>
         <div className='content'>
-        <i onClick={() => this.props.logFn()} className="fas fa-times-circle fa-2x"></i>
+        <i onClick={() => this.props.logFn()} className="fas fa-times fa-2x"></i>
           <h2>Login</h2>
           <div className='user-input'>
             <input
@@ -46,13 +46,13 @@ class Login extends Component {
               type="password"
             />
             </div>
-            <div className='button' onClick={this.login}>Login</div>
+            <button className='button' onClick={this.login}>Login</button>
             <div className='switch-modal'>
               <h4>Need an account?</h4>
-              <div onClick={() => {
+              <button onClick={() => {
                 this.props.logFn()
                 this.props.regFn() 
-                }} className='button'>Register</div>
+                }} className='button'>Register</button>
               <div>
             </div>
           </div>
