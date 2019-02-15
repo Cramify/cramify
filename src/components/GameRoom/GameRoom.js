@@ -7,12 +7,11 @@ import axios from "axios";
 import Question from './Question'
 import Swal from 'sweetalert2'
 
-
 class GameRoom extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      resultsDisplay: false,
+      gameStarted: false,
       questionDisplay: false,
       pointCount: 0,
       set: [],
@@ -20,7 +19,9 @@ class GameRoom extends Component {
       users: [],
       currentUser: "Guest",
       setID: null,
-      myID: null
+      myID: null,
+      currentQuestion: 0,
+      showTimer: true
     };
     this.socket = io.connect(":4000");
     this.socket.on("display name response", data => this.displayName(data));
@@ -77,7 +78,6 @@ class GameRoom extends Component {
     };
 
     componentWillUnmount = async () => {
-      console.log('unmounted')
       if (this.props.creator) {
         await this.socket.emit('host has left', {room: this.state.roomID})
         this.props.destroyCreator()
@@ -92,8 +92,6 @@ class GameRoom extends Component {
         users: this.state.users,
         setID: this.state.setID
       })
-      console.log(this.state.users)
-      console.log('unmounted again')
     }
 
     displayName = data => {
@@ -110,7 +108,6 @@ class GameRoom extends Component {
         users: data.users,
         setID: data.setID
       });
-      console.log(data)
     };
 
     startGame = async () => {
@@ -120,8 +117,21 @@ class GameRoom extends Component {
       let res = await axios.get(`/game/set/${this.state.setID}`)
       this.setState({
         set: res.data,
+        gameStarted: true,
         questionDisplay: true
       })
+    }
+
+    toResults = () => {
+      this.setState({questionDisplay: false})
+    }
+    
+    nextQuestion = () => {
+      this.setState({currentQuestion: this.state.currentQuestion + 1, questionDisplay: true})
+      if (this.state.currentQuestion + 2 > this.state.set.length) {
+        //get rid of the timer
+        return this.setState({showTimer: false, questionDisplay: false})
+      }
     }
 
     kick = () => {
@@ -136,23 +146,19 @@ class GameRoom extends Component {
       })
     }
 
-    render() {
-      console.log(this.state.setID)
+    render() {      
       return (
         <div>
           <h2>GameRoom</h2>
+          <h3>Room ID: {this.props.roomID}</h3>
           {this.state.users.map((user, i) => (
             <h3 key={i}>{user.username}</h3>
           ))}
           {this.props.creator && <button onClick={this.startGame}>Begin!</button>}
-          {this.state.questionDisplay && <Question questionData={this.state.set[0]} />}
-          {this.state.resultsDisplay && <h1>Results here</h1>}
+          {this.state.questionDisplay && <Question toResFn={this.toResults} questionData={this.state.set[this.state.currentQuestion]} />}
+          {this.state.gameStarted && !this.state.questionDisplay ? <Results nextQFn={this.nextQuestion} questionData={this.state.set[this.state.currentQuestion]} timerDisplay={this.state.showTimer}/> : null}
           <button onClick={()=>{this.setState({questionDisplay: true})}}></button>
-          {/* <Results
-            question={this.state.set[0]}
-            correctAnswer={this.state.set}
-            users={this.state.users}
-          /> */}
+          {/* {gameDisplay} */}
         </div>
       );
     }

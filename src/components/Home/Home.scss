@@ -61,7 +61,7 @@ font-family: $mainFont;
 .big-triangle {
   height: 200vh;
   width: 70vw;
-  background: linear-gradient(135deg, #006BF6, #6CABFE);
+  background: linear-gradient(to right, #006BF6, #6CABFE);
   position: relative;
   left: 200px;
   bottom: 200vh;
@@ -79,7 +79,6 @@ font-family: $mainFont;
   // z-index: -1;
   // top: 0;
   // left: 200px;
-  
 }
 
 .hook {
