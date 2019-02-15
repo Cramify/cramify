@@ -1,0 +1,60 @@
+@import "../../sassVars.scss";
+
+.waiting-room {
+  background: linear-gradient(45deg, #006bf6, #6cabfe);
+  padding: 100px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
+  font-family: $mainFont;
+  color: $white;
+  h1,
+  h2 {
+    font-size: 2em;
+    padding-bottom: 1rem;
+  }
+  h1 {
+    font-weight: 700;
+  }
+  h3 {
+    font-size: 1.5em;
+    text-align: center;
+  }
+  .player-list {
+    margin-top: 3em;
+    text-align: center;
+    justify-self: flex-start;
+    h4 {
+      text-align: left;
+    }
+  }
+  .answers {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  button {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    padding: 0.5em 1.6em;
+    border: 1px #ffed17 solid;
+    color: $white;
+    border-radius: 0.55em;
+    margin: 0 0.8em;
+    transition: 0.2s;
+    font-size: 1.5rem;
+    &:hover {
+      cursor: pointer;
+      background: #ffed17;
+      color: $fontColor;
+    }
+  }
+}

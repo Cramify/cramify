@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import Timer from './Timer'
+import './Question.scss'
 
 export default class Question extends Component{
     constructor(props){
@@ -58,18 +59,18 @@ export default class Question extends Component{
             <button disabled>{this.state.answerArray[i]}</button>
         ))
         return(
-            <div>
+            <div className='question'>
                 <h1>Question:</h1>
-                <Timer timerFn={this.props.toResFn} time={5}/>
-
-                <h1>{this.props.questionData.question}</h1>
-
+                <h2>{this.props.questionData.question}</h2>
+                {/* Timer Display */}
+                <Timer timerFn={this.props.toResFn} time={120}/>
+                {/* Display Answers. If user has answered, disable buttons */}
                 {!this.state.didAnswer ? (
                     <div className='answers'>
                         {answers}
                     </div>
                     ) :
-                    <div>
+                    <div className='answers'>
                         {disabledAnswers}
                     </div>
                 }
