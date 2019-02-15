@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import axios from 'axios';
 import { updateRoomID, updateCreator } from "../../ducks/reducer";
+import './CreateRoom.scss';
 
 class CreateRoom extends Component {
   constructor(props) {
@@ -43,25 +44,27 @@ class CreateRoom extends Component {
   render() {
     let sets = this.state.sets.map((set, i) => {
       return (
-        <div key={i}>
+        <div className='set' key={i}>
           {set.set_name} {/* Seperate sets by admin/user*/}
-        <button onClick={() => this.createRoom(set.set_id)}>Create Room</button>
-
+        <div className='create-button' onClick={() => this.createRoom(set.set_id)}>Create Room</div>
         </div>
       )
     })
     return (
-      <div>
-        <h2>Room ID: {this.state.roomID}</h2>
+      <div className='create'>
+        {/* <h2>Room ID: {this.state.roomID}</h2>
         <input
           placeholder="Room Name"
           value={this.state.roomName}
           onChange={e => this.handleInput("roomName", e)}
           type="text"
         />
-        <button onClick={this.createRoom}>Create Room</button>
-        <h2>Game Sets: {sets}</h2>
-        />
+        <button onClick={this.createRoom}>Create Room</button> */}
+        <div onClick={() => this.props.history.push('/dashboard')} className='back-button'>Back</div>
+        <div className='set-container'>
+          <h2>Game Sets:</h2>
+          <h3>{sets}</h3>
+        </div>
       </div>
     );
   }
