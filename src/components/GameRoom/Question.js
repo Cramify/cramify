@@ -60,7 +60,7 @@ export default class Question extends Component{
         return(
             <div>
                 <h1>Question:</h1>
-                <Timer timerFn={this.props.toResFn} time={5}/>
+                <Timer timerFn={this.props.toResFn} time={1} size={100}/>
 
                 <h1>{this.props.questionData.question}</h1>
 

@@ -65,7 +65,6 @@ class GameRoom extends Component {
       username: this.state.currentUser,
       setID: this.state.setID
     });
-
   };
 
   componentDidUpdate = (prevProps, prevState) => {
@@ -179,12 +178,6 @@ class GameRoom extends Component {
     let userObj = usersArrCopy.splice(index, 1);
     console.log(userObj)
     userObj[0].points += pts;
-    if (this.props.creator) {
-      this.setState({
-        users: usersArrCopy,
-        player: userObj
-      })
-    }
 
     // send userObj to everyone
     this.socket.emit('update points', {

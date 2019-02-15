@@ -1,18 +1,94 @@
 @import '../../sassVars.scss';
+@import url('https://fonts.googleapis.com/css?family=Catamaran:400,800|Merriweather');
+$mainFont: 'Catamaran', sans-serif;
+$secondaryFont: 'Merriweather', serif;
+$fontColor: rgb(24, 29, 66);
 
 .results {
-  background: linear-gradient(45deg, #006BF6, #6CABFE);
+  background: linear-gradient(45deg, #3d6cb9, #00d1ff);
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  // justify-content: space-around;
   align-items: center;
   height: 100vh;
   font-family: $mainFont;
+  color: aliceblue;
+}
+
+.question-info {
+  margin-top: 5rem;
+}
+
+.results-question-display {
+  // margin-top: 2rem;
+  font-size: 3rem;
+  color: aliceblue;
+  display: flex;
+  justify-content: center;
+}
+
+.results-answer-display {
+  font-size: 1.7em;
+  color: #FFED17;
+  display: flex;
+  justify-content: center;
+  margin-top: 1.7rem;
+};
+
+.timer {
+  margin-top: 2rem;
+}
+
+.ranking {
+  margin-top: 2rem;
+  display: flex;
+  margin-top: 1.7rem;
+}
+
+.results-score {
+  color: aliceblue;
+  font-size: 3rem;
+  margin-top: 5rem;
+}
+
+.player-scores {
+  color: #FFED17;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+  width: 25vw;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #00d1ff
+}
+
+.results-player-info {
+  font-size: 1.5rem;
+}
+
+.dash-link {
+  text-decoration: none;
+}
+
+.dash-btn {
+  display: flex;
+  font-size: 1rem;
+  background-color: #FFED17;
   color: $fontColor;
-  h1 {
-    font-size: 2em;
+  justify-content: center;
+  align-items: center;
+  padding: .5em 1.6em;
+  border: none;
+  border-radius: .55em;
+  transition: .2s;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.8;
+    background: #ea3546;
+    color: aliceblue;
   }
-  h2 {
-    font-size: 1.5em;
+  &:focus {
+    color: aliceblue;
+    background: #ea3546;
+    outline: none;
   }
 }

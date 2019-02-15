@@ -13,9 +13,9 @@ class Timer extends Component{
             <div>
                 {/* Timer from react-countdown-clock*/}
                 <ReactCountdownClock seconds={this.props.time}
-                     color="#000"
+                     color="#ea3546"
                      alpha={0.9}
-                     size={100}
+                     size={this.props.size}
                      onComplete={this.props.timerFn} />
             </div>
         )

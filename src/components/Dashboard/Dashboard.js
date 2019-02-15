@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 import EditUser from "./EditUser";
 import Swal from "sweetalert2";
 import "./Dashboard.scss";
 
-export default class DashBoard extends Component {
+class DashBoard extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -94,17 +95,22 @@ export default class DashBoard extends Component {
             <img src="" alt="" />
           </div>
           <i className="fas fa-pen" onClick={this.toggleEdit} />
-          <button onClick={this.logout}>Logout</button>
-          <button onClick={this.deleteAccount}>Delete User</button>
+          <h4 className='dash-username'>{this.props.user.username}</h4>
+          <div className='logout-delete-btns'>
+            <button className='logout-btn' onClick={this.logout}>Logout</button>
+            <button className='delete-btn' onClick={this.deleteAccount}>Delete User</button>
+          </div>
         </div>
         <div className="game-options">
-          <h2>Play Now!</h2>
-          <Link to="/join">
-            <button>Join Game Room</button>
-          </Link>
-          <Link to="/create">
-            <button>Create New Game</button>
-          </Link>
+          <h2 className='play-now'>Play Now!</h2>
+          <div className='join-create-btns'>
+            <Link to="/join">
+              <button className='dash-join-btn'>Join Game Room</button>
+            </Link>
+            <Link to="/create">
+              <button className='dash-create-btn'>Create New Game</button>
+            </Link>
+          </div>
         </div>
         {this.state.edit && <EditUser toggleFn={this.toggleEdit} />}
         <div className="set-window">
@@ -117,3 +123,9 @@ export default class DashBoard extends Component {
     );
   }
 }
+
+const mapStateToProps = store => store;
+
+export default connect(
+  mapStateToProps,
+)(DashBoard);
