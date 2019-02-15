@@ -13,33 +13,6 @@ export default class Question extends Component{
         }
     }
 
-    //     {question_id: 2, question: "What is the purpose of the alt attribute on images?", correct_answer: "Provides alternate info if user cannot view it", answer_2: "Provides an alternate image", answer_3: "Gives the image a class", …}
-    // answer_2: "Provides an alternate image"
-    // answer_3: "Gives the image a class"
-    // answer_4: "alternately moves between two images"
-    // category: "HTML"
-    // correct_answer: "Provides alternate info if user cannot view it"
-    // junction_id: 24
-    // question: "What is the purpose of the alt attribute on images?"
-    // question_id: 2
-    // set_id: 5
-    // componentDidMount(){
-    //     let {correctAnswer, answerTwo, answerThree, answerFour} = this.state
-    //     let answers = [correctAnswer, answerTwo, answerThree, answerFour]
-    //     let newAnswers = []
-    //     for(let i = 0; i<answers.length; i++){
-            // let randomIndex = Math.floor(Math.random() * answers.length)
-            // while(newAnswers.includes(answers[randomIndex])){
-            //     randomIndex = Math.floor(Math.random() * answers.length)
-            // }
-            // newAnswers[i] = answers[randomIndex]
-    //     }
-    //     this.setState({
-    //         answerArray: newAnswers
-    //     })
-    // }
-
-
     componentDidMount = () => {
         console.log(this.props.questionData)
         const {answer_2, answer_3, answer_4, correct_answer} = this.props.questionData
