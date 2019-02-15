@@ -1,7 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Catamaran:400,800|Merriweather');
-$mainFont: 'Catamaran', sans-serif;
-$secondaryFont: 'Merriweather', serif;
-$fontColor: #4B4C53;
+@import '../../sassVars.scss';
 
 .home {
   position: relative;
@@ -9,8 +6,8 @@ $fontColor: #4B4C53;
   width: 100vw;
   overflow: hidden;
   max-width: 100%;
-  // border: 1px black solid;
-font-family: $mainFont;
+  font-family: $mainFont;
+  // background-color: $white;
 }
 .header {
   height: 4em;
@@ -37,7 +34,7 @@ font-family: $mainFont;
       align-items: center;
       padding: .5em 1.6em;
       border: 1px #FFED17 solid;
-      color: white;
+      color: $fontColor;
       border-radius: .55em;
       margin: 0 .8em;
       transition: .2s;
@@ -61,7 +58,7 @@ font-family: $mainFont;
 .big-triangle {
   height: 200vh;
   width: 70vw;
-  background: linear-gradient(to right, #006BF6, #6CABFE);
+  background: linear-gradient(to right, #3d6cb9, #00d1ff);
   position: relative;
   left: 200px;
   bottom: 200vh;
@@ -96,6 +93,7 @@ font-family: $mainFont;
     font-weight: 400;
   }
   > .hero-button {
+    margin-top: 30px;
     display: flex;
     justify-content: center;
     align-items: center;

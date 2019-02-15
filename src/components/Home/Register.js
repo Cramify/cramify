@@ -39,7 +39,7 @@ class Register extends Component{
         return(
             <div className='modal'>
                 <div className='content'>
-                    <i onClick={() => this.props.regFn()} className="fas fa-times-circle fa-2x"></i>
+                    <i onClick={() => this.props.regFn()} className="fas fa-times fa-2x"></i>
                     <h2>Register</h2>
                     <div className='user-input'>
                         <input onChange={(e)=>this.handleInput('email', e)} type="text" placeholder='email'/>
@@ -47,15 +47,15 @@ class Register extends Component{
                         <input onChange={(e)=>this.handleInput('password', e)} type="password" placeholder='password'/>
                         <input onChange={(e)=>this.handleInput('checkPassword', e)} type="password" placeholder='confirm password'/>
                     </div>
-                    <div className='button' onClick={this.register}>Register</div>
+                    <button className='button' onClick={this.register}>Register</button>
                     <div className='switch-modal'>
                         <h4>Already Have an Account?</h4>
-                        <div onClick={() => {
+                        <button onClick={() => {
                             this.props.regFn();
                             this.props.logFn();
                         }} className='button'>
                         Login
-                    </div>
+                    </button>
                     </div>
                 </div>
             </div>
