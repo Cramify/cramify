@@ -39,7 +39,7 @@ class Register extends Component{
         return(
             <div className='modal'>
                 <div className='content'>
-                    <i onClick={() => this.props.regFn()} class="fas fa-times-circle fa-2x"></i>
+                    <i onClick={() => this.props.regFn()} className="fas fa-times-circle fa-2x"></i>
                     <h2>Register</h2>
                     <div className='user-input'>
                         <input onChange={(e)=>this.handleInput('email', e)} type="text" placeholder='email'/>

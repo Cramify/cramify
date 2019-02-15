@@ -32,7 +32,7 @@ class Login extends Component {
     return (
       <div className='modal'>
         <div className='content'>
-        <i onClick={() => this.props.logFn()} class="fas fa-times-circle fa-2x"></i>
+        <i onClick={() => this.props.logFn()} className="fas fa-times-circle fa-2x"></i>
           <h2>Login</h2>
           <div className='user-input'>
             <input

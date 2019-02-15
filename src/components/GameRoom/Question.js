@@ -7,18 +7,22 @@ export default class Question extends Component{
         this.state = {
             didAnswer: false,
             question: [],
-            // dont think we need correct answer in this component. correctAnswer in the gameRoom component
             correctAnswer: '',
             answerArray: []
         }
     }
 
     componentDidMount = () => {
-        console.log(this.props.questionData)
-        const {answer_2, answer_3, answer_4, correct_answer} = this.props.questionData
         let answers = [];
         let newAnswers = [];
-        answers.push(answer_2, answer_3, answer_4, correct_answer);
+        if (this.props.questionData.answer_4) {
+            const {answer_2, answer_3, answer_4, correct_answer} = this.props.questionData
+            answers.push(answer_2, answer_3, answer_4, correct_answer);
+        }
+        else if (!this.props.questionData.answer_4) {
+            const {answer_2, correct_answer} = this.props.questionData
+            answers.push(answer_2, correct_answer)
+        }
         for(let i = 0; i < answers.length; i++){
             let randomIndex = Math.floor(Math.random() * answers.length)
             while(newAnswers.includes(answers[randomIndex])){
@@ -29,7 +33,7 @@ export default class Question extends Component{
 
         this.setState({
             answerArray: newAnswers,
-            correctAnswer: correct_answer
+            correctAnswer: this.props.questionData.correct_answer
         })
 
 
@@ -40,39 +44,35 @@ export default class Question extends Component{
             didAnswer: true
         })
         if(this.state.answerArray[num-1] === this.state.correctAnswer){
+            this.props.updatePts(this.props.playerID, 1)
             console.log('correct')
         } else {
+            this.props.updatePts(this.props.playerID, 0)
             console.log('incorrect')
         }
     }
 
     render(){
+        const answers = this.state.answerArray.map((answer, i) => (
+            <button onClick={() => this.answerQuestion(i+1)}>{this.state.answerArray[i]}</button>
+        ))
+        const disabledAnswers = this.state.answerArray.map((answer, i) => (
+            <button disabled>{this.state.answerArray[i]}</button>
+        ))
         return(
             <div>
                 <h1>Question:</h1>
-                <Timer timerFn={this.props.toResFn} time={1}/>
+                <Timer timerFn={this.props.toResFn} time={2}/>
 
-                {/* this will be a prop from GameRoom.state.questions*/}
                 <h1>{this.props.questionData.question}</h1>
 
-
-                {/*<Timer />*/}
-
-                {/* one of these will be a prop from GameRoom.state.correctAnswer*/}
-                {/* The rest will be props from GameRoom.state.questions*/}
                 {!this.state.didAnswer ? (
                     <div className='answers'>
-                        <button onClick={() => this.answerQuestion(1)}>{this.state.answerArray[0]}</button>
-                        <button onClick={() => this.answerQuestion(2)}>{this.state.answerArray[1]}</button>
-                        <button onClick={() => this.answerQuestion(3)}>{this.state.answerArray[2]}</button>
-                        <button onClick={() => this.answerQuestion(4)}>{this.state.answerArray[3]}</button>
+                        {answers}
                     </div>
                     ) :
                     <div>
-                        <button disabled>{this.state.answerArray[0]}</button>
-                        <button disabled>{this.state.answerArray[1]}</button>
-                        <button disabled>{this.state.answerArray[2]}</button>
-                        <button disabled>{this.state.answerArray[3]}</button>
+                        {disabledAnswers}
                     </div>
                 }
                 
