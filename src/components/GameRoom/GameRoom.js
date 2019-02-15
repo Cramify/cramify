@@ -177,12 +177,18 @@ class GameRoom extends Component {
     const index = this.state.users.findIndex((user, i) => {
       return user.playerID === playerID
     })
-    let userObj = this.state.users.splice(index, 1);
+    let usersArrCopy = [...this.state.users]
+    let userObj = usersArrCopy.splice(index, 1);
     console.log(userObj)
     userObj[0].points += pts;
+    for(let i = 0 ; i < usersArrCopy.length ; i++){
+      if(userObj.playerID === usersArrCopy[i].playerID){
+        usersArrCopy[i].points = userObj[0].points
+      }
+    }
     if (this.props.creator) {
       this.setState({
-        userPointsArr: [],
+        users: usersArrCopy,
         player: userObj
       })
     }
