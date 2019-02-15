@@ -6,7 +6,6 @@ import Results from "./Results";
 import axios from "axios";
 import Question from './Question'
 import Swal from 'sweetalert2'
-import { fdatasync } from "fs";
 
 class GameRoom extends Component {
   constructor(props) {
@@ -31,7 +30,8 @@ class GameRoom extends Component {
     this.socket.on("update users array", data => this.updateUsersArr(data));
     this.socket.on('run begin function', data => this.startGame());
     this.socket.on('kick everyone out', data => this.kick());
-    this.socket.on('display points', data => this.displayPoints(data))
+    this.socket.on('display points', data => this.displayPoints(data));
+    this.socket.on('set myid on state', data => this.updateMyID(data))
   }
 
   componentDidMount = async () => {
@@ -87,9 +87,10 @@ class GameRoom extends Component {
       await this.socket.emit('host has left', { room: this.state.roomID })
       this.props.destroyCreator()
     }
-    this.state.users.map((user, i) => {
+    // eslint-disable-next-line
+    this.state.users.map((user, i) => { 
       if (user.playerID === this.state.myID) {
-        this.state.users.splice(i, 1)
+         return this.state.users.splice(i, 1)
       }
     })
     this.socket.emit('users array changed', {
@@ -105,17 +106,24 @@ class GameRoom extends Component {
     const player = { username: data.players[0], playerID: data.playerID, points: 0 };
     const newUsersArr = [...this.state.users, player];
     this.setState({
-      users: newUsersArr,
-      myID: data.playerID
+      users: newUsersArr
     });
+    if (this.state.myID === null) this.socket.emit('update my id', {myID: player.playerID})
   };
+  
+  updateMyID = data => {
+    this.setState({
+      myID: data.myID
+    })
+    console.log(this.state.myID)
+  }
 
   updateUsersArr = data => {
+    console.log(data.users)
     this.setState({
       users: data.users,
       setID: data.setID
     });
-    console.log(data)
   };
 
   startGame = async () => {
@@ -131,8 +139,6 @@ class GameRoom extends Component {
   }
 
   toResults = () => {
-    console.log(this.state.currentQuestion)
-    console.log(this.state.set.length)
     this.setState({ questionDisplay: !this.state.questionDisplay })
   }
 
@@ -165,11 +171,14 @@ class GameRoom extends Component {
 
 
   updatePoints = (playerID, pts) => {
+    console.log('playerid', playerID)
+    console.log('users arr', this.state.users)
     const index = this.state.users.findIndex((user, i) => {
       return user.playerID === playerID
     })
-    let userObj = this.state.users.slice(index, 1);
-    userObj.score += pts;
+    let userObj = this.state.users.splice(index, 1);
+    console.log(userObj)
+    userObj[0].points += pts;
     if (this.props.creator) {
       this.setState({
         userPointsArr: [],
@@ -183,7 +192,6 @@ class GameRoom extends Component {
   }
 
   render() {
-    console.log(this.state.setID)
     const { users, questionDisplay, gameStarted, currentQuestion, set, showTimer } = this.state;
     return (
       <div>
@@ -208,8 +216,6 @@ class GameRoom extends Component {
           usersArr={this.state.users}
         /> 
           : null}
-        <button onClick={() => { this.setState({ questionDisplay: true }) }}></button>
-        {/* {gameDisplay} */}
       </div>
     );
   }
