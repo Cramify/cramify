@@ -8,7 +8,6 @@ import Question from './Question'
 import Swal from 'sweetalert2'
 import { fdatasync } from "fs";
 
-
 class GameRoom extends Component {
   constructor(props) {
     super(props);
