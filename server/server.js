@@ -99,6 +99,12 @@ io.on("connection", socket => {
     console.log('host has left. kick out. this is a test.')
   })
 
+  // updates and displays points
+  socket.on('update points', data => {
+    io.to(data.room).emit('display points', data)
+    console.log('updated points')
+  })
+
 });
 
 // Account Endpoints

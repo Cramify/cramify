@@ -44,8 +44,10 @@ export default class Question extends Component{
             didAnswer: true
         })
         if(this.state.answerArray[num-1] === this.state.correctAnswer){
+            this.props.updatePts(this.props.playerID, 1)
             console.log('correct')
         } else {
+            this.props.updatePts(this.props.playerID, 0)
             console.log('incorrect')
         }
     }
@@ -60,7 +62,7 @@ export default class Question extends Component{
         return(
             <div>
                 <h1>Question:</h1>
-                <Timer timerFn={this.props.toResFn} time={1}/>
+                <Timer timerFn={this.props.toResFn} time={2}/>
 
                 <h1>{this.props.questionData.question}</h1>
 
