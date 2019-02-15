@@ -22,8 +22,7 @@ class GameRoom extends Component {
       setID: null,
       myID: null,
       currentQuestion: 0,
-      showTimer: true,
-      player: null
+      showTimer: true
     };
     this.socket = io.connect(":4000");
     this.socket.on("display name response", data => this.displayName(data));
@@ -83,7 +82,6 @@ class GameRoom extends Component {
   };
 
   componentWillUnmount = async () => {
-    console.log('unmounted')
     if (this.props.creator) {
       await this.socket.emit('host has left', { room: this.state.roomID })
       this.props.destroyCreator()
@@ -99,15 +97,13 @@ class GameRoom extends Component {
       users: this.state.users,
       setID: this.state.setID
     })
-    console.log(this.state.users)
-    console.log('unmounted again')
   }
 
   displayName = data => {
     const player = { username: data.players[0], playerID: data.playerID, points: 0 };
-    const newUsersArr = [...this.state.users, player];
+    const updatedUsers = [...this.state.users, player];
     this.setState({
-      users: newUsersArr
+      users: updatedUsers
     });
     if (this.state.myID === null) this.socket.emit('update my id', {myID: player.playerID})
   };
@@ -164,9 +160,11 @@ class GameRoom extends Component {
   }
 
   displayPoints = data => {
-    const newUsersArr = [...this.state.userPointsArr, data.user];
+    console.log(data.user)
+    const updatedUsers = [...this.state.users]
+    updatedUsers[data.userIndex] = data.user
     this.setState({
-      userPointsArr: newUsersArr,
+      users: updatedUsers
     });
   };
 
@@ -181,20 +179,18 @@ class GameRoom extends Component {
     let userObj = usersArrCopy.splice(index, 1);
     console.log(userObj)
     userObj[0].points += pts;
-    for(let i = 0 ; i < usersArrCopy.length ; i++){
-      if(userObj.playerID === usersArrCopy[i].playerID){
-        usersArrCopy[i].points = userObj[0].points
-      }
-    }
     if (this.props.creator) {
       this.setState({
         users: usersArrCopy,
         player: userObj
       })
     }
+
+    // send userObj to everyone
     this.socket.emit('update points', {
       room: this.props.roomID,
-      userPointsArr: this.state.player
+      user: {...userObj[0]},
+      userIndex: index
     })
   }
 
