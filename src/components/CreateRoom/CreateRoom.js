@@ -52,14 +52,6 @@ class CreateRoom extends Component {
     })
     return (
       <div className='create'>
-        {/* <h2>Room ID: {this.state.roomID}</h2>
-        <input
-          placeholder="Room Name"
-          value={this.state.roomName}
-          onChange={e => this.handleInput("roomName", e)}
-          type="text"
-        />
-        <button onClick={this.createRoom}>Create Room</button> */}
         <div onClick={() => this.props.history.push('/dashboard')} className='back-button'>Back</div>
         <div className='set-container'>
           <h2>Game Sets:</h2>
