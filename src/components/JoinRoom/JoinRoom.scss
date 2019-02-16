@@ -1,0 +1,72 @@
+@import '../../sassVars.scss';
+
+.join-room {
+  height: 100vh;
+  font-family: $mainFont;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #FFFCF2;
+  background: linear-gradient(to left, #02cefd, #3d6cb9);
+  .back-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 2em;
+    width: 5em;
+    border: 1px #FFED17 solid;
+    border-radius: 0.5em;
+    font-size: 1.2em;
+    margin-bottom: 2em;
+    align-self: center;
+    background: transparent;
+    color: #FFFCF2;
+    &:hover {
+      background: #FFED17;
+      color: $fontColor;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+  }
+  > h2 {
+    font-size: 5em;
+  }
+  > input {
+    font-size: 4em;
+    height: 1.2em;
+    border-bottom: 1px solid black;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background: transparent;
+    text-align: center;
+    margin-top: 2em;
+    color: #FFFCF2;
+    &::placeholder {
+      font-family: $mainFont;
+      color: #FFFCF2;
+    }
+    &:focus {
+      outline: none;
+      background-color: #0099ff;
+      border-radius: 5px;
+    }
+  }
+  .join-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 2em;
+    width: 4em;
+    border: 1px #FFED17 solid;
+    border-radius: 0.5em;
+    margin-top: 4em;
+    &:hover {
+      background: #FFED17;
+      color: $fontColor;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+  }
+}

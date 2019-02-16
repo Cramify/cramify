@@ -27,6 +27,8 @@
     }
   }
   .set-container {
+    max-height: 50%;
+    overflow: auto;
     color: $fontColor;
     display: flex;
     flex-direction: column;
