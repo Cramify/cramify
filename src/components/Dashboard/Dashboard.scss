@@ -1,16 +1,12 @@
 @import '../../sassVars.scss';
 
 .dashboard {
+  background-color: #FFFFFF;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   height: 100vh;
   width: 100vw;
-  h2 {
-    font-size: 2em;
-    font-family: $mainFont;
-    color: $fontColor;
-  }
 }
 
 .set-window {
@@ -23,6 +19,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  margin-left: 30px;
+  margin-top: 30px;
   .profile-pic {
     height: 200px;
     width: 200px;
@@ -32,8 +30,114 @@
   }
 }
 
+.dash-username {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 1.3rem;
+  display: flex;
+  justify-content: center;
+}
+
+.logout-delete-btns {
+  display: flex;
+  justify-content: space-around;
+  border: none;
+}
+
+.logout-btn, .delete-btn {
+  display: flex;
+  justify-content: space-around;
+  width: 48%;
+  height: 25px;
+  font-size: .9rem;
+  border: none;
+  border-radius: .55em;
+  transition: .2s;
+  cursor: pointer;
+}
+
+.logout-btn {
+  background-color: #3d6cb9;
+  color: aliceblue;
+  &:hover {
+    opacity: 0.8;
+    background: #00d1ff;
+    color: aliceblue;
+  }
+  &:focus {
+    color: aliceblue;
+    background: #00d1ff;
+    outline: none;
+  }
+}
+
+.delete-btn {
+  background-color: #FFED17;
+  color: $fontColor;
+  &:hover {
+    opacity: 0.8;
+    background: #ea3546;
+    color: aliceblue;
+  }
+  &:focus {
+    color: aliceblue;
+    background: #ea3546;
+    outline: none;
+  }
+}
+
 .game-options {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  margin-left: 30px;
+  margin-top: 30px;
+}
+
+.play-now {
+  font-size: 3em;
+  font-family: $mainFont;
+  margin-bottom: 15px;
+}
+
+.join-create-btns {
+  display: flex;
+  justify-content: space-around;
+  width: 48%;
+  height: 25px;
+  font-size: .9rem;
+  border: none;
+  border-radius: .55em;
+  transition: .2s;
+  cursor: pointer;
+}
+
+.dash-join-btn {
+  background-color: #3d6cb9;
+  color: aliceblue;
+  &:hover {
+    opacity: 0.8;
+    background: #00d1ff;
+    color: aliceblue;
+  }
+  &:focus {
+    color: aliceblue;
+    background: #00d1ff;
+    outline: none;
+  }
+}
+
+.dash-create-btn {
+  background-color: #FFED17;
+  color: $fontColor;
+  &:hover {
+    opacity: 0.8;
+    background: #ea3546;
+    color: aliceblue;
+  }
+  &:focus {
+    color: aliceblue;
+    background: #ea3546;
+    outline: none;
+  }
 }
