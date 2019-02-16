@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import Timer from './Timer'
+import './Question.scss'
 
 export default class Question extends Component{
     constructor(props){
@@ -58,7 +59,7 @@ export default class Question extends Component{
             <button disabled>{this.state.answerArray[i]}</button>
         ))
         return(
-            <div>
+            <div className='question'>
                 <h1>Question:</h1>
                 <Timer timerFn={this.props.toResFn} time={1} size={100}/>
 
@@ -69,7 +70,7 @@ export default class Question extends Component{
                         {answers}
                     </div>
                     ) :
-                    <div>
+                    <div className='answers'>
                         {disabledAnswers}
                     </div>
                 }

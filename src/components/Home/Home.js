@@ -48,7 +48,7 @@ export default class Home extends Component {
               Want to study some great coding material? You are at the right
               place my friends. :)
             </h2>
-            <div className="hero-button" onClick={() => this.loginToggle()}>
+            <div className="hero-button" onClick={() => this.props.history.push('/join')}>
               Play Now!
             </div>
           </div>
