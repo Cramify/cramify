@@ -61,5 +61,11 @@ module.exports  = {
         console.log(req.query)
         const editQuestionDelete = await db.edit_question_delete({set_id: setID, junction_id: junctionID});
         res.status(200).send(editQuestionDelete)
+    },
+    getByCategory: async (req, res) => {
+        const db = req.app.get('db');
+        const {category} = req.params;
+        const getByCategory = await db.select_category({category})
+        res.status(200).send(getByCategory)
     }
 }

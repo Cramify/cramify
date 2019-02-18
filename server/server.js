@@ -134,8 +134,10 @@ app.post('/set/user/question/', qc.addQuestionsToSet);
 //delete specific question from users set
 app.delete('/set/user/edit/delete/', qc.editQuestionDelete)
 
-//question endpoints
-app.get('/question/all', qc.getAllQuestions);
+//CreateSet endpoints
+app.get('/question/all', qc.getAllQuestions); //gets all questions
+app.get('/question/:category', qc.getByCategory) //gets by category
+
 
 //Game Room Endpoints
 app.get('/game/set/:setID', gc.getGameSets)
