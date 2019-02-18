@@ -4,13 +4,79 @@ $mainFont: 'Catamaran', sans-serif;
 $secondaryFont: 'Merriweather', serif;
 $fontColor: rgb(24, 29, 66);
 
+//confetti
+$yellow: #ffd300;
+$blue: #173dff;
+$pink: #ff4e91;
+
+$duration: 1000;
+
+@function randomNum($min, $max) {
+  $rand: random();
+  $randomNum: $min + floor($rand * (($max - $min) + 1));
+  @return $randomNum;
+}
+
+.confetti-piece {
+  position: absolute;
+  width: 8px;
+  height: 16px;
+  background: $yellow;
+  top: 0;
+  opacity: 0;
+
+  @for $i from 1 through 49 {
+    &:nth-child(#{$i}) {
+      left: $i * 2%;
+      transform: rotate(#{randomNum(-180, 180)}deg);
+      animation: makeItRain $duration * 4ms infinite ease-out;
+      animation-delay: #{randomNum(0, $duration * 5.5)}ms;
+      animation-duration: #{randomNum($duration * 2.7, $duration * 3.2)}ms
+    }
+  }
+
+  &:nth-child(odd) {
+    background: $blue;
+  }
+
+  &:nth-child(even) {
+    z-index: 1;
+  }
+
+  &:nth-child(4n) {
+    width: 5px;
+    height: 12px;
+    animation-duration: $duration * 3ms;
+  }
+
+  &:nth-child(4n-7) {
+    background: $pink;
+  }
+}
+
+@keyframes makeItRain {
+  from {
+    opacity: 0;
+  }
+
+  25% {
+    opacity: 1;
+  }
+
+  to {
+    transform: translateY(100vh)
+  }
+}
+
 .results {
+  background-position: fixed;
   background: linear-gradient(45deg, #3d6cb9, #00d1ff);
   display: flex;
   flex-direction: column;
-  // justify-content: space-around;
+  justify-content: space-around;
   align-items: center;
   height: 100vh;
+  width: 100vw;
   font-family: $mainFont;
   color: aliceblue;
 }
@@ -41,8 +107,10 @@ $fontColor: rgb(24, 29, 66);
 
 .ranking {
   margin-top: 2rem;
+  height: 30%;
   display: flex;
   margin-top: 1.7rem;
+  overflow: auto;
 }
 
 .results-score {

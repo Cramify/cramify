@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Register from "./Register";
 import Login from "./Login";
 import "./Home.scss";
+import axios from "axios";
+import {Link} from 'react-router-dom'
 // import {useTransition, animated, useSpring} from 'react-spring';
 
 export default class Home extends Component {
@@ -10,9 +12,17 @@ export default class Home extends Component {
 
     this.state = {
       register: false,
-      login: false
+      login: false,
+      leaderboard: []
     };
   }
+
+  componentDidMount = async () => {
+    const leaderboard = await axios.get("/leaderboard");
+    this.setState({
+      leaderboard: leaderboard.data
+    });
+  };
 
   registerToggle = () => {
     this.setState({
@@ -32,11 +42,11 @@ export default class Home extends Component {
 
     return (
       <div className="home">
-        <div className='triangle-container'>
+        <div className="triangle-container">
           <div className="big-triangle" />
         </div>
         <div className="header">
-          <h1>Cramify</h1>
+          <Link to='/'><h1>Cramify</h1></Link>
           <div>
             <div onClick={() => this.registerToggle()}>Register</div>
             <div onClick={() => this.loginToggle()}>Login</div>
@@ -48,7 +58,10 @@ export default class Home extends Component {
               Want to study some great coding material? You are at the right
               place my friends. :)
             </h2>
-            <div className="hero-button" onClick={() => this.props.history.push('/join')}>
+            <div
+              className="hero-button"
+              onClick={() => this.props.history.push("/join")}
+            >
               Play Now!
             </div>
           </div>
@@ -58,6 +71,16 @@ export default class Home extends Component {
           {login ? (
             <Login logFn={this.loginToggle} regFn={this.registerToggle} />
           ) : null}
+        </div>
+        <div className="leaderboard">
+          <h1>Leaderboard</h1>
+          {this.state.leaderboard.map((leader, i) => (
+            <div key={i}>
+              <h2>{i+1}. {leader.username}</h2>
+              <div className="leading-dots"></div>
+              <h2>{leader.score}</h2>
+            </div>
+          ))}
         </div>
       </div>
     );
