@@ -14,6 +14,7 @@ export default class Question extends Component{
     }
 
     componentDidMount = () => {
+        if (this.props.roomID === null) this.props.history.push('/')
         let answers = [];
         let newAnswers = [];
         if (this.props.questionData.answer_4) {
@@ -63,7 +64,7 @@ export default class Question extends Component{
                 <h1>Question:</h1>
                 <h2>{this.props.questionData.question}</h2>
                 {/* Timer Display */}
-                <Timer timerFn={this.props.toResFn} time={20}/>
+                <Timer timerFn={this.props.toResFn} time={20} size={100}/>
                 {/* Display Answers. If user has answered, disable buttons */}
                 {!this.state.didAnswer ? (
                     <div className='answers'>

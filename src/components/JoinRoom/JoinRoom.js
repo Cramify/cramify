@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { updateRoomID } from "../../ducks/reducer";
+import './JoinRoom.scss';
 
 class JoinRoom extends Component {
   constructor(props) {
@@ -23,15 +24,16 @@ class JoinRoom extends Component {
 
   render() {
     return (
-      <div>
+      <div className='join-room'>
+        <div onClick={() => this.props.history.push('/dashboard')} className='back-button'>Back</div>
         <h2>Join Room</h2>
         <input
           value={this.state.roomID}
-          placeholder="Enter Room ID"
+          placeholder="Enter Room Code"
           onChange={e => this.handleInput("roomID", e)}
           type="text"
         />
-        <button onClick={this.joinRoom}>Join</button>
+        <div className='join-button' onClick={this.joinRoom}>Join!</div>
       </div>
     );
   }
