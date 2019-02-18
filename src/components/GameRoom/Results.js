@@ -53,14 +53,77 @@ class Results extends Component {
           </h2>
           <br/>
         </div>
-        {!this.props.timerDisplay && (
-          // TODO: Add points to db on this button click
+      {!this.props.timerDisplay && (
+        // TODO: Add points to db on this button click
+        <div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
           <Link className='dash-link' to="/dashboard">
             <button className='dash-btn'>Back to Dash</button>
           </Link>
-        )}
-      </div>
-    );
+        </div>
+      )}
+    </div>
+  );
   }
 }
 
