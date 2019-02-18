@@ -16,15 +16,19 @@ class DashBoard extends Component {
       edit: false,
       editSet: false,
       sets: [],
-      setName: ""
+      setName: "",
+      ranking: null
     };
   }
 
   componentDidMount = async () => {
     const res = await axios.get("/set/user");
+    const userRank = await axios.get(`/user/rankings/${this.props.user.id}`)
     this.setState({
-      sets: res.data
+      sets: res.data,
+      ranking: userRank.data
     });
+    console.log(this.state.ranking)
   };
   logout = () => {
     axios.post("/auth/logout");
@@ -106,7 +110,7 @@ class DashBoard extends Component {
           </div>
           <div className='dash-rank-holder'>
             <h1 className='dash-rank'>Rank</h1>
-            <p className='user-rank'>10</p>
+            <p className='user-rank'>{this.state.ranking}</p>
           </div>
           <div className="set-window">
             <h2 className='dash-sets'>My Sets</h2>
