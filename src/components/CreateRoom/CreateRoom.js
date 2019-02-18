@@ -22,7 +22,6 @@ class CreateRoom extends Component {
     this.setState({ roomID });
 
     const res = await axios.get('/set/all');
-    console.log(res.data)
     this.setState({
         sets: res.data,
     })
