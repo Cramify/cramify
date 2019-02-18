@@ -89,19 +89,19 @@ io.on("connection", socket => {
   // Update everyone's users arrays & setID
   socket.on('users array changed', data => {
     io.to(data.room).emit('update users array', data)
-    console.log('update', data)
+    console.log('update')
   })
 
   // begin the game
   socket.on('game start', data => {
     socket.to(data.room).broadcast.emit('run begin function', data)
-    console.log('game start', data)
+    console.log('game start')
   })
 
   // host has left, kick everyone out
   socket.on('host has left', data => {
     socket.to(data.room).broadcast.emit('kick everyone out', data)
-    console.log('host has left. kick out. this is a test.')
+    console.log('host has left.')
   })
 
   // updates and displays points
@@ -109,7 +109,6 @@ io.on("connection", socket => {
     io.to(data.room).emit('display points', data)
     console.log('updated points')
   })
-
 });
 
 // Account Endpoints

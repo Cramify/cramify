@@ -29,12 +29,23 @@ class GameRoom extends Component {
     this.socket.on("display name response", data => this.displayName(data));
     this.socket.on("update users array", data => this.updateUsersArr(data));
     this.socket.on("run begin function", data => this.startGame());
-    this.socket.on("kick everyone out", data => this.kick());
     this.socket.on("display points", data => this.displayPoints(data));
     this.socket.on("set myid on state", data => this.updateMyID(data));
   }
 
   componentDidMount = async () => {
+    if (this.props.roomID === null) {
+      Swal.fire({
+        title: 'Disconnected from the game!',
+        text: `Don't worry, we'll send you back where you came from.`,
+        timer: 2500,
+        showConfirmButton: false,
+        type: 'error',
+        customClass: 'custom-alert'
+      }).then(() => {
+        this.props.history.goBack()
+      })
+    } 
     if (this.props.creator) {
       const setID = Number(this.props.location.search.slice(1));
       this.setState({ setID });
@@ -83,8 +94,8 @@ class GameRoom extends Component {
 
   componentWillUnmount = async () => {
     if (this.props.creator) {
-      await this.socket.emit("host has left", { room: this.state.roomID });
       this.props.destroyCreator();
+      await this.socket.emit("host has left", { room: this.state.roomID });
     }
     // eslint-disable-next-line
     this.state.users.map((user, i) => {
@@ -117,11 +128,9 @@ class GameRoom extends Component {
     this.setState({
       myID: data.myID
     });
-    console.log(this.state.myID);
   };
 
   updateUsersArr = data => {
-    console.log(data.users);
     this.setState({
       users: data.users,
       setID: data.setID
@@ -155,20 +164,7 @@ class GameRoom extends Component {
     }
   };
 
-  kick = () => {
-    console.log("kick");
-    Swal.fire({
-      title: "Host has left",
-      message: "Leaving room",
-      timer: 1500,
-      type: "error"
-    }).then(() => {
-      this.props.history.push("/");
-    });
-  };
-
   displayPoints = data => {
-    console.log(data.user);
     const updatedUsers = [...this.state.users];
     updatedUsers[data.userIndex] = data.user;
     this.setState({
@@ -177,14 +173,11 @@ class GameRoom extends Component {
   };
 
   updatePoints = (playerID, pts) => {
-    console.log("playerid", playerID);
-    console.log("users arr", this.state.users);
     const index = this.state.users.findIndex((user, i) => {
       return user.playerID === playerID;
     });
     let usersArrCopy = [...this.state.users];
     let userObj = usersArrCopy.splice(index, 1);
-    console.log(userObj);
     userObj[0].points += pts;
 
     // send userObj to everyone
@@ -212,6 +205,7 @@ class GameRoom extends Component {
             <div className="waiting-room-heading">
               {this.props.creator ? <h2>Waiting for More Players</h2> : <h2>Waiting for Game to Start</h2>}
               <h3>Room ID: {this.props.roomID}</h3>
+              <h4>Share this number so others can join the game!</h4>
               <div className="player-list">
                 <h3>Players</h3>
                 {users.map((user, i) => (

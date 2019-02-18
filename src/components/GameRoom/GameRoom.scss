@@ -23,12 +23,27 @@
     font-size: 1.5em;
     text-align: center;
   }
+  .waiting-room-heading {
+    text-align: center;
+    > h2 {
+      font-weight: 700;
+    }
+    > h4 {
+      font-family: $secondaryFont;
+      font-style: italic;
+      font-size: .9em;
+    }
+  }
   .player-list {
     margin-top: 3em;
     text-align: center;
     justify-self: flex-start;
+    h3 {
+      margin-bottom: 10px;
+      text-decoration: underline;
+    }
     h4 {
-      text-align: left;
+      font-size: 1.2em;
     }
   }
   .answers {
@@ -57,4 +72,7 @@
       color: $fontColor;
     }
   }
+}
+.custom-alert {
+  font-family: $mainFont;
 }
