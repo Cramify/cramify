@@ -1,39 +1,59 @@
-import React from "react";
+import React, {Component} from "react";
 import "./Results.scss";
 import Timer from "./Timer";
 import {Link} from 'react-router-dom'
+import axios from 'axios';
+import {connect} from 'react-redux';
 
-export default function Results(props) {
-  return (
-    <div className="results">
-      {props.timerDisplay ? (
-        <div className='timer'>
-        <Timer timerFn={props.nextQFn} time={1} size={100}/>
+class Results extends Component {
+
+  componentDidMount() {
+    console.log('hit')
+    console.log(this.props.usersArr)
+    console.log(this.props.myID)
+    if (!this.props.timerDisplay) {
+      const index = this.props.usersArr.findIndex((user) => {
+        return this.props.myID === user.playerID;
+      })
+      console.log(index)
+      axios.put(`./user/points/${this.props.user.id}`, {points: Number(this.props.usersArr[index].points)})
+      .then(() => {
+        console.log(`user score updated`)
+      })
+    }
+  }
+
+  render() {
+    return (
+      <div className="results">
+        {this.props.timerDisplay ? (
+          <div className='timer'>
+          <Timer timerFn={this.props.nextQFn} time={1} size={100}/>
+          </div>
+        ) : (
+          <p></p>
+        )}
+        <div className="question-info">
+          <h1 className='results-question-display'>{this.props.questionData.question}</h1>
+          <br/>
+          <h2 className='results-answer-display'>{this.props.questionData.correct_answer}</h2>
         </div>
-      ) : (
-        <p></p>
-      )}
-      <div className="question-info">
-        <h1 className='results-question-display'>{props.questionData.question}</h1>
-        <br/>
-        <h2 className='results-answer-display'>{props.questionData.correct_answer}</h2>
-      </div>
-      
-      <h1 className='results-score'>Scores</h1>
-      <div className="ranking">
-        <h2>
-          {props.usersArr.map(user => {
-            return (
-              <div className='player-scores' key={user.playerID}>
-                <p className='results-player-info'>{user.username}</p>
-                <p className='results-player-info'>{user.points}</p>
-              </div>
-            );
-          })}
-        </h2>
-        <br/>
-      </div>
-      {!props.timerDisplay && (
+        
+        <h1 className='results-score'>Scores</h1>
+        <div className="ranking">
+          <h2>
+            {this.props.usersArr.map(user => {
+              return (
+                <div className='player-scores' key={user.playerID}>
+                  <p className='results-player-info'>{user.username}</p>
+                  <p className='results-player-info'>{user.points}</p>
+                </div>
+              );
+            })}
+          </h2>
+          <br/>
+        </div>
+      {!this.props.timerDisplay && (
         // TODO: Add points to db on this button click
         <div>
             <div className='confetti-piece'></div>
@@ -104,4 +124,9 @@ export default function Results(props) {
       )}
     </div>
   );
+  }
 }
+
+const mapStateToProps = store => store;
+
+export default connect(mapStateToProps)(Results);

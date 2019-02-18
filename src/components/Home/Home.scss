@@ -2,7 +2,7 @@
 
 .home {
   position: relative;
-  height: 100vh;
+  height: auto;
   width: 100vw;
   overflow: hidden;
   max-width: 100%;
@@ -16,17 +16,23 @@
   align-items: center;
   padding: 0 1em;
   overflow: hidden;
-  > h1 {
-    font-family: $mainFont;
-    font-weight: 800;
-    font-size: 2.8em;
-    color: $fontColor;
-    width: 4em;
-    padding: 0;
-    margin: 0;
-    // line-height: 0.5em;
+  > a {
+    text-decoration: none;
+    h1 {
+      cursor: pointer;
+      font-family: $mainFont;
+      font-weight: 800;
+      font-size: 2.8em;
+      color: $fontColor;
+      width: 4em;
+      padding: 0;
+      margin: 0;
+      // line-height: 0.5em;
+    }  
   }
   > div {
+    display: flex;
+    z-index: 1;
     > div {
       cursor: pointer;
       display: flex;
@@ -44,7 +50,6 @@
         color: $fontColor;
       }
     }
-    display: flex;
     // padding-left: 8em;
   }
 }
@@ -53,10 +58,12 @@
   height: 100%;
   position: absolute;
   overflow: hidden;
-  z-index: -2;
+  // z-index: -2;
+  pointer-events: none;
 }
 .big-triangle {
   height: 200vh;
+  min-height: 1800px;
   width: 70vw;
   background: linear-gradient(to right, #3d6cb9, #00d1ff);
   position: relative;
@@ -64,7 +71,6 @@
   bottom: 200vh;
   transform-origin: bottom left;
   transform: rotate(45deg);
-  z-index: -1;
   // height: 0;
   // width: 0;
   // background-color: transparent;
@@ -73,7 +79,6 @@
   // border-bottom: 900px solid transparent;
   // border-left: 900px solid transparent;
   // border-right: 900px solid transparent;
-  // z-index: -1;
   // top: 0;
   // left: 200px;
 }
@@ -107,5 +112,44 @@
       color: white;
       cursor: pointer;
     }
+  }
+}
+
+.leaderboard {
+  font-family: $mainFont;
+  color: $fontColor;
+  background: $lightGray;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 10px;
+  z-index: -3;
+  > div {
+    display: flex;
+    justify-content: space-between;
+    width: 90vw;
+    max-width: 500px;
+    margin: 6px 0;
+  }
+  h1 {
+    font-size: 3rem;
+    margin-bottom: 30px;
+    z-index: 1;
+  }
+  h2 {
+    display: inline-block;
+    font-size: 1.5em;
+    font-family: $secondaryFont;
+    flex: 0 0 auto;
+    margin: 0 10px;
+    z-index: 1;
+  }
+  .leading-dots {
+    flex: 1 1 auto;
+    border-bottom: dotted $fontColor;
+    z-index: 1;
+    position: relative;
+    bottom: 3px;
   }
 }

@@ -14,10 +14,6 @@
 
 }
 
-
-
-
-
 .question-category{
     font-weight: 700 !important;
 }
@@ -28,6 +24,29 @@
     align-items: center;
     overflow-y: scroll;
     height: 100vh;  
+
+    .back-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        left: 1rem;
+        height: 2em;
+        width: 5em;
+        border: 1px #FFED17 solid;
+        border-radius: 0.5em;
+        font-size: 1.2em;
+        margin-bottom: 2em;
+        align-self: center;
+        background: #1da0dd;
+        color: #FFFCF2;
+        &:hover {
+          cursor: pointer;
+          background:#FFED17;
+          color: $fontColor;
+          transition: 0.3s;
+        }
+    }
 }
 
 
@@ -41,6 +60,8 @@
     margin: .7rem;
     padding: .3rem;
     width: 23rem;
+    background-color: $white;
+    color: $fontColor;
 }
 
 .your-questions-to-display{
@@ -75,5 +96,63 @@
         }
     }
 }
+
+.select {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 15px;
+    width: 65%;
+}    .select select {
+        font-family: 'Arial';
+        display: inline-block;
+        width: 100%;
+        cursor: pointer;
+        padding: 7px 21px;
+        outline: 0;
+        border: 1px outset #4b4c53;
+        border-radius: 36px;
+        background: #e6e6e6;
+        color: #4b4c53;
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+    }
+        .select select::-ms-expand {
+            display: none;
+        }
+        .select select:hover,
+        .select select:focus {
+            color: #4b4c53;
+            background: #FFFCF2;
+        }
+        .select select:disabled {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+.select_arrow {
+    position: absolute;
+    top: 8px;
+    right: 23px;
+    width: 0px;
+    height: 0px;
+    border: solid #7b7b7b;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+.select select:hover ~ .select_arrow,
+.select select:focus ~ .select_arrow {
+    border-color: #000000;
+}
+.select select:disabled ~ .select_arrow {
+    border-top-color: #cccccc;
+}
+
+
+
+
+
 
 

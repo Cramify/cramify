@@ -112,32 +112,37 @@ io.on("connection", socket => {
 });
 
 // Account Endpoints
-app.post("/auth/register", ac.register);
-app.post("/auth/login", ac.login);
-app.post("/auth/logout", ac.logout);
-app.put("/auth/edit/:id", ac.changeUser);
-app.get("/auth/user", ac.getUser);
-app.delete('/auth/user/delete', ac.deleteUser);
+app.post("/auth/register", ac.register);  // add new account to db
+app.post("/auth/login", ac.login);  // login logic
+app.post("/auth/logout", ac.logout);  // logout and destroy session
+app.put("/auth/edit/:id", ac.changeUser);  // edit account information
+app.get("/auth/user", ac.getUser);  // check if user is logged in
+app.delete('/auth/user/delete', ac.deleteUser);  // delete account
 
 //Question_sets endpoints
-app.get('/set/user', qc.getSets); //this is the users question_sets for his dashboard.
-app.get('/set/all', qc.allGameSets); // this is both the user and our question_sets for the create game page
-app.post('/set/user/create', qc.createNewSet); //this creates a new empty set for specific user
-app.delete('/set/user/delete/:setID', qc.deleteQuestionSets); // delete sets
-
-app.get('/set/getedit/:setID', qc.getSpecificSet); // this is to get the specific set by id to edit
+app.get('/set/user', qc.getSets); // get the user's question_sets for his dashboard.
+app.get('/set/all', qc.allGameSets); // get both the user's and the admin's (pre-made) question_sets for the create game page
+app.post('/set/user/create', qc.createNewSet); // creates a new empty set for specific user
+app.delete('/set/user/delete/:setID', qc.deleteQuestionSets); // delete a set
+app.get('/set/getedit/:setID', qc.getSpecificSet); // get a specific set by id to edit
 
 //added questions to new sets per user
 app.post('/set/user/question/', qc.addQuestionsToSet);
 
 //delete specific question from users set
-app.delete('/set/user/edit/delete/', qc.editQuestionDelete)
+app.delete('/set/user/edit/delete/', qc.editQuestionDelete);
 
-//question endpoints
-app.get('/question/all', qc.getAllQuestions);
+//CreateSet endpoints
+app.get('/question/all', qc.getAllQuestions); //gets all questions
+app.get('/question/:category', qc.getByCategory) //gets by category
 
 //Game Room Endpoints
-app.get('/game/set/:setID', gc.getGameSets)
+app.get('/game/set/:setID', gc.getGameSets);
+
+// Leaderboard Endpoints
+app.get('/leaderboard', gc.getLeaders);
+//Add Points Endpoint
+app.put('/user/points/:id', gc.editUserPoints)
 
 //require in db through massive, listen to server for connection
 massive(CONNECTION_PORT).then(connection => {
