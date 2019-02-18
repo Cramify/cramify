@@ -179,7 +179,6 @@ class GameRoom extends Component {
     let usersArrCopy = [...this.state.users];
     let userObj = usersArrCopy.splice(index, 1);
     userObj[0].points += pts;
-
     // send userObj to everyone
     this.socket.emit("update points", {
       room: this.props.roomID,
@@ -236,6 +235,7 @@ class GameRoom extends Component {
             questionData={set[currentQuestion]}
             timerDisplay={showTimer}
             usersArr={this.state.users}
+            myID={this.state.myID}
           />
         ) : null}
       </div>
