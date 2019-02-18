@@ -69,10 +69,10 @@ export default class Question extends Component{
         return(
             <div className='question'>
                 <h1>Question:</h1>
-                <Timer timerFn={this.props.toResFn} time={1} size={100}/>
-
-                <h1>{this.props.questionData.question}</h1>
-
+                <h2>{this.props.questionData.question}</h2>
+                {/* Timer Display */}
+                <Timer timerFn={this.props.toResFn} time={20} size={100}/>
+                {/* Display Answers. If user has answered, disable buttons */}
                 {!this.state.didAnswer ? (
                     <div className='answers'>
                         {answers}

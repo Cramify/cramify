@@ -17,4 +17,5 @@ module.exports = {
         let updatedPoints = await db.edit_score({score: newTotalPoints, id: id})
         res.status(200).send(updatedPoints)
     }
+   
 }
