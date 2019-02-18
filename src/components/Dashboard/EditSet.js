@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import './EditSet.scss'
 
 
 export default class EditSet extends Component {
@@ -12,6 +13,7 @@ export default class EditSet extends Component {
             questions: [],
             setID: {},
             junctionID: {},
+            limitReached: false
         }
     }
 
@@ -48,6 +50,11 @@ export default class EditSet extends Component {
         this.setState({
             set: res.data
         })
+        if(this.state.set.length >=19){
+            this.setState({
+                limitReached: true
+            })
+        }
     }
 
     deleteQuestion = async (id) => {
@@ -63,30 +70,34 @@ export default class EditSet extends Component {
     render() {
         let userQuestions = this.state.set.map((question, index) => {
             return (
-                <div>
-                    {question.question}
-                    <button onClick={()=>this.deleteQuestion(question.junction_id)}>Delete</button>
+                <div className='question-to-display'>
+                   {/* <div className='question-item' onClick={()=>this.deleteQuestion(question.junction_id)}> {question.question} </div> */}
+                    <div className='edit-item'>{question.question}</div>
+                    {/* <button onClick={()=>this.deleteQuestion(question.junction_id)}>Delete</button> */}
+                    <i className="fas fa-minus" onClick={()=>{this.deleteQuestion(question.junction_id)}}></i>
                 </div>
             )
         })
         let allQuestions = this.state.questions.map((question, index) => {
             return (
-                <div>
-                    {question.question}
-                    <button onClick={()=>this.addQuestionToSet(question.question_id)}>Add</button>
+                <div className='question-to-display'>
+                    {/* <div className='question-item' onClick={()=>this.addQuestionToSet(question.question_id)}>{question.question}</div> */}
+                    <div className='edit-item'>{question.question}</div>
+                    <i className="fas fa-plus" onClick={()=>{this.addQuestionToSet(question.question_id)}}></i>
                 </div>
             )
         })
         return (
-            <div>
-                <div>
-                    <h2>User Set</h2>
-                    <h3>{userQuestions}</h3>
+            <div className='edit-set-page'>
+
+                <div className='question-list'>
+                    <><h2>User Set</h2>
+                    <div>{userQuestions}</div></>
                 </div>
                     <hr/>
-                <div>
-                    <h2>All Questions</h2>
-                    <h3>{allQuestions}</h3>
+                <div className='question-list'>
+                    {this.state.limitReached === false &&<><h2>All Questions</h2>
+                    <div>{allQuestions}</div></>}
                 </div>
             </div>
         )
