@@ -63,7 +63,7 @@ export default class EditSet extends Component {
     render() {
         let userQuestions = this.state.set.map((question, index) => {
             return (
-                <div>
+                <div key={index}>
                     {question.question}
                     <button onClick={()=>this.deleteQuestion(question.junction_id)}>Delete</button>
                 </div>

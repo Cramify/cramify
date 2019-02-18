@@ -89,19 +89,19 @@ io.on("connection", socket => {
   // Update everyone's users arrays & setID
   socket.on('users array changed', data => {
     io.to(data.room).emit('update users array', data)
-    console.log('update', data)
+    console.log('update')
   })
 
   // begin the game
   socket.on('game start', data => {
     socket.to(data.room).broadcast.emit('run begin function', data)
-    console.log('game start', data)
+    console.log('game start')
   })
 
   // host has left, kick everyone out
   socket.on('host has left', data => {
     socket.to(data.room).broadcast.emit('kick everyone out', data)
-    console.log('host has left. kick out. this is a test.')
+    console.log('host has left.')
   })
 
   // updates and displays points
@@ -109,7 +109,6 @@ io.on("connection", socket => {
     io.to(data.room).emit('display points', data)
     console.log('updated points')
   })
-
 });
 
 // Account Endpoints
@@ -133,14 +132,17 @@ app.post('/set/user/question/', qc.addQuestionsToSet);
 //delete specific question from users set
 app.delete('/set/user/edit/delete/', qc.editQuestionDelete);
 
-//question endpoints
-app.get('/question/all', qc.getAllQuestions);
+//CreateSet endpoints
+app.get('/question/all', qc.getAllQuestions); //gets all questions
+app.get('/question/:category', qc.getByCategory) //gets by category
 
 //Game Room Endpoints
 app.get('/game/set/:setID', gc.getGameSets);
 
 // Leaderboard Endpoints
 app.get('/leaderboard', gc.getLeaders);
+//Add Points Endpoint
+app.put('/user/points/:id', gc.editUserPoints)
 
 //require in db through massive, listen to server for connection
 massive(CONNECTION_PORT).then(connection => {

@@ -1,6 +1,12 @@
 @import '../../sassVars.scss';
 
+
+
 .dashboard {
+  font-family: $mainFont;
+}
+
+.main {
   background-color: #FFFFFF;
   display: flex;
   justify-content: space-between;
@@ -44,7 +50,7 @@
   border: none;
 }
 
-.logout-btn, .delete-btn {
+.logout-btn, .delete-btn, .dash-join-btn, .dash-create-btn, .create-set-btn, .delete-set-btn, .edit-set-btn {
   display: flex;
   justify-content: space-around;
   width: 48%;
@@ -86,35 +92,156 @@
   }
 }
 
+.dash-rank-holder {
+  display: flex;
+  font-display: column-reverse;
+  align-items: center;
+  margin-top: 3rem;
+  width: 10%;
+}
+
+.dash-rank {
+  display: flex;
+  justify-content: center;
+  width: 100px;
+  font-size: 2rem;
+  font-family: '$mainFont';
+  border-bottom: 1px solid black
+}
+
+.user-rank {
+  margin-top: 90px;
+  display: flex;
+  justify-content: center;
+  margin-left: -2.8em;
+  font-size: 1.3rem;
+}
+
+
+.set-window {
+  border-left: 1px solid black;
+  height: 100vh;
+  width: 40%;
+  display: flex;
+  justify-content: flex-start;
+  font-display: column;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.dash-sets {
+  margin-top: 2rem;
+  font-size: 2.5rem;
+}
+
+.create-set-btn {
+  background-color: #3d6cb9;
+  color: aliceblue;
+  height: 2.5rem;
+  width: 7rem;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  &:hover {
+    opacity: 0.8;
+    background: #00d1ff;
+    color: aliceblue;
+  }
+  &:focus {
+    color: aliceblue;
+    background: #00d1ff;
+    outline: none;
+  }
+}
+
+.user-created-sets {
+  border-bottom: 1px solid black;
+  width: 100%;
+}
+
+.user-set-name {
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.set-btns {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 5px;
+}
+
+.delete-set-btn {
+  background-color: #FFED17;
+  color: $fontColor;
+  font-size: .8rem;
+  width: 40%;
+  &:hover {
+    opacity: 0.8;
+    background: #ea3546;
+    color: aliceblue;
+  }
+  &:focus {
+    color: aliceblue;
+    background: #ea3546;
+    outline: none;
+  }
+}
+
+.edit-set-btn {
+  background-color: #00d1ff;
+  color: aliceblue;
+  font-size: .8rem;
+  width: 40%;
+  &:hover {
+    opacity: 0.8;
+    background: #3d6cb9;
+    color: aliceblue;
+  }
+  &:focus {
+    color: aliceblue;
+    background: #3d6cb9;
+    outline: none;
+  }
+}
+
 .game-options {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin-left: 30px;
-  margin-top: 30px;
+  width: 20%;
+  margin-top: -24rem;
+  margin-left: 18%;
 }
 
 .play-now {
   font-size: 3em;
   font-family: $mainFont;
   margin-bottom: 15px;
+  display: flex;
+  justify-content: center;
 }
 
 .join-create-btns {
   display: flex;
   justify-content: space-around;
-  width: 48%;
-  height: 25px;
-  font-size: .9rem;
-  border: none;
-  border-radius: .55em;
-  transition: .2s;
-  cursor: pointer;
+}
+
+.link {
+  text-decoration: none;
+  margin: 0%;
+  display: flex;
+  justify-content: center;
+  width: 7rem;
 }
 
 .dash-join-btn {
   background-color: #3d6cb9;
   color: aliceblue;
+  height: 37px;
+  width: 100%;
+  margin: 0px;
   &:hover {
     opacity: 0.8;
     background: #00d1ff;
@@ -130,6 +257,8 @@
 .dash-create-btn {
   background-color: #FFED17;
   color: $fontColor;
+  height: 37px;
+  width: 100%;
   &:hover {
     opacity: 0.8;
     background: #ea3546;
