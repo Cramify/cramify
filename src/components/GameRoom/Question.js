@@ -9,7 +9,8 @@ export default class Question extends Component{
             didAnswer: false,
             question: [],
             correctAnswer: '',
-            answerArray: []
+            answerArray: [],
+            startTime: null
         }
     }
 
@@ -34,21 +35,28 @@ export default class Question extends Component{
 
         this.setState({
             answerArray: newAnswers,
-            correctAnswer: this.props.questionData.correct_answer
+            correctAnswer: this.props.questionData.correct_answer,
+            startTime: Date.now()
         })
 
 
     }
 
     answerQuestion = (num) => {
+        const answerTime = Date.now();
+        const scoreToAdd = Math.floor((675 - ((answerTime - this.state.startTime)) / 10))
+        // score to add is currently set for the logic of a 5 second timer (adds 175 points for correct answer + time left)
+        console.log(scoreToAdd)
         this.setState({
-            didAnswer: true
+            didAnswer: true,
+            startTime: null
         })
         if(this.state.answerArray[num-1] === this.state.correctAnswer){
-            this.props.updatePts(this.props.playerID, 1)
+            this.props.updatePts(this.props.playerID, scoreToAdd)
         } else {
             this.props.updatePts(this.props.playerID, 0)
         }
+        
     }
 
     render(){

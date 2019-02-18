@@ -117,11 +117,9 @@ class GameRoom extends Component {
     this.setState({
       myID: data.myID
     });
-    console.log(this.state.myID);
   };
 
   updateUsersArr = data => {
-    console.log(data.users);
     this.setState({
       users: data.users,
       setID: data.setID
@@ -186,7 +184,6 @@ class GameRoom extends Component {
     let userObj = usersArrCopy.splice(index, 1);
     console.log(userObj);
     userObj[0].points += pts;
-
     // send userObj to everyone
     this.socket.emit("update points", {
       room: this.props.roomID,
@@ -242,6 +239,7 @@ class GameRoom extends Component {
             questionData={set[currentQuestion]}
             timerDisplay={showTimer}
             usersArr={this.state.users}
+            myID={this.state.myID}
           />
         ) : null}
       </div>

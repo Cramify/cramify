@@ -138,7 +138,10 @@ app.delete('/set/user/edit/delete/', qc.editQuestionDelete)
 app.get('/question/all', qc.getAllQuestions);
 
 //Game Room Endpoints
-app.get('/game/set/:setID', gc.getGameSets)
+app.get('/game/set/:setID', gc.getGameSets);
+
+//Add Points Endpoint
+app.put('/user/points/:id', gc.editUserPoints)
 
 //require in db through massive, listen to server for connection
 massive(CONNECTION_PORT).then(connection => {
