@@ -73,12 +73,14 @@ class DashBoard extends Component {
   render() {
     let sets = this.state.sets.map((set, i) => {
       return (
-        <div key={i}>
-          <p>{set.set_name}</p>
-          <button onClick={() => this.deleteSet(set.set_id)}>Delete</button>
-          <button onClick={() => this.editSet(set.set_id)}>
-            Edit Your Set
-          </button>
+        <div className='user-created-sets' key={i}>
+          <p className='user-set-name'>{set.set_name}</p>
+          <p className='set-btns'>
+            <button className='edit-set-btn' onClick={() => this.editSet(set.set_id)}>
+              Edit
+            </button>
+          <button className='delete-set-btn' onClick={() => this.deleteSet(set.set_id)}>Delete</button>
+          </p>
           {/* {this.state.editSet && 
                     <EditSet
                         setName={this.state.setName}
@@ -90,35 +92,41 @@ class DashBoard extends Component {
 
     return (
       <div className="dashboard">
-        <div className="user-info">
-          <div className="profile-pic">
-            <img src="" alt="" />
+        <div className='main'>
+          <div className="user-info">
+            <div className="profile-pic">
+              <img src="" alt="" />
+            </div>
+            <i className="fas fa-pen" onClick={this.toggleEdit} />
+            <h4 className='dash-username'>{this.props.user.username}</h4>
+            <div className='logout-delete-btns'>
+              <button className='logout-btn' onClick={this.logout}>Logout</button>
+              <button className='delete-btn' onClick={this.deleteAccount}>Delete User</button>
+            </div>
           </div>
-          <i className="fas fa-pen" onClick={this.toggleEdit} />
-          <h4 className='dash-username'>{this.props.user.username}</h4>
-          <div className='logout-delete-btns'>
-            <button className='logout-btn' onClick={this.logout}>Logout</button>
-            <button className='delete-btn' onClick={this.deleteAccount}>Delete User</button>
+          <div className='dash-rank-holder'>
+            <h1 className='dash-rank'>Rank</h1>
+            <p className='user-rank'>10</p>
+          </div>
+          <div className="set-window">
+            <h2 className='dash-sets'>My Sets</h2>
+            <Link className='link' to="/newset">
+              <button className='create-set-btn'>Create Question Set</button>
+            </Link>{sets}
           </div>
         </div>
         <div className="game-options">
           <h2 className='play-now'>Play Now!</h2>
           <div className='join-create-btns'>
-            <Link to="/join">
+            <Link className='link' to="/join">
               <button className='dash-join-btn'>Join Game Room</button>
             </Link>
-            <Link to="/create">
+            <Link className='link' to="/create">
               <button className='dash-create-btn'>Create New Game</button>
             </Link>
           </div>
         </div>
         {this.state.edit && <EditUser toggleFn={this.toggleEdit} />}
-        <div className="set-window">
-          <h2>My Sets:{sets}</h2>
-          <Link to="/newset">
-            <button>Create New Question Set</button>
-          </Link>
-        </div>
       </div>
     );
   }
