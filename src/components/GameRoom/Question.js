@@ -14,7 +14,6 @@ export default class Question extends Component{
     }
 
     componentDidMount = () => {
-        if (this.props.roomID === null) this.props.history.push('/')
         let answers = [];
         let newAnswers = [];
         if (this.props.questionData.answer_4) {
