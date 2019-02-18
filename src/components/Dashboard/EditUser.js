@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
 import { updateUser } from "../../ducks/reducer";
+import '../../modal.scss'
 
 class EditUser extends Component {
   state = {
