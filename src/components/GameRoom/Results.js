@@ -8,7 +8,7 @@ export default function Results(props) {
     <div className="results">
       {props.timerDisplay ? (
         <div className='timer'>
-        <Timer timerFn={props.nextQFn} time={5} size={100}/>
+        <Timer timerFn={props.nextQFn} time={1} size={100}/>
         </div>
       ) : (
         <p></p>
@@ -35,9 +35,72 @@ export default function Results(props) {
       </div>
       {!props.timerDisplay && (
         // TODO: Add points to db on this button click
-        <Link className='dash-link' to="/dashboard">
-          <button className='dash-btn'>Back to Dash</button>
-        </Link>
+        <div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+            <div className='confetti-piece'></div>
+          <Link className='dash-link' to="/dashboard">
+            <button className='dash-btn'>Back to Dash</button>
+          </Link>
+        </div>
       )}
     </div>
   );
