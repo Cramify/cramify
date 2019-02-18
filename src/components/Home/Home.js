@@ -3,6 +3,7 @@ import Register from "./Register";
 import Login from "./Login";
 import "./Home.scss";
 import axios from "axios";
+import {Link} from 'react-router-dom'
 // import {useTransition, animated, useSpring} from 'react-spring';
 
 export default class Home extends Component {
@@ -45,7 +46,7 @@ export default class Home extends Component {
           <div className="big-triangle" />
         </div>
         <div className="header">
-          <h1>Cramify</h1>
+          <Link to='/'><h1>Cramify</h1></Link>
           <div>
             <div onClick={() => this.registerToggle()}>Register</div>
             <div onClick={() => this.loginToggle()}>Login</div>
