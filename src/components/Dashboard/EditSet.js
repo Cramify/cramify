@@ -79,11 +79,15 @@ export default class EditSet extends Component {
         })
         return (
             <div>
-                <h2>User Set</h2>
-                <h3>{userQuestions}</h3>
-                <hr/>
-                <h2>All Questions</h2>
-                <h3>{allQuestions}</h3>
+                <div>
+                    <h2>User Set</h2>
+                    <h3>{userQuestions}</h3>
+                </div>
+                    <hr/>
+                <div>
+                    <h2>All Questions</h2>
+                    <h3>{allQuestions}</h3>
+                </div>
             </div>
         )
     }
