@@ -1,10 +1,12 @@
 import React, {Component} from "react";
 import "./Results.scss";
 import Timer from "./Timer";
+import Confetti from './Confetti';
 import {Link} from 'react-router-dom'
 import axios from 'axios';
 import {connect} from 'react-redux';
 import Swal from 'sweetalert2'
+
 
 class Results extends Component {
 
@@ -41,7 +43,7 @@ class Results extends Component {
       <div className="results">
         {this.props.timerDisplay ? (
           <div className='timer'>
-          <Timer timerFn={this.props.nextQFn} time={1} size={100}/>
+          <Timer timerFn={this.props.nextQFn} time={5} size={100}/>
           </div>
         ) : (
           <p></p>
@@ -69,67 +71,7 @@ class Results extends Component {
       {!this.props.timerDisplay && (
         // TODO: Add points to db on this button click
         <div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
-            <div className='confetti-piece'></div>
+          <Confetti />
           <Link className='dash-link' to="/dashboard">
             <button className='dash-btn'>Back to Dash</button>
           </Link>
