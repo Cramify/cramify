@@ -66,9 +66,15 @@ class Home extends Component {
           <div>
             {this.props.user.id ? (
               <>
-                <div onClick={() => this.props.history.push('/create')}>Create Room</div>
-                <div onClick={() => this.props.history.push('/join')}>Join Room</div>
-                <div onClick={() => this.props.history.push('/dashboard')}>Dashboard</div>
+                <div onClick={() => this.props.history.push("/create")}>
+                  Create Room
+                </div>
+                <div onClick={() => this.props.history.push("/join")}>
+                  Join Room
+                </div>
+                <div onClick={() => this.props.history.push("/dashboard")}>
+                  Dashboard
+                </div>
               </>
             ) : (
               <>
@@ -91,12 +97,24 @@ class Home extends Component {
               Play Now!
             </div>
           </div>
-          {register ? (
+          <div
+            className={
+              register
+                ? "modal-container show-modal"
+                : "modal-container hide-modal"
+            }
+          >
             <Register regFn={this.registerToggle} logFn={this.loginToggle} />
-          ) : null}
-          {login ? (
+          </div>
+          <div
+            className={
+              login
+                ? "modal-container show-modal"
+                : "modal-container hide-modal"
+            }
+          >
             <Login logFn={this.loginToggle} regFn={this.registerToggle} />
-          ) : null}
+          </div>
         </div>
         <div className="leaderboard">
           <h1>Leaderboard</h1>

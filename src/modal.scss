@@ -3,18 +3,33 @@ $mainFont: 'Catamaran', sans-serif;
 $secondaryFont: 'Merriweather', serif;
 $fontColor: rgb(24, 29, 66);
 
-.modal {
+.modal-container {
+  z-index: 2;
   color: white;
   position: absolute;
   top: 0;
   background-color: #d3d3d3E8;
-  height: 100vh;
+  height: 100%;
   width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
   font-family: $mainFont;
+  transition: 1s;
+}
+
+.hide-modal {
+  opacity: 0;
+  pointer-events: none;
+}
+.show-modal {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal {
   .content {
+    margin-bottom: 15em;
     padding: 20px;
     display: flex;
     flex-direction: column;
