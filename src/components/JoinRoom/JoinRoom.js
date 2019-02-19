@@ -25,7 +25,7 @@ class JoinRoom extends Component {
   render() {
     return (
       <div className='join-room'>
-        <div onClick={() => this.props.history.push('/dashboard')} className='back-button'>Back</div>
+        <div onClick={() => this.props.history.goBack()} className='back-button'>Back</div>
         <h2>Join Room</h2>
         <input
           value={this.state.roomID}

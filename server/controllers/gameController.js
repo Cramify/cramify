@@ -12,13 +12,15 @@ module.exports = {
         res.status(200).send(leaderboard)
     },
     editUserPoints: async (req, res) => {
-        const db = req.app.get('db');
-        const {id} = req.params;
-        const {points} = req.body;
-        let currentUserScore = await db.get_user_score({id: Number(id)});
-        let newTotalPoints = currentUserScore[0].score + points;
-        let updatedPoints = await db.edit_score({score: newTotalPoints, id: id})
-        res.status(200).send(updatedPoints)
+        if (req.session.user) {
+            const db = req.app.get('db');
+            const {id} = req.params;
+            const {points} = req.body;
+            let currentUserScore = await db.get_user_score({id: Number(id)});
+            let newTotalPoints = currentUserScore[0].score + points;
+            let updatedPoints = await db.edit_score({score: newTotalPoints, id: id})
+            res.status(200).send(updatedPoints)
+        }
     },
     getRanking: async (req, res) => {
         const db = req.app.get('db');

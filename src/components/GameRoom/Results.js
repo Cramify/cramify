@@ -7,10 +7,8 @@ import { connect } from "react-redux";
 import Swal from "sweetalert2";
 
 class Results extends Component {
-  componentDidMount = async () => {
-    // console.log('hit')
-    // console.log(this.props.usersArr)
-    // console.log(this.props.myID)
+
+  async componentDidMount() {
     if (!this.props.timerDisplay) {
       console.log(this.props.usersArr);
       let leader = await this.props.usersArr.sort(function(a, b) {
@@ -31,15 +29,10 @@ class Results extends Component {
       });
       const index = this.props.usersArr.findIndex(user => {
         return this.props.myID === user.playerID;
-      });
-      // console.log(index)
-      axios
-        .put(`./user/points/${this.props.user.id}`, {
-          points: Number(this.props.usersArr[index].points)
-        })
-        .then(() => {
-          console.log(`user score updated`);
-        });
+      })
+      if (this.props.user !== {}) {
+        await axios.put(`./user/points/${this.props.user.id}`, {points: Number(this.props.usersArr[index].points)})
+      }
     }
   };
 
