@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './CreateSet.scss';
+import Swal from "sweetalert2";
 
 
 export default class CreateSet extends Component {
@@ -40,22 +41,30 @@ export default class CreateSet extends Component {
     addToSet = (i) => {
         const newSet = this.state.set.slice();
         newSet.push(this.state.questions.splice(i, 1)[0]);
+        console.log(this.state.set.length)
+
         if (this.state.set.length >= 19) {
             this.setState({
                 limitReached: true
             })
+     
         }
 
         this.setState({
             set: newSet
         })
-
-        console.log(this.state.set)
     }
 
     createNewSet = async () => {
         //Creates empty set to add to
         const { setName } = this.state;
+        if(!this.state.set[1]){
+           return Swal.fire({
+                title: `Not Enough Questions!`,
+                text: `Please Add More Questions!`,
+                type: `error`
+              });
+        }
         const res = await axios.post('/set/user/create', { setName })
         this.setState({
             setID: res.data[0].set_id,
@@ -63,9 +72,12 @@ export default class CreateSet extends Component {
         })
         //sends questions to add to new set
         const { setID } = this.state
-        console.log(setID)
         this.state.set.map((question) => {
-            return axios.post('/set/user/question', { setID, questionID: question.question_id })
+            if(!this.state.set[1]){
+                return;
+            }else if(this.state.set.length >= 1){
+                return axios.post('/set/user/question', { setID, questionID: question.question_id })
+            }
         })
         this.props.history.push('./dashboard')
     }
@@ -74,7 +86,6 @@ export default class CreateSet extends Component {
         let backToQuestions = [];
         let deleteFromSet = this.state.set.splice(i, 1);
         backToQuestions.push(deleteFromSet);
-        console.log(backToQuestions[0][0])
         this.setState({
             questions: [...this.state.questions, backToQuestions[0][0]]
         })
