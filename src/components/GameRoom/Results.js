@@ -7,8 +7,8 @@ import { connect } from "react-redux";
 import Swal from "sweetalert2";
 
 class Results extends Component {
-
   async componentDidMount() {
+    console.log(this.props.user);
     if (!this.props.timerDisplay) {
       console.log(this.props.usersArr);
       let leader = await this.props.usersArr.sort(function(a, b) {
@@ -29,19 +29,21 @@ class Results extends Component {
       });
       const index = this.props.usersArr.findIndex(user => {
         return this.props.myID === user.playerID;
-      })
+      });
       if (this.props.user !== {}) {
-        await axios.put(`./user/points/${this.props.user.id}`, {points: Number(this.props.usersArr[index].points)})
+        await axios.put(`./user/points/${this.props.user.id}`, {
+          points: Number(this.props.usersArr[index].points)
+        });
       }
     }
-  };
+  }
 
   render() {
     return (
       <div className="results">
         {this.props.timerDisplay ? (
           <div className="timer">
-            <Timer timerFn={this.props.nextQFn} time={5} size={100} />
+            <Timer timerFn={this.props.nextQFn} time={2} size={100} />
           </div>
         ) : (
           <p />
@@ -134,9 +136,17 @@ class Results extends Component {
             <div className="confetti-piece" />
             <div className="confetti-piece" />
             <div className="confetti-piece" />
-            <Link className="dash-link" to="/dashboard">
-              <button className="dash-btn">Back to Dash</button>
-            </Link>
+
+            {this.props.user.id ? (
+              <Link className="dash-link" to="/dashboard">
+                <button className="dash-btn">Back to Dash</button>
+              </Link>
+            ) : (
+              <Link className="dash-link" to="/join">
+                <button className="dash-btn">Back to Join</button>
+              </Link>
+            )}
+
           </div>
         )}
       </div>

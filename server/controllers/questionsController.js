@@ -13,10 +13,6 @@ module.exports  = {
     },
     getAllQuestions: async (req,res) => {
         const db = req.app.get('db');
-        const {id} = req.session.user;
-        if (!id) {
-            return res.status(401).send({message: 'Please Log In'})
-        } 
         const getQuestions = await db.get_questions();
         res.status(200).send(getQuestions);
     },
