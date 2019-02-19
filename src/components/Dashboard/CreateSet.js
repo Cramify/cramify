@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './CreateSet.scss';
-import {Link} from 'react-router-dom';
 
 
 export default class CreateSet extends Component {
@@ -93,25 +92,29 @@ export default class CreateSet extends Component {
                 <div className='question-to-display' key={i} onClick={() => this.addToSet(i)} >
                     <div className='question-category'>{question.category}</div>
                      <br />
-                    {question.question}
+                     <div className='question-item'>{question.question}</div> 
                 </div>
             )
         })
         let set = this.state.set.map((question, i) => {
             return (
                 <div className='question-to-display' key={i} onClick={() => this.deleteQuestionFromSet(i)}>
-                     <div className='question-category'>{question.category}</div>
+                    <div className='question-category'>{question.category}</div>
                       <br/>
-                    {question.question} 
+                    <div className='question-item'>{question.question}</div> 
                 </div>
             )
         })
         return (
             <div className='create-set-page'>                
                 <div className='question-list'>
-                        <div onClick={() => this.props.history.push('/dashboard')} className='back-button'>Back</div>
 
-                                <div className='select'>
+
+                    {this.state.limitReached === false && 
+                    <div>
+                        <div onClick={() => this.props.history.push('/dashboard')} className='back-button'>Back</div>
+                        <h1 className='title'>Questions To Add:</h1> 
+                        <div className='select'>
                                     <select onChange={(e)=>this.handleChange(e)}  value={this.state.category}>
                                         <option value="Javascript">Javascript</option>
                                         <option value="HTML">HTML</option>
@@ -120,9 +123,6 @@ export default class CreateSet extends Component {
                                     </select>
                                     <div className='select_arrow'></div>
                                 </div>
-                    {this.state.limitReached === false && 
-                    <div>
-                        <h1 className='title'>Questions To Add:</h1> 
                         {<h1 >{questions}</h1>}
                         {/* Use a ternary to conditionally show based on category */}
                     </div>}
@@ -133,8 +133,8 @@ export default class CreateSet extends Component {
                     <div className='user-input' >
                         <input onChange={(e) => this.handleInput('setName', e)} value={this.state.setName} type="text" placeholder="Your Set's Name" />
                         <i className="fas fa-plus" onClick={this.createNewSet}></i>
-                      <div>{set}</div>
                     </div>
+                    <h1>{set}</h1>
                 </div>
 
             </div>

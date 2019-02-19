@@ -4,17 +4,33 @@ import Timer from "./Timer";
 import {Link} from 'react-router-dom'
 import axios from 'axios';
 import {connect} from 'react-redux';
+import Swal from 'sweetalert2'
 
 class Results extends Component {
 
   componentDidMount() {
     if (!this.props.timerDisplay) {
+      console.log(this.props.usersArr)
+      let leader = await this.props.usersArr.sort(function(a,b){
+        console.log(a.points) 
+        return a.points - b.points
+      })
+      let winner = await leader.slice(leader.length - 1)
+      console.log(winner)
+      
+      Swal.fire({
+        title: `${winner[0].username} is the winner!`,
+        text: `${winner[0].points} points`,
+        type: 'success',
+        showCancelButton: false,
+        confirmButtonColor: '#00d1ff',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'NEATO!'
+      })
       const index = this.props.usersArr.findIndex((user) => {
         return this.props.myID === user.playerID;
       })
       axios.put(`./user/points/${this.props.user.id}`, {points: Number(this.props.usersArr[index].points)})
-      .then(() => {
-      })
     }
   }
 
