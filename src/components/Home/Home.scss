@@ -34,13 +34,14 @@
     display: flex;
     z-index: 1;
     > div {
+      background-color: #00000022;
       cursor: pointer;
       display: flex;
       justify-content: center;
       align-items: center;
       padding: .5em 1.6em;
       border: 1px #FFED17 solid;
-      color: $fontColor;
+      color: $white;
       border-radius: .55em;
       margin: 0 .8em;
       transition: .2s;
@@ -63,7 +64,6 @@
 }
 .big-triangle {
   height: 200vh;
-  min-height: 1800px;
   width: 70vw;
   background: linear-gradient(to right, #3d6cb9, #00d1ff);
   position: relative;
