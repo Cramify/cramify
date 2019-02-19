@@ -8,17 +8,12 @@ import {connect} from 'react-redux';
 class Results extends Component {
 
   componentDidMount() {
-    console.log('hit')
-    console.log(this.props.usersArr)
-    console.log(this.props.myID)
     if (!this.props.timerDisplay) {
       const index = this.props.usersArr.findIndex((user) => {
         return this.props.myID === user.playerID;
       })
-      console.log(index)
       axios.put(`./user/points/${this.props.user.id}`, {points: Number(this.props.usersArr[index].points)})
       .then(() => {
-        console.log(`user score updated`)
       })
     }
   }
@@ -28,7 +23,7 @@ class Results extends Component {
       <div className="results">
         {this.props.timerDisplay ? (
           <div className='timer'>
-          <Timer timerFn={this.props.nextQFn} time={1} size={100}/>
+          <Timer timerFn={this.props.nextQFn} time={10} size={100}/>
           </div>
         ) : (
           <p></p>
