@@ -54,7 +54,7 @@ class GameRoom extends Component {
           const loginData = await axios.get("/auth/user");
           this.props.updateUser(loginData);
         } catch (e) {
-          console.log(e);
+          console.log(e.message);
         }
       }
     }
