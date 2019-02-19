@@ -12,12 +12,9 @@ class Results extends Component {
     if (!this.props.timerDisplay) {
       console.log(this.props.usersArr)
       let leader = await this.props.usersArr.sort(function(a,b){
-        console.log(a.points) 
         return a.points - b.points
       })
       let winner = await leader.slice(leader.length - 1)
-      console.log(winner)
-      
       Swal.fire({
         title: `${winner[0].username} is the winner!`,
         text: `${winner[0].points} points`,
@@ -41,7 +38,7 @@ class Results extends Component {
       <div className="results">
         {this.props.timerDisplay ? (
           <div className='timer'>
-          <Timer timerFn={this.props.nextQFn} time={1} size={100}/>
+          <Timer timerFn={this.props.nextQFn} time={5} size={100}/>
           </div>
         ) : (
           <p></p>
@@ -55,7 +52,7 @@ class Results extends Component {
         <h1 className='results-score'>Scores</h1>
         <div className="ranking">
           <h2>
-            {this.props.usersArr.map(user => {
+            {this.props.usersArr.sort((a,b) => b.points - a.points).map(user => {
               return (
                 <div className='player-scores' key={user.playerID}>
                   <p className='results-player-info'>{user.username}</p>
