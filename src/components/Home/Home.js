@@ -3,10 +3,12 @@ import Register from "./Register";
 import Login from "./Login";
 import "./Home.scss";
 import axios from "axios";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
+import { updateUser } from "../../ducks/reducer";
+import { connect } from "react-redux";
 // import {useTransition, animated, useSpring} from 'react-spring';
 
-export default class Home extends Component {
+class Home extends Component {
   constructor(props) {
     super(props);
 
@@ -18,10 +20,22 @@ export default class Home extends Component {
   }
 
   componentDidMount = async () => {
-    const leaderboard = await axios.get("/leaderboard");
-    this.setState({
-      leaderboard: leaderboard.data
-    });
+    try {
+      const leaderboard = await axios.get("/leaderboard");
+      this.setState({
+        leaderboard: leaderboard.data
+      });
+    } catch (e) {
+      console.log(e.message);
+    }
+    if (!this.props.user.username) {
+      try {
+        const loginData = await axios.get("/auth/user");
+        this.props.updateUser(loginData.data);
+      } catch (e) {
+        console.log(e.message);
+      }
+    }
   };
 
   registerToggle = () => {
@@ -46,10 +60,28 @@ export default class Home extends Component {
           <div className="big-triangle" />
         </div>
         <div className="header">
-          <Link to='/'><h1>Cramify</h1></Link>
+          <Link to="/">
+            <h1>Cramify</h1>
+          </Link>
           <div>
-            <div onClick={() => this.registerToggle()}>Register</div>
-            <div onClick={() => this.loginToggle()}>Login</div>
+            {this.props.user.id ? (
+              <>
+                <div onClick={() => this.props.history.push("/create")}>
+                  Create Room
+                </div>
+                <div onClick={() => this.props.history.push("/join")}>
+                  Join Room
+                </div>
+                <div onClick={() => this.props.history.push("/dashboard")}>
+                  Dashboard
+                </div>
+              </>
+            ) : (
+              <>
+                <div onClick={() => this.registerToggle()}>Register</div>
+                <div onClick={() => this.loginToggle()}>Login</div>
+              </>
+            )}
           </div>
         </div>
         <div className="hero">
@@ -65,19 +97,33 @@ export default class Home extends Component {
               Play Now!
             </div>
           </div>
-          {register ? (
+          <div
+            className={
+              register
+                ? "modal-container show-modal"
+                : "modal-container hide-modal"
+            }
+          >
             <Register regFn={this.registerToggle} logFn={this.loginToggle} />
-          ) : null}
-          {login ? (
+          </div>
+          <div
+            className={
+              login
+                ? "modal-container show-modal"
+                : "modal-container hide-modal"
+            }
+          >
             <Login logFn={this.loginToggle} regFn={this.registerToggle} />
-          ) : null}
+          </div>
         </div>
         <div className="leaderboard">
           <h1>Leaderboard</h1>
           {this.state.leaderboard.map((leader, i) => (
             <div key={i}>
-              <h2>{i+1}. {leader.username}</h2>
-              <div className="leading-dots"></div>
+              <h2>
+                {i + 1}. {leader.username}
+              </h2>
+              <div className="leading-dots" />
               <h2>{leader.score}</h2>
             </div>
           ))}
@@ -86,3 +132,12 @@ export default class Home extends Component {
     );
   }
 }
+
+const mapStateToProps = store => {
+  return { ...store };
+};
+
+export default connect(
+  mapStateToProps,
+  { updateUser }
+)(Home);
