@@ -25,16 +25,14 @@ export default class CreateSet extends Component {
 
     sortByCategory = async () => {
         const {category} = this.state
-        console.log(category)
-
         const res = await axios.get(`/question/${category}`)
-        this.setState({
+        await this.setState({
             questions: res.data
         })
     }
 
     handleInput = async (prop, e) => {
-        this.setState({
+        await this.setState({
             [prop]: e.target.value
         })
     }
@@ -51,6 +49,8 @@ export default class CreateSet extends Component {
         this.setState({
             set: newSet
         })
+
+        console.log(this.state.set)
     }
 
     createNewSet = async () => {
@@ -71,7 +71,6 @@ export default class CreateSet extends Component {
     }
 
     deleteQuestionFromSet = (i) => {
-        console.log(i)
         let backToQuestions = [];
         let deleteFromSet = this.state.set.splice(i, 1);
         backToQuestions.push(deleteFromSet);
