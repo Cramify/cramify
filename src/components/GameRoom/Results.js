@@ -10,13 +10,12 @@ import Swal from 'sweetalert2'
 
 class Results extends Component {
   async componentDidMount() {
-    console.log(this.props.user);
     if (!this.props.timerDisplay) {
-      console.log(this.props.usersArr)
-      let leader = await this.props.usersArr.sort(function(a,b){
-        return a.points - b.points
-      })
-      let winner = await leader.slice(leader.length - 1)
+      let leader = await this.props.usersArr.sort(function(a, b) {
+        return a.points - b.points;
+      });
+      let winner = await leader.slice(leader.length - 1);
+
       Swal.fire({
         title: `${winner[0].username} is the winner!`,
         text: `${winner[0].points} points`,

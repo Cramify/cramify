@@ -25,7 +25,6 @@ class CreateRoom extends Component {
     this.setState({
         sets: res.data,
     })
-    // console.log(this.state.setID)
   };
 
   createRoom = (setID) => {

@@ -53,14 +53,13 @@ io.on("connection", socket => {
 
   //Join Room
   socket.on("join room", data => {
-    console.log(socket.handshake.session);
     if (!socket.handshake.session.socketSession) {
       socket.handshake.session.socketSession = data;
       socket.handshake.session.save();
     }
     const { socketSession } = socket.handshake.session;
     socket.join(socketSession.room);
-    console.log("joined room ", socketSession.room);
+    // console.log("joined room ", socketSession.room);
     io.to(socketSession.room).emit("room joined", socketSession);
   });
 
@@ -73,7 +72,7 @@ io.on("connection", socket => {
     players.push(data.username);
     socket.handshake.session.save();
 
-    console.log("room socket hit: blast", socket.handshake.session.players);
+    // console.log("room socket hit: blast", socket.handshake.session.players);
     io.to(data.room).emit(
       "display name response",
       {players: socket.handshake.session.players, setID: data.setID, playerID }
@@ -89,19 +88,19 @@ io.on("connection", socket => {
   // Update everyone's users arrays & setID
   socket.on('users array changed', data => {
     io.to(data.room).emit('update users array', data)
-    console.log('update')
+    // console.log('update')
   })
 
   // begin the game
   socket.on('game start', data => {
     socket.to(data.room).broadcast.emit('run begin function', data)
-    console.log('game start')
+    // console.log('game start')
   })
 
   // host has left, kick everyone out
   socket.on('host has left', data => {
     socket.to(data.room).broadcast.emit('kick everyone out', data)
-    console.log('host has left.')
+    // console.log('host has left.')
   })
 
   // updates and displays points

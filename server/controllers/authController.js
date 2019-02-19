@@ -87,6 +87,7 @@ module.exports = {
     res.send({ message: "updated account", userData: req.session.user });
   },
   deleteUser: async (req,res) => {
+    const db = req.app.get('db')
     const {id} = req.session.user;
     const deleteUser = await db.delete_user({user_id: id});
     req.session.destroy();
