@@ -26,11 +26,12 @@ class DashBoard extends Component {
   componentDidMount = async () => {
     const res = await axios.get("/set/user");
     const userRank = await axios.get(`/user/rankings/${this.props.user.id}`)
-    this.setState({
+    await this.setState({
       sets: res.data,
       ranking: userRank.data
     });
   };
+
   logout = () => {
     axios.post("/auth/logout");
     this.props.history.push("/");

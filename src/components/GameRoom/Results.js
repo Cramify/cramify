@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import "./Results.scss";
 import Timer from "./Timer";
-import { Link } from "react-router-dom";
-import axios from "axios";
-import { connect } from "react-redux";
-import Swal from "sweetalert2";
+import Confetti from './Confetti';
+import {Link} from 'react-router-dom'
+import axios from 'axios';
+import {connect} from 'react-redux';
+import Swal from 'sweetalert2'
+
 
 class Results extends Component {
   async componentDidMount() {
@@ -38,8 +40,8 @@ class Results extends Component {
     return (
       <div className="results">
         {this.props.timerDisplay ? (
-          <div className="timer">
-            <Timer timerFn={this.props.nextQFn} time={2} size={100} />
+          <div className='timer'>
+          <Timer timerFn={this.props.nextQFn} time={5} size={100}/>
           </div>
         ) : (
           <p />
@@ -57,7 +59,7 @@ class Results extends Component {
         <h1 className="results-score">Scores</h1>
         <div className="ranking">
           <h2>
-            {this.props.usersArr.map(user => {
+            {this.props.usersArr.sort((a,b) => b.points - a.points).map(user => {
               return (
                 <div className="player-scores" key={user.playerID}>
                   <p className="results-player-info">{user.username}</p>
@@ -68,72 +70,11 @@ class Results extends Component {
           </h2>
           <br />
         </div>
-        {!this.props.timerDisplay && (
-          // TODO: Add points to db on this button click
-          <div>
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-            <div className="confetti-piece" />
-
-            {this.props.user.id ? (
+      {!this.props.timerDisplay && (
+        // TODO: Add points to db on this button click
+        <div>
+          <Confetti />
+          {this.props.user.id ? (
               <Link className="dash-link" to="/dashboard">
                 <button className="dash-btn">Back to Dash</button>
               </Link>
@@ -142,11 +83,10 @@ class Results extends Component {
                 <button className="dash-btn">Back to Join</button>
               </Link>
             )}
-
-          </div>
-        )}
-      </div>
-    );
+        </div>
+      )}
+    </div>
+  );
   }
 }
 

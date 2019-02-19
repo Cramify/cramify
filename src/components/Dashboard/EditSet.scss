@@ -24,6 +24,32 @@
     }
 }
 
+.confirm-btn-holder {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.confirm-btn {
+    height: 2.5rem;
+    width: 6rem;
+    font-size: 1rem;
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // padding: .8em 2em;
+    background-color: #006BF6;
+    color: aliceblue;
+    border-radius: .55em;
+    transition: .3s;
+    &:hover {
+      background-color: #FFED17;
+      color: rgb(116, 116, 116);
+      cursor: pointer;
+    }
+}
+
 
 .question-list{
     max-height: 50%;
