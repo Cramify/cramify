@@ -1,7 +1,8 @@
 const initialState = {
     user: {},
     roomID: null,
-    creator: false
+    creator: false,
+    guestName: ''
 }
 
 // consts
@@ -10,6 +11,7 @@ const UPDATE_ROOMID = 'UPDATE_ROOMID'
 const UPDATE_CREATOR = 'UPDATE_CREATOR'
 const DESTROY_CREATOR = 'DESTROY_CREATOR'
 const REMOVE_USER_INDEX = 'REMOVE_USER_INDEX'
+const NAME_GUEST = 'NAME_GUEST'
 
 // action builders
 export function updateUser(user) {
@@ -44,6 +46,13 @@ export function removeUserIndex(user) {
     }
 }
 
+export function nameGuest(name) {
+    return {
+        type: NAME_GUEST,
+        payload: name
+    }
+}
+
 // reducer
 export default function reducer(state = initialState, action) {
     switch (action.type) {
@@ -52,6 +61,7 @@ export default function reducer(state = initialState, action) {
         case UPDATE_CREATOR: return {...state, creator: action.payload}
         case DESTROY_CREATOR: return {...state, creator: action.payload}
         case REMOVE_USER_INDEX: return {...state, user: action.payload}
+        case NAME_GUEST: return {...state, guestName: action.payload}
         default: return state
     }
 }

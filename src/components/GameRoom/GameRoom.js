@@ -34,6 +34,7 @@ class GameRoom extends Component {
   }
 
   componentDidMount = async () => {
+    if (this.props.guestName) this.setState({currentUser: this.props.guestName})
     if (this.props.roomID === null) {
       Swal.fire({
         title: 'Disconnected from the game!',
