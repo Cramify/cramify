@@ -107,7 +107,6 @@ io.on("connection", socket => {
   // updates and displays points
   socket.on('update points', data => {
     io.to(data.room).emit('display points', data)
-    console.log('updated points')
   })
 });
 
@@ -143,6 +142,8 @@ app.get('/game/set/:setID', gc.getGameSets);
 app.get('/leaderboard', gc.getLeaders);
 //Add Points Endpoint
 app.put('/user/points/:id', gc.editUserPoints)
+// Get User Ranking
+app.get('/user/rankings/:id', gc.getRanking)
 
 //require in db through massive, listen to server for connection
 massive(CONNECTION_PORT).then(connection => {
