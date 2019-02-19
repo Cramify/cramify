@@ -58,7 +58,6 @@ module.exports  = {
         const db = req.app.get('db');
         const {id} = req.session.user;
         const {setID, junctionID} = req.query;
-        console.log(req.query)
         const editQuestionDelete = await db.edit_question_delete({set_id: setID, junction_id: junctionID});
         res.status(200).send(editQuestionDelete)
     },

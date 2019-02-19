@@ -107,7 +107,6 @@ io.on("connection", socket => {
   // updates and displays points
   socket.on('update points', data => {
     io.to(data.room).emit('display points', data)
-    console.log('updated points')
   })
 });
 

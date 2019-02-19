@@ -44,7 +44,7 @@ export default class Question extends Component{
 
     answerQuestion = (num) => {
         const answerTime = Date.now();
-        const scoreToAdd = Math.floor((675 - ((answerTime - this.state.startTime)) / 10))
+        const scoreToAdd = Math.floor((300 - ((answerTime - this.state.startTime)) / 10))
         // score to add is currently set for the logic of a 5 second timer (adds 175 points for correct answer + time left)
         console.log(scoreToAdd)
         this.setState({
@@ -71,7 +71,7 @@ export default class Question extends Component{
                 <h1>Question:</h1>
                 <h2>{this.props.questionData.question}</h2>
                 {/* Timer Display */}
-                <Timer timerFn={this.props.toResFn} time={1} size={100}/>
+                <Timer timerFn={this.props.toResFn} time={2} size={100}/>
                 {/* Display Answers. If user has answered, disable buttons */}
                 {!this.state.didAnswer ? (
                     <div className='answers'>
