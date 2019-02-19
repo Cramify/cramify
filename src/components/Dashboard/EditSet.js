@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import {Link} from 'react-router-dom'
 import './EditSet.scss'
 
 
@@ -89,9 +90,13 @@ export default class EditSet extends Component {
         })
         return (
             <div className='edit-set-page'>
-
                 <div className='question-list'>
                     <><h2>User Set</h2>
+                    <div className='confirm-btn-holder'>
+                        <Link className='link' to='/dashboard'>
+                        <button className='confirm-btn'>Confirm</button>
+                        </Link>
+                    </div>
                     <div>{userQuestions}</div></>
                 </div>
                     <hr/>
