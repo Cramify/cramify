@@ -45,8 +45,6 @@ export default class EditSet extends Component {
     }
 
     checkQuestions = () => {
-        console.log(this.state.set.length)
-        console.log(this.state.set)
         if(this.state.set.length === 1){
             alert('Must have more than one question')
         } else if (this.state.set.length > 1){
@@ -61,13 +59,11 @@ export default class EditSet extends Component {
         this.setState({
             set: res.data
         })
-        if(this.state.set.length >=19){
+        if(this.state.set.length >= 19){
             this.setState({
                 limitReached: true
             })
         }
-        console.log(this.state.set)
-        console.log(this.state.set.length)
     }
 
     deleteQuestion = async (id) => {
