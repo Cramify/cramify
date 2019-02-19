@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import EditUser from "./EditUser";
 import Swal from "sweetalert2";
 import "./Dashboard.scss";
+import { updateUser } from "../../ducks/reducer";
+
 
 class DashBoard extends Component {
   constructor(props) {
@@ -33,6 +35,7 @@ class DashBoard extends Component {
   logout = () => {
     axios.post("/auth/logout");
     this.props.history.push("/");
+    // this.props.updateUser('')
   };
 
   toggleEdit = () => {
@@ -85,11 +88,6 @@ class DashBoard extends Component {
             </button>
           <button className='delete-set-btn' onClick={() => this.deleteSet(set.set_id)}>Delete</button>
           </p>
-          {/* {this.state.editSet && 
-                    <EditSet
-                        setName={this.state.setName}
-                        setID ={set.set_id}
-                     />} */}
         </div>
       );
     });
@@ -139,5 +137,5 @@ class DashBoard extends Component {
 const mapStateToProps = store => store;
 
 export default connect(
-  mapStateToProps,
+  mapStateToProps, {updateUser}
 )(DashBoard);
