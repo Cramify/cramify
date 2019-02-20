@@ -23,7 +23,7 @@ class GameRoom extends Component {
       setID: null,
       myID: null,
       currentQuestion: 0,
-      showTimer: true
+      showTimer: true,
     };
     this.socket = io.connect(":4000");
     this.socket.on("display name response", data => this.displayName(data));
@@ -34,6 +34,7 @@ class GameRoom extends Component {
   }
 
   componentDidMount = async () => {
+    const res = await axios.get('/game/rooms');  
     if (this.props.guestName) this.setState({currentUser: this.props.guestName})
     if (this.props.roomID === null) {
       Swal.fire({
