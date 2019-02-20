@@ -6,6 +6,7 @@ import EditUser from "./EditUser";
 import Swal from "sweetalert2";
 import "./Dashboard.scss";
 import Header from "../Header/Header";
+import { updateUser } from "../../ducks/reducer";
 
 class DashBoard extends Component {
   constructor(props) {
@@ -25,15 +26,16 @@ class DashBoard extends Component {
   componentDidMount = async () => {
     const res = await axios.get("/set/user");
     const userRank = await axios.get(`/user/rankings/${this.props.user.id}`);
-    this.setState({
+    await this.setState({
       sets: res.data,
       ranking: userRank.data
     });
-    console.log(this.state.ranking);
   };
+
   logout = () => {
     axios.post("/auth/logout");
     this.props.history.push("/");
+    // this.props.updateUser('')
   };
 
   toggleEdit = () => {
@@ -81,7 +83,10 @@ class DashBoard extends Component {
         <div className="set-card" key={i}>
           <h3>{set.set_name}</h3>
           <div className="set-buttons">
-            <i className="fas fa-pen" onClick={() => this.editSet(set.set_id)} />
+            <i
+              className="fas fa-pen"
+              onClick={() => this.editSet(set.set_id)}
+            />
             <i
               className="far fa-times-circle"
               onClick={() => this.deleteSet(set.set_id)}
@@ -112,7 +117,6 @@ class DashBoard extends Component {
 
         <div className="dashboard">
           <div className="left-container">
-
             <div className="user-info">
               <div className="profile-pic">
                 <img src="" alt="" />
@@ -124,8 +128,12 @@ class DashBoard extends Component {
             </div>
 
             <div className="game-buttons">
-            <Link className="link" to="/join"><button>Join Room</button></Link>
-              <Link className="link" to="/create"><button>Create Room</button></Link>
+              <Link className="link" to="/join">
+                <button>Join Room</button>
+              </Link>
+              <Link className="link" to="/create">
+                <button>Create Room</button>
+              </Link>
             </div>
             <div className="leaderboard">Leaderboard Component</div>
           </div>
@@ -194,4 +202,7 @@ class DashBoard extends Component {
 
 const mapStateToProps = store => store;
 
-export default connect(mapStateToProps)(DashBoard);
+export default connect(
+  mapStateToProps,
+  { updateUser }
+)(DashBoard);

@@ -73,17 +73,19 @@
 
   .back-button {
     display: flex;
+    font-family: $mainFont;
     justify-content: center;
     align-items: center;
     position: absolute;
+    padding: .8em 1em;
     left: 1;
-    height: 2em;
-    width: 5em;
+    height: 1.3em;
+    width: 4em;
     border: 1px #ffed17 solid;
-    margin-left: 1.8em;
-    margin-top: .8em;
+    margin-left: 2.1em;
+    margin-top: 1.3em;
     border-radius: 0.5em;
-    font-size: 1.2em;
+    font-size: 1em;
     margin-bottom: 2em;
     align-self: center;
     background: #1da0dd;

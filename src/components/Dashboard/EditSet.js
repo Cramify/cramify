@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import {Link} from 'react-router-dom'
 import './EditSet.scss'
 import Header from '../Header/Header';
 
@@ -15,6 +16,7 @@ export default class EditSet extends Component {
             junctionID: {},
             limitReached: false
         }
+
     }
 
     //delete and add to the current user question set.
@@ -42,9 +44,18 @@ export default class EditSet extends Component {
         })
     }
 
+    checkQuestions = () => {
+        console.log(this.state.set.length)
+        console.log(this.state.set)
+        if(this.state.set.length === 1){
+            alert('Must have more than one question')
+        } else if (this.state.set.length > 1){
+            this.props.history.push('/dashboard')
+        }
+    }
+
     addQuestionToSet = async (id) => {
         const {setID} = this.props.match.params
-        console.log(setID)
         await axios.post('/set/user/question', { setID, questionID: id});
         const res = await axios.get(`/set/getedit/${this.props.match.params.setID}`);
         this.setState({
@@ -55,6 +66,8 @@ export default class EditSet extends Component {
                 limitReached: true
             })
         }
+        console.log(this.state.set)
+        console.log(this.state.set.length)
     }
 
     deleteQuestion = async (id) => {
@@ -92,6 +105,9 @@ export default class EditSet extends Component {
                 <Header />
                 <div className='question-list'>
                     <><h2>User Set</h2>
+                    <div className='confirm-btn-holder'>
+                        <button className='confirm-btn' onClick={this.checkQuestions}>Confirm</button>
+                    </div>
                     <div>{userQuestions}</div></>
                 </div>
                     <hr/>
