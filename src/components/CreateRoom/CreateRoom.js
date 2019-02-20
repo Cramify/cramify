@@ -10,8 +10,7 @@ class CreateRoom extends Component {
     this.state = {
       roomName: "",
       sets: [],
-      roomID: null,
-      setID: {}
+      roomID: null
     };
   }
 
