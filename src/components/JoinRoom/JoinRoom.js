@@ -3,18 +3,31 @@ import { connect } from "react-redux";
 import { updateRoomID, updateUser, nameGuest } from "../../ducks/reducer";
 import axios from 'axios';
 import './JoinRoom.scss';
+import OpenRooms from './OpenRooms';
+import Swal from 'sweetalert2';
 
 class JoinRoom extends Component {
   constructor(props) {
     super(props);
     this.state = {
       roomID: '',
-      guestName: ''
+      guestName: '',
+      openRooms: []
     };
+
   }
 
+  //add a get to the room table and then use that to compare. Keep on state and then compare in the openRoomJoin fucntion. 
+
   componentDidMount = async () => {
-    if (!this.props.user.username) {
+    const res = await axios.get('/game/rooms');
+    console.log(res.data)
+    this.setState({
+      openRooms: res.data
+    })
+    console.log(this.state.openRooms)
+
+    if (!this.props.user.id) {
       try {
         const loginData = await axios.get("/auth/user");
         this.props.updateUser(loginData.data);
@@ -34,6 +47,29 @@ class JoinRoom extends Component {
     if (evt.keyCode === 13) {
       this.joinRoom();
     }
+  } 
+
+  openRoomJoin = async (gameCode) => {
+    const res = await axios.get('/game/rooms');
+    console.log(res)
+    // eslint-disable-next-line
+      this.state.openRooms.map((room, i)=>{
+        if(!room.game_code){
+          return Swal.fire({
+            title: 'This Game Must Have Started!',
+            text: `Don't worry, we'll send you back where you came from.`,
+            timer: 2500,
+            showConfirmButton: false,
+            type: 'error',
+            customClass: 'custom-alert'
+          })
+        }
+      })
+        
+      await this.setState({
+        roomID: gameCode
+      })
+      await this.joinRoom()
   }
 
   joinRoom = () => {
@@ -66,6 +102,10 @@ class JoinRoom extends Component {
           type="text"
         />
         <div className='join-button' onClick={this.joinRoom}>Join!</div>
+        <OpenRooms 
+          // joinRoom={this.joinRoom}
+          openRoomJoin={this.openRoomJoin}
+        />
       </div>
     );
   }

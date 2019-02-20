@@ -109,6 +109,7 @@ io.on("connection", socket => {
   })
 });
 
+
 // Account Endpoints
 app.post("/auth/register", ac.register);  // add new account to db
 app.post("/auth/login", ac.login);  // login logic
@@ -137,12 +138,19 @@ app.get('/question/:category', qc.getByCategory) //gets by category
 //Game Room Endpoints
 app.get('/game/set/:setID', gc.getGameSets);
 
+// Add/Delete rooms to OpenRooms
+//Get All Rooms 
+app.get('/game/rooms', gc.getAllRooms);
+app.post('/game/room/add', gc.addOpenRoom);
+app.delete('/game/room/delete/:roomID', gc.deleteOpenRoom);
+
+
 // Leaderboard Endpoints
 app.get('/leaderboard', gc.getLeaders);
 //Add Points Endpoint
-app.put('/user/points/:id', gc.editUserPoints)
+app.put('/user/points/:id', gc.editUserPoints);
 // Get User Ranking
-app.get('/user/rankings/:id', gc.getRanking)
+app.get('/user/rankings/:id', gc.getRanking);
 
 //require in db through massive, listen to server for connection
 massive(CONNECTION_PORT).then(connection => {

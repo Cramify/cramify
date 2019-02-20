@@ -39,6 +39,15 @@ friend_id INT REFERENCES user_account(user_id),
 user_id INT REFERENCES user_account(user_id)
 );
 
+-- rooms table/ holds all rooms for others to join 
+CREATE TABLE rooms (
+    room_id SERIAL,
+    game_code INTEGER,
+    user_id INTEGER,
+    PRIMARY KEY (room_id),
+    FOREIGN KEY (user_id) REFERENCES user_account(user_id)
+);
+
 
 
 --create new user

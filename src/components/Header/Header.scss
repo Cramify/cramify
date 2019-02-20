@@ -43,6 +43,10 @@
     padding: 0;
     margin: 0;
     // line-height: 0.5em;
+    a {
+      color: $fontColor;
+      text-decoration: none;
+    }
   }
 
   .buttons {
@@ -59,7 +63,7 @@
       color: $white;
       border-radius: .55em;
       margin: 0 .8em;
-      transition: .2s;
+      transition: .4s;
       &:hover {
         cursor: pointer;
         background: #FFED17;

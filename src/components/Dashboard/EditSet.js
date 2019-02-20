@@ -21,6 +21,10 @@ export default class EditSet extends Component {
   //delete and add to the current user question set.
 
   componentDidMount = async () => {
+    // check if logged in, send unlogged in users to landing
+    const user = await axios.get('/auth/user')
+    if (!user.data) return this.props.history.push('/')
+    
     const res = await axios.get(
       `/set/getedit/${this.props.match.params.setID}`
     );
@@ -71,8 +75,6 @@ export default class EditSet extends Component {
         limitReached: true
       });
     }
-    console.log(this.state.set);
-    console.log(this.state.set.length);
   };
 
   deleteQuestion = async id => {

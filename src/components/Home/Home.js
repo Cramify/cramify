@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Register from "./Register";
 import Login from "./Login";
+import Leaderboard from '../Leaderboard/Leaderboard'
 import "./Home.scss";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -20,14 +21,6 @@ class Home extends Component {
   }
 
   componentDidMount = async () => {
-    try {
-      const leaderboard = await axios.get("/leaderboard");
-      this.setState({
-        leaderboard: leaderboard.data
-      });
-    } catch (e) {
-      console.log(e.message);
-    }
     if (!this.props.user.username) {
       try {
         const loginData = await axios.get("/auth/user");
@@ -42,12 +35,19 @@ class Home extends Component {
     this.setState({
       register: !this.state.register
     });
+    document.getElementById('register-input').focus();
   };
 
   loginToggle = () => {
     this.setState({
       login: !this.state.login
     });
+    document.getElementById('login-input').focus();
+  };
+
+  logout = () => {
+    axios.post("/auth/logout");
+    this.props.updateUser({})
   };
 
   render() {
@@ -66,12 +66,7 @@ class Home extends Component {
           <div>
             {this.props.user.id ? (
               <>
-                <div onClick={() => this.props.history.push("/create")}>
-                  Create Room
-                </div>
-                <div onClick={() => this.props.history.push("/join")}>
-                  Join Room
-                </div>
+                <div onClick={() => this.logout()}>Logout</div>
                 <div onClick={() => this.props.history.push("/dashboard")}>
                   Dashboard
                 </div>
@@ -81,7 +76,7 @@ class Home extends Component {
                 <div onClick={() => this.registerToggle()}>Register</div>
                 <div onClick={() => this.loginToggle()}>Login</div>
               </>
-            )}
+            )} 
           </div>
         </div>
         <div className="hero">
@@ -116,18 +111,7 @@ class Home extends Component {
             <Login logFn={this.loginToggle} regFn={this.registerToggle} />
           </div>
         </div>
-        <div className="leaderboard">
-          <h1>Leaderboard</h1>
-          {this.state.leaderboard.map((leader, i) => (
-            <div key={i}>
-              <h2>
-                {i + 1}. {leader.username}
-              </h2>
-              <div className="leading-dots" />
-              <h2>{leader.score}</h2>
-            </div>
-          ))}
-        </div>
+        <Leaderboard/>
       </div>
     );
   }
