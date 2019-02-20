@@ -2,11 +2,12 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-// import EditUser from "./EditUser";
+import EditUser from "./EditUser";
+import Leaderboard from '../Leaderboard/Leaderboard'
 import Swal from "sweetalert2";
 import "./Dashboard.scss";
 import Header from "../Header/Header";
-import { updateUser } from "../../ducks/reducer";
+import { updateUser, updateRoomID, updateCreator } from "../../ducks/reducer";
 
 class DashBoard extends Component {
   constructor(props) {
@@ -19,15 +20,27 @@ class DashBoard extends Component {
       editSet: false,
       sets: [],
       setName: "",
-      ranking: null
+      ranking: null,
+      roomID: null
     };
   }
 
   componentDidMount = async () => {
-    const res = await axios.get("/set/user");
+    // check if user is logged in, else move to landing
+    const user = await axios.get('/auth/user')
+    if (!user.data) return this.props.history.push('/')
+    
+    // get a random room id
+    const roomID =
+    Math.floor(Math.random() + 10000) + Math.floor(Math.random() * 10000);
+    this.setState({ roomID });
+    
+    // get user sets
+    const userSets = await axios.get("/set/user");
+    // check ranking
     const userRank = await axios.get(`/user/rankings/${this.props.user.id}`);
     await this.setState({
-      sets: res.data,
+      sets: userSets.data,
       ranking: userRank.data
     });
   };
@@ -35,16 +48,18 @@ class DashBoard extends Component {
   logout = () => {
     axios.post("/auth/logout");
     this.props.history.push("/");
-    // this.props.updateUser('')
+    this.props.updateUser({})
   };
 
   toggleEdit = () => {
     this.setState({
       edit: !this.state.edit
     });
+    document.getElementById('edit-user-input').focus();
   };
 
-  deleteSet = async set_id => {
+  deleteSet = async (set_id, event) => {
+    event.stopPropagation();
     const res = await axios.delete(`/set/user/delete/${set_id}`);
     await this.setState({
       sets: res.data
@@ -52,7 +67,8 @@ class DashBoard extends Component {
     this.componentDidMount();
   };
 
-  editSet = async setID => {
+  editSet = async (setID, event) => {
+    event.stopPropagation();
     this.props.history.push(`/editset/${setID}`);
   };
 
@@ -77,43 +93,38 @@ class DashBoard extends Component {
     });
   };
 
+  createRoom = setID => {
+    this.props.updateRoomID(this.state.roomID);
+    this.props.updateCreator();
+    this.props.history.push(`/gameroom?${setID}`);
+  };
+
   render() {
     let sets = this.state.sets.map((set, i) => {
       return (
-        <div className="set-card" key={i}>
+        <div
+          onClick={() => this.createRoom(set.set_id)}
+          className="set-card"
+          key={i}
+        >
           <h3>{set.set_name}</h3>
           <div className="set-buttons">
             <i
-              className="fas fa-pen"
-              onClick={() => this.editSet(set.set_id)}
+              className="far fa-times-circle"
+              onClick={e => this.deleteSet(set.set_id, e)}
             />
             <i
-              className="far fa-times-circle"
-              onClick={() => this.deleteSet(set.set_id)}
+              className="fas fa-pen"
+              onClick={e => this.editSet(set.set_id, e)}
             />
           </div>
-          {/* <p className="user-set-name">{set.set_name}</p>
-          <p className="set-btns">
-            <button
-              className="edit-set-btn"
-              onClick={() => this.editSet(set.set_id)}
-            >
-              Edit
-            </button>
-            <button
-              className="delete-set-btn"
-              onClick={() => this.deleteSet(set.set_id)}
-            >
-              Delete
-            </button>
-          </p> */}
         </div>
       );
     });
 
     return (
       <div className="dashboard-page">
-        <Header />
+        <Header  logoutFn={this.logout}/>
 
         <div className="dashboard">
           <div className="left-container">
@@ -123,8 +134,8 @@ class DashBoard extends Component {
               </div>
               <h1>{this.props.user.username}</h1>
               <h2>Rank: {this.state.ranking}</h2>
-              <h4>Logout</h4>
-              <h4>Edit Account</h4>
+              <h4 onClick={this.logout}>Logout</h4>
+              <h4 onClick={this.toggleEdit}>Edit Account</h4>
             </div>
 
             <div className="game-buttons">
@@ -135,66 +146,27 @@ class DashBoard extends Component {
                 <button>Create Room</button>
               </Link>
             </div>
-            <div className="leaderboard">Leaderboard Component</div>
+            <div className="leaderboard-container"><Leaderboard/></div>
           </div>
           <div className="right-container">
             <div className="my-sets">
               <h1>My Sets</h1>
               {sets}
+              <Link to="/newset">
+                <h5 className="create-set-btn">Create Question Set</h5>
+              </Link>
             </div>
           </div>
-        </div>
-        {/* <div className="main">
-          <div className="user-info">
-            <div className="profile-pic">
-              <img src="" alt="" />
-            </div>
-            <i className="fas fa-pen" onClick={this.toggleEdit} />
-            <h4 className="dash-username">{this.props.user.username}</h4>
-            <div className="logout-delete-btns">
-              <button className="logout-btn" onClick={this.logout}>
-                Logout
-              </button>
-              <button className="delete-btn" onClick={this.deleteAccount}>
-                Delete User
-              </button>
-            </div>
-          </div>
-          
-          <div className="dash-rank-holder">
-            <h1 className="dash-rank">Rank</h1>
-            <p className="user-rank">{this.state.ranking}</p>
-          </div>
-
-          <div className="set-window">
-            <h2 className="dash-sets">My Sets</h2>
-            <Link className="link" to="/newset">
-              <button className="create-set-btn">Create Question Set</button>
-            </Link>
-            {sets}
+          <div
+            className={
+              this.state.edit
+                ? "modal-container show-modal"
+                : "modal-container hide-modal"
+            }
+          >
+            <EditUser toggleFn={this.toggleEdit} />
           </div>
         </div>
-
-        <div className="game-options">
-          <h2 className="play-now">Play Now!</h2>
-          <div className="join-create-btns">
-            <Link className="link" to="/join">
-              <button className="dash-join-btn">Join Game Room</button>
-            </Link>
-            <Link className="link" to="/create">
-              <button className="dash-create-btn">Create New Game</button>
-            </Link>
-          </div>
-        </div>
-        <div
-          className={
-            this.state.edit
-              ? "modal-container show-modal"
-              : "modal-container hide-modal"
-          }
-        >
-          <EditUser toggleFn={this.toggleEdit} />
-        </div> */}
       </div>
     );
   }
@@ -204,5 +176,5 @@ const mapStateToProps = store => store;
 
 export default connect(
   mapStateToProps,
-  { updateUser }
+  { updateUser, updateRoomID, updateCreator }
 )(DashBoard);

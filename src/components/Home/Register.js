@@ -44,6 +44,19 @@ class Register extends Component {
     if (evt.keyCode === 13) {
       this.register();
     }
+    if (evt.keyCode === 27) {
+      this.removeRegister();
+    }
+  }
+
+  removeRegister = () => {
+    this.setState({
+      email: "",
+      password: "",
+      checkPassword: "",
+      username: ""
+    })
+    this.props.regFn()
   }
 
   render() {
@@ -51,30 +64,35 @@ class Register extends Component {
       <div className="modal">
         <div className="content">
           <i
-            onClick={() => this.props.regFn()}
+            onClick={() => this.removeRegister()}
             className="fas fa-times fa-2x"
           />
           <h2>Register</h2>
           <div className="user-input">
             <input
+              value={this.state.email}
+              id='register-input'
               onKeyDown={e => this.handleKeyDown(e)}
               onChange={e => this.handleInput("email", e)}
               type="text"
               placeholder="email"
             />
             <input
+            value={this.state.username}
                 onKeyDown={e => this.handleKeyDown(e)}
               onChange={e => this.handleInput("username", e)}
               type="text"
               placeholder="username"
             />
             <input
+            value={this.state.password}
             onKeyDown={e => this.handleKeyDown(e)}
               onChange={e => this.handleInput("password", e)}
               type="password"
               placeholder="password"
             />
             <input
+            value={this.state.checkPassword}
             onKeyDown={e => this.handleKeyDown(e)}
               onChange={e => this.handleInput("checkPassword", e)}
               type="password"

@@ -13,6 +13,7 @@
 .left-container {
   display: flex;
   flex-direction: column;
+  max-width: 40vw;
   .user-info {
     display: flex;
     justify-content: center;
@@ -20,21 +21,21 @@
     flex-direction: column;
     position: relative;
     margin: 1rem;
-    width: 30vw;
     min-width: 14rem;
     min-height: 14rem;
     text-align: center;
-    background-color: #f6f6f6;
+    background-color: $lightGray;
     .profile-pic {
       position: absolute;
-      left: -3rem;
+      left: -8rem;
       height: 12rem;
       width: 12rem;
       border-radius: 50%;
       background-color: lightblue;
       overflow: hidden;
     }
-    h1, h2 {
+    h1,
+    h2 {
       display: block;
     }
     h1 {
@@ -45,34 +46,122 @@
       position: absolute;
       right: 1rem;
       bottom: 1rem;
+      cursor: pointer;
       &:nth-of-type(1) {
         bottom: 2.2rem;
+      }
+      &:hover {
+        color: #0d89f3;
+        transition: 0.2s;
+      }
+    }
+  }
+  .game-buttons {
+    display: flex;
+    justify-content: center;
+    margin: 1rem 1rem 3.5rem 1rem;
+    a {
+      text-decoration: none;
+    }
+    button {
+      background: transparent;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0.5em 1.6em;
+      border: 1px #ffed17 solid;
+      border-radius: 0.55em;
+      margin: 0 0.8em;
+      transition: 0.2s;
+      &:hover {
+        cursor: pointer;
+        background: #ffed17;
+        color: $fontColor;
+      }
+    }
+  }
+  .leaderboard-container {
+    margin: 1rem;
+  }
+}
+.right-container {
+  width: 20em;
+  .my-sets {
+    position: relative;
+    padding: 1em;
+    height: 60%;
+    margin: 1em;
+    width: 20em;
+    background: $lightGray;
+    h1 {
+      font-size: 2rem;
+      text-align: center;
+    }
+    a {
+      text-decoration: none;
+      color: $fontColor;
+      .create-set-btn {
+        position: absolute;
+        bottom: 0.5em;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border: solid 1px #0d89f3;
+        border-radius: 0.5em;
+        padding: 0.5em .6em;
+        font-size: 1rem;
+        width: auto;
+        transition: 0.4s;
+        &:hover {
+          cursor: pointer;
+          background: #0d89f3;
+          color: $white;
+        }
+      }
+    }
+    .set-card {
+      position: relative;
+      border: solid 1px #0d89f3;
+      margin: 0.2em;
+      height: 3em;
+      border-radius: 0.5em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0em 0.5em;
+      cursor: pointer;
+      font-size: 1.2rem;
+      &:hover {
+        opacity: 0.7;
+        transition: 0.3s;
+      }
+      .set-buttons {
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        > i {
+          padding: 0.2em;
+          &:hover {
+            color: #0d89f3;
+            transition: 0.2s;
+          }
+        }
       }
     }
   }
 }
-.right-container {
-  .my-sets {
-    background: #f6f6f6;
-  }
-  width: 20em;
-}
 
-
-.my-sets {
-  background: lightgray;
-  padding: 0.3em;
-  height: 60%;
-  margin: 1em;
-}
-.set-card {
-  position: relative;
-  background: $white;
-  margin: 0.2em;
-  height: 2em;
-  .set-buttons {
+@media(max-width: 915px) {
+  .left-container > .user-info > .profile-pic {
     position: absolute;
-    right: 0;
-    z-index: 1;
+    left: 50%;
+    top: -30%;
+    transform: translate(-50%, 0);
+    height: 8rem;
+    width: 8rem;
+  }
+  .dashboard-page > .dashboard {
+    margin-top: 4rem;
   }
 }
