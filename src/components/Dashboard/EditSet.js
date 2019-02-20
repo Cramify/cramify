@@ -1,13 +1,7 @@
-<<<<<<< HEAD
-import React, { Component } from 'react';
-import axios from 'axios';
-import './EditSet.scss'
-=======
 import React, { Component } from "react";
 import axios from "axios";
 import "./EditSet.scss";
 import Swal from "sweetalert2";
->>>>>>> master
 
 
 export default class EditSet extends Component {
