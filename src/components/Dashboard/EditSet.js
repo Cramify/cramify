@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import {Link} from 'react-router-dom'
 import './EditSet.scss'
 
 
@@ -45,7 +44,7 @@ export default class EditSet extends Component {
     }
 
     checkQuestions = () => {
-        if(this.state.set.length === 1){
+        if(this.state.set.length <= 1){
             alert('Must have more than one question')
         } else if (this.state.set.length > 1){
             this.props.history.push('/dashboard')
