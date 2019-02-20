@@ -76,7 +76,7 @@ class Home extends Component {
                 <div onClick={() => this.registerToggle()}>Register</div>
                 <div onClick={() => this.loginToggle()}>Login</div>
               </>
-            )}
+            )} 
           </div>
         </div>
         <div className="hero">

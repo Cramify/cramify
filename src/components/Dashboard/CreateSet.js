@@ -68,7 +68,9 @@ export default class CreateSet extends Component {
       return Swal.fire({
         title: `Not Enough Questions!`,
         text: `Please Add More Questions!`,
-        type: `error`
+        type: `error`,
+        showConfirmButton: false,
+        timer: 1500
       });
     }
     const res = await axios.post("/set/user/create", { setName });
