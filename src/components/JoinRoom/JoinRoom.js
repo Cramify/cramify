@@ -27,7 +27,7 @@ class JoinRoom extends Component {
     })
     console.log(this.state.openRooms)
 
-    if (!this.props.user.username) {
+    if (!this.props.user.id) {
       try {
         const loginData = await axios.get("/auth/user");
         this.props.updateUser(loginData.data);

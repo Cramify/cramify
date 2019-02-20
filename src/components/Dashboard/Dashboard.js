@@ -26,8 +26,10 @@ class DashBoard extends Component {
   }
 
   componentDidMount = async () => {
+    // check if user is logged in, else move to landing
     const user = await axios.get('/auth/user')
     if (!user.data) return this.props.history.push('/')
+    
     // get a random room id
     const roomID =
     Math.floor(Math.random() + 10000) + Math.floor(Math.random() * 10000);
