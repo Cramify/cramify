@@ -11,7 +11,6 @@ class CreateRoom extends Component {
       roomName: "",
       sets: [],
       roomID: null,
-      setID: {}
     };
   }
 
@@ -27,8 +26,9 @@ class CreateRoom extends Component {
     })
   };
 
-  createRoom = (setID) => {
+  createRoom = async (setID) => {
     this.props.updateRoomID(this.state.roomID);
+      await axios.post('/game/room/add', {roomID: this.state.roomID})
     this.props.updateCreator();
     this.props.history.push(`/gameroom?${setID}`);
   };

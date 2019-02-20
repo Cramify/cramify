@@ -72,8 +72,10 @@ export default class CreateSet extends Component {
         })
         //sends questions to add to new set
         const { setID } = this.state
+        // eslint-disable-next-line
         this.state.set.map((question) => {
             if(!this.state.set[1]){
+        // eslint-disable-next-line
                 return;
             }else if(this.state.set.length >= 1){
                 return axios.post('/set/user/question', { setID, questionID: question.question_id })
