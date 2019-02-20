@@ -49,8 +49,6 @@ class Register extends Component {
     }
   }
 
-<<<<<<< HEAD
-=======
   removeRegister = () => {
     this.setState({
       email: "",
@@ -61,7 +59,6 @@ class Register extends Component {
     this.props.regFn()
   }
 
->>>>>>> master
   render() {
     return (
       <div className="modal">
