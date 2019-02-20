@@ -1,272 +1,78 @@
-@import '../../sassVars.scss';
+@import "../../sassVars.scss";
 
-
-
-.dashboard {
+.dashboard-page {
   font-family: $mainFont;
-}
-
-.main {
-  background-color: $white;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
   height: 100vh;
-  width: 100vw;
+  .dashboard {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+  }
 }
 
-.set-window {
+.left-container {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-}
-
-.user-info {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  margin-left: 30px;
-  margin-top: 30px;
-  .profile-pic {
-    height: 200px;
-    width: 200px;
-    border-radius: 50%;
-    background-color: lightblue;
-    overflow: hidden;
+  .user-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    margin: 1rem;
+    width: 30vw;
+    min-width: 14rem;
+    min-height: 14rem;
+    text-align: center;
+    background-color: #f6f6f6;
+    .profile-pic {
+      position: absolute;
+      left: -3rem;
+      height: 12rem;
+      width: 12rem;
+      border-radius: 50%;
+      background-color: lightblue;
+      overflow: hidden;
+    }
+    h1, h2 {
+      display: block;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    h4 {
+      position: absolute;
+      right: 1rem;
+      bottom: 1rem;
+      &:nth-of-type(1) {
+        bottom: 2.2rem;
+      }
+    }
   }
 }
-
-.dash-username {
-  margin-top: 10px;
-  margin-bottom: 10px;
-  font-size: 1.3rem;
-  display: flex;
-  justify-content: center;
-}
-
-.logout-delete-btns {
-  display: flex;
-  justify-content: space-around;
-  border: none;
-}
-
-.logout-btn, .delete-btn, .dash-join-btn, .dash-create-btn, .create-set-btn, .delete-set-btn, .edit-set-btn {
-  display: flex;
-  justify-content: space-around;
-  width: 48%;
-  height: 25px;
-  font-size: .9rem;
-  border: none;
-  border-radius: .55em;
-  transition: .2s;
-  cursor: pointer;
-}
-
-.logout-btn {
-  background-color: #3d6cb9;
-  color: aliceblue;
-  &:hover {
-    opacity: 0.8;
-    background: #00d1ff;
-    color: aliceblue;
+.right-container {
+  .my-sets {
+    background: #f6f6f6;
   }
-  &:focus {
-    color: aliceblue;
-    background: #00d1ff;
-    outline: none;
-  }
-}
-
-.delete-btn {
-  background-color: #FFED17;
-  color: $fontColor;
-  &:hover {
-    opacity: 0.8;
-    background: #ea3546;
-    color: aliceblue;
-  }
-  &:focus {
-    color: aliceblue;
-    background: #ea3546;
-    outline: none;
-  }
-}
-
-.dash-rank-holder {
-  display: flex;
-  font-display: column-reverse;
-  align-items: center;
-  margin-top: 3rem;
-  width: 10%;
-}
-
-.dash-rank {
-  display: flex;
-  justify-content: center;
-  width: 100px;
-  font-size: 2rem;
-  font-family: '$mainFont';
-  border-bottom: 1px solid black
-}
-
-.user-rank {
-  margin-top: 90px;
-  display: flex;
-  justify-content: center;
-  margin-left: -2.8em;
-  font-size: 1.3rem;
+  width: 20em;
 }
 
 
-.set-window {
-  border-left: 1px solid black;
-  height: 100vh;
-  width: 40%;
-  display: flex;
-  justify-content: flex-start;
-  font-display: column;
-  align-items: center;
-  flex-wrap: wrap;
+.my-sets {
+  background: lightgray;
+  padding: 0.3em;
+  height: 60%;
+  margin: 1em;
 }
-
-.dash-sets {
-  margin-top: 2rem;
-  font-size: 2.5rem;
-}
-
-.create-set-btn {
-  background-color: #3d6cb9;
-  color: aliceblue;
-  height: 2.5rem;
-  width: 7rem;
-  margin-top: 1rem;
-  margin-bottom: 2rem;
-  &:hover {
-    opacity: 0.8;
-    background: #00d1ff;
-    color: aliceblue;
-  }
-  &:focus {
-    color: aliceblue;
-    background: #00d1ff;
-    outline: none;
-  }
-}
-
-.user-created-sets {
-  border-bottom: 1px solid black;
-  width: 100%;
-}
-
-.user-set-name {
-  font-size: 1.5rem;
-  display: flex;
-  justify-content: center;
-  margin-top: 10px;
-  margin-bottom: 5px;
-}
-
-.set-btns {
-  display: flex;
-  justify-content: space-around;
-  margin-bottom: 5px;
-}
-
-.delete-set-btn {
-  background-color: #FFED17;
-  color: $fontColor;
-  font-size: .8rem;
-  width: 40%;
-  &:hover {
-    opacity: 0.8;
-    background: #ea3546;
-    color: aliceblue;
-  }
-  &:focus {
-    color: aliceblue;
-    background: #ea3546;
-    outline: none;
-  }
-}
-
-.edit-set-btn {
-  background-color: #00d1ff;
-  color: aliceblue;
-  font-size: .8rem;
-  width: 40%;
-  &:hover {
-    opacity: 0.8;
-    background: #3d6cb9;
-    color: aliceblue;
-  }
-  &:focus {
-    color: aliceblue;
-    background: #3d6cb9;
-    outline: none;
-  }
-}
-
-.game-options {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 20%;
-  margin-top: -24rem;
-  margin-left: 18%;
-}
-
-.play-now {
-  font-size: 3em;
-  font-family: $mainFont;
-  margin-bottom: 15px;
-  display: flex;
-  justify-content: center;
-}
-
-.join-create-btns {
-  display: flex;
-  justify-content: space-around;
-}
-
-.link {
-  text-decoration: none;
-  margin: 0%;
-  display: flex;
-  justify-content: center;
-  width: 7rem;
-}
-
-.dash-join-btn {
-  background-color: #3d6cb9;
-  color: aliceblue;
-  height: 37px;
-  width: 100%;
-  margin: 0px;
-  &:hover {
-    opacity: 0.8;
-    background: #00d1ff;
-    color: aliceblue;
-  }
-  &:focus {
-    color: aliceblue;
-    background: #00d1ff;
-    outline: none;
-  }
-}
-
-.dash-create-btn {
-  background-color: #FFED17;
-  color: $fontColor;
-  height: 37px;
-  width: 100%;
-  &:hover {
-    opacity: 0.8;
-    background: #ea3546;
-    color: aliceblue;
-  }
-  &:focus {
-    color: aliceblue;
-    background: #ea3546;
-    outline: none;
+.set-card {
+  position: relative;
+  background: $white;
+  margin: 0.2em;
+  height: 2em;
+  .set-buttons {
+    position: absolute;
+    right: 0;
+    z-index: 1;
   }
 }

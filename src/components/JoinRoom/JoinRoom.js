@@ -30,6 +30,12 @@ class JoinRoom extends Component {
     });
   };
 
+  handleKeyDown = evt => {
+    if (evt.keyCode === 13) {
+      this.joinRoom();
+    }
+  }
+
   joinRoom = () => {
     this.props.updateRoomID(this.state.roomID);
     if (this.state.guestName) this.props.nameGuest(this.state.guestName)
@@ -56,6 +62,7 @@ class JoinRoom extends Component {
           value={this.state.roomID}
           placeholder="Enter Room Code"
           onChange={e => this.handleInput("roomID", e)}
+          onKeyDown={e => this.handleKeyDown(e)}
           type="text"
         />
         <div className='join-button' onClick={this.joinRoom}>Join!</div>
