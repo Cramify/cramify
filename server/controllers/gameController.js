@@ -34,5 +34,30 @@ module.exports = {
             res.status(200).send(currentUserRanking)
         } catch(e){console.log(e)}
 
+    },
+    getAllRooms: async (req, res) => {
+        const db = req.app.get('db')
+        try{
+            const getRooms = await db.get_all_rooms();
+            res.status(200).send(getRooms)
+        }catch(e){console.log(e)}
+    },
+    addOpenRoom: async (req,res) => {
+        const db = req.app.get('db');
+        const {id} = req.session.user;
+        const {roomID} = req.body;
+        try{
+            const addRooms = await db.add_open_rooms({room_id: roomID, user_id: id})
+            res.status(200).send(addRooms)
+        }catch(e){console.log(e)}
+    },
+    deleteOpenRoom: async (req,res)=>{
+        const db = req.app.get('db');
+        const {roomID} = req.params;
+        // const {id} = req.session.user;
+        try{
+            const deleteOpenRoom = await db.delete_open_room({game_code: roomID})
+            res.status(200).send(deleteOpenRoom)
+        }catch(e){console.log(e)}
     }
 }

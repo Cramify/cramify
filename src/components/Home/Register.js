@@ -30,7 +30,7 @@ class Register extends Component {
         }
         const res = await axios.post('/auth/register', {email, username, password})
         if (res.data.loggedIn) this.props.history.push('/dashboard')
-        if (!res.data.loggedIn) alert(res.data.message)
+        if (!res.data.loggedIn) return alert(res.data.message)
         this.props.updateUser(res.data.userData)
     }
 
@@ -45,21 +45,6 @@ class Register extends Component {
       this.register();
     }
   }
-
-  register = async () => {
-    const { email, username, password, checkPassword } = this.state;
-    if (password !== checkPassword) {
-      return alert("Check YoSelf");
-    }
-    const res = await axios.post("/auth/register", {
-      email,
-      username,
-      password
-    });
-    if (res.data.loggedIn) this.props.history.push("/dashboard");
-    if (!res.data.loggedIn) alert(res.data.message);
-    this.props.updateUser(res.data.userData);
-  };
 
   render() {
     return (

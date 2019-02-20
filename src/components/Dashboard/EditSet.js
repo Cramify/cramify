@@ -71,8 +71,6 @@ export default class EditSet extends Component {
         limitReached: true
       });
     }
-    console.log(this.state.set);
-    console.log(this.state.set.length);
   };
 
   deleteQuestion = async id => {

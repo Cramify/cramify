@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import EditUser from "./EditUser";
+// import EditUser from "./EditUser";
 import Swal from "sweetalert2";
 import "./Dashboard.scss";
 import Header from "../Header/Header";

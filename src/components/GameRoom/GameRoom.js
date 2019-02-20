@@ -109,6 +109,8 @@ class GameRoom extends Component {
       users: this.state.users,
       setID: this.state.setID
     });
+    await axios.delete(`/game/room/delete/${this.props.roomID}`)
+
   };
 
   displayName = data => {
@@ -148,6 +150,7 @@ class GameRoom extends Component {
       gameStarted: true,
       questionDisplay: true
     });
+    await axios.delete(`/game/room/delete/${this.props.roomID}`)
   };
 
   toResults = () => {
