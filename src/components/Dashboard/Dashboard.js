@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import EditUser from "./EditUser";
 import Swal from "sweetalert2";
 import "./Dashboard.scss";
+import Header from "../Header/Header";
 
 class DashBoard extends Component {
   constructor(props) {
@@ -23,12 +24,12 @@ class DashBoard extends Component {
 
   componentDidMount = async () => {
     const res = await axios.get("/set/user");
-    const userRank = await axios.get(`/user/rankings/${this.props.user.id}`)
+    const userRank = await axios.get(`/user/rankings/${this.props.user.id}`);
     this.setState({
       sets: res.data,
       ranking: userRank.data
     });
-    console.log(this.state.ranking)
+    console.log(this.state.ranking);
   };
   logout = () => {
     axios.post("/auth/logout");
@@ -77,60 +78,115 @@ class DashBoard extends Component {
   render() {
     let sets = this.state.sets.map((set, i) => {
       return (
-        <div className='user-created-sets' key={i}>
-          <p className='user-set-name'>{set.set_name}</p>
-          <p className='set-btns'>
-            <button className='edit-set-btn' onClick={() => this.editSet(set.set_id)}>
+        <div className="set-card" key={i}>
+          <h3>{set.set_name}</h3>
+          <div className="set-buttons">
+            <i className="fas fa-pen" onClick={() => this.editSet(set.set_id)} />
+            <i
+              className="far fa-times-circle"
+              onClick={() => this.deleteSet(set.set_id)}
+            />
+          </div>
+          {/* <p className="user-set-name">{set.set_name}</p>
+          <p className="set-btns">
+            <button
+              className="edit-set-btn"
+              onClick={() => this.editSet(set.set_id)}
+            >
               Edit
             </button>
-          <button className='delete-set-btn' onClick={() => this.deleteSet(set.set_id)}>Delete</button>
-          </p>
-          {/* {this.state.editSet && 
-                    <EditSet
-                        setName={this.state.setName}
-                        setID ={set.set_id}
-                     />} */}
+            <button
+              className="delete-set-btn"
+              onClick={() => this.deleteSet(set.set_id)}
+            >
+              Delete
+            </button>
+          </p> */}
         </div>
       );
     });
 
     return (
-      <div className="dashboard">
-        <div className='main'>
+      <div className="dashboard-page">
+        <Header />
+
+        <div className="dashboard">
+          <div className="left-container">
+
+            <div className="user-info">
+              <div className="profile-pic">
+                <img src="" alt="" />
+              </div>
+              <h1>{this.props.user.username}</h1>
+              <h2>Rank: {this.state.ranking}</h2>
+              <h4>Logout</h4>
+              <h4>Edit Account</h4>
+            </div>
+
+            <div className="game-buttons">
+            <Link className="link" to="/join"><button>Join Room</button></Link>
+              <Link className="link" to="/create"><button>Create Room</button></Link>
+            </div>
+            <div className="leaderboard">Leaderboard Component</div>
+          </div>
+          <div className="right-container">
+            <div className="my-sets">
+              <h1>My Sets</h1>
+              {sets}
+            </div>
+          </div>
+        </div>
+        {/* <div className="main">
           <div className="user-info">
             <div className="profile-pic">
               <img src="" alt="" />
             </div>
             <i className="fas fa-pen" onClick={this.toggleEdit} />
-            <h4 className='dash-username'>{this.props.user.username}</h4>
-            <div className='logout-delete-btns'>
-              <button className='logout-btn' onClick={this.logout}>Logout</button>
-              <button className='delete-btn' onClick={this.deleteAccount}>Delete User</button>
+            <h4 className="dash-username">{this.props.user.username}</h4>
+            <div className="logout-delete-btns">
+              <button className="logout-btn" onClick={this.logout}>
+                Logout
+              </button>
+              <button className="delete-btn" onClick={this.deleteAccount}>
+                Delete User
+              </button>
             </div>
           </div>
-          <div className='dash-rank-holder'>
-            <h1 className='dash-rank'>Rank</h1>
-            <p className='user-rank'>{this.state.ranking}</p>
+          
+          <div className="dash-rank-holder">
+            <h1 className="dash-rank">Rank</h1>
+            <p className="user-rank">{this.state.ranking}</p>
           </div>
+
           <div className="set-window">
-            <h2 className='dash-sets'>My Sets</h2>
-            <Link className='link' to="/newset">
-              <button className='create-set-btn'>Create Question Set</button>
-            </Link>{sets}
+            <h2 className="dash-sets">My Sets</h2>
+            <Link className="link" to="/newset">
+              <button className="create-set-btn">Create Question Set</button>
+            </Link>
+            {sets}
           </div>
         </div>
+
         <div className="game-options">
-          <h2 className='play-now'>Play Now!</h2>
-          <div className='join-create-btns'>
-            <Link className='link' to="/join">
-              <button className='dash-join-btn'>Join Game Room</button>
+          <h2 className="play-now">Play Now!</h2>
+          <div className="join-create-btns">
+            <Link className="link" to="/join">
+              <button className="dash-join-btn">Join Game Room</button>
             </Link>
-            <Link className='link' to="/create">
-              <button className='dash-create-btn'>Create New Game</button>
+            <Link className="link" to="/create">
+              <button className="dash-create-btn">Create New Game</button>
             </Link>
           </div>
         </div>
-        {this.state.edit && <EditUser toggleFn={this.toggleEdit} />}
+        <div
+          className={
+            this.state.edit
+              ? "modal-container show-modal"
+              : "modal-container hide-modal"
+          }
+        >
+          <EditUser toggleFn={this.toggleEdit} />
+        </div> */}
       </div>
     );
   }
@@ -138,6 +194,4 @@ class DashBoard extends Component {
 
 const mapStateToProps = store => store;
 
-export default connect(
-  mapStateToProps,
-)(DashBoard);
+export default connect(mapStateToProps)(DashBoard);

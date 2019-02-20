@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './EditSet.scss'
-
+import Header from '../Header/Header';
 
 export default class EditSet extends Component {
     constructor(props) {
@@ -89,7 +89,7 @@ export default class EditSet extends Component {
         })
         return (
             <div className='edit-set-page'>
-
+                <Header />
                 <div className='question-list'>
                     <><h2>User Set</h2>
                     <div>{userQuestions}</div></>
