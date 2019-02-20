@@ -37,7 +37,7 @@ $fontColor: rgb(24, 29, 66);
     align-items: center;
     position: relative;
     background: linear-gradient(145deg, #3d6cb9, #00d1ff);
-    height: 30rem;
+    min-height: 30rem;
     width: 22rem;
     border-radius: 1.1rem;
     i {
