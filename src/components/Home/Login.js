@@ -21,6 +21,12 @@ class Login extends Component {
     });
   };
 
+  handleKeyDown = evt => {
+    if (evt.keyCode === 13) {
+      this.login();
+    }
+  }
+
   login = async () => {
     const { email, password } = this.state;
     const res = await axios.post("/auth/login", { email, password });
@@ -38,11 +44,13 @@ class Login extends Component {
             <input
               placeholder="Email"
               onChange={e => this.handleInput("email", e)}
+              onKeyDown={e => this.handleKeyDown(e)}
               type="text"
             />
             <input
               placeholder="Password"
               onChange={e => this.handleInput("password", e)}
+              onKeyDown={e => this.handleKeyDown(e)}
               type="password"
             />
             </div>
