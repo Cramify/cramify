@@ -10,12 +10,15 @@ class CreateRoom extends Component {
     this.state = {
       roomName: "",
       sets: [],
-      roomID: null,
-      setID: {}
+      roomID: null
     };
   }
 
   componentDidMount = async () => {
+    // check if logged in, send unlogged in users to landing
+    const user = await axios.get('/auth/user')
+    if (!user.data) return this.props.history.push('/')
+
     // get a random room id
     const roomID =
       Math.floor(Math.random() + 10000) + Math.floor(Math.random() * 10000);

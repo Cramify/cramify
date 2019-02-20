@@ -30,7 +30,7 @@ class Register extends Component {
         }
         const res = await axios.post('/auth/register', {email, username, password})
         if (res.data.loggedIn) this.props.history.push('/dashboard')
-        if (!res.data.loggedIn) alert(res.data.message)
+        if (!res.data.loggedIn) return alert(res.data.message)
         this.props.updateUser(res.data.userData)
     }
 
@@ -44,52 +44,55 @@ class Register extends Component {
     if (evt.keyCode === 13) {
       this.register();
     }
+    if (evt.keyCode === 27) {
+      this.removeRegister();
+    }
   }
 
-  register = async () => {
-    const { email, username, password, checkPassword } = this.state;
-    if (password !== checkPassword) {
-      return alert("Check YoSelf");
-    }
-    const res = await axios.post("/auth/register", {
-      email,
-      username,
-      password
-    });
-    if (res.data.loggedIn) this.props.history.push("/dashboard");
-    if (!res.data.loggedIn) alert(res.data.message);
-    this.props.updateUser(res.data.userData);
-  };
+  removeRegister = () => {
+    this.setState({
+      email: "",
+      password: "",
+      checkPassword: "",
+      username: ""
+    })
+    this.props.regFn()
+  }
 
   render() {
     return (
       <div className="modal">
         <div className="content">
           <i
-            onClick={() => this.props.regFn()}
+            onClick={() => this.removeRegister()}
             className="fas fa-times fa-2x"
           />
           <h2>Register</h2>
           <div className="user-input">
             <input
+              value={this.state.email}
+              id='register-input'
               onKeyDown={e => this.handleKeyDown(e)}
               onChange={e => this.handleInput("email", e)}
               type="text"
               placeholder="email"
             />
             <input
+            value={this.state.username}
                 onKeyDown={e => this.handleKeyDown(e)}
               onChange={e => this.handleInput("username", e)}
               type="text"
               placeholder="username"
             />
             <input
+            value={this.state.password}
             onKeyDown={e => this.handleKeyDown(e)}
               onChange={e => this.handleInput("password", e)}
               type="password"
               placeholder="password"
             />
             <input
+            value={this.state.checkPassword}
             onKeyDown={e => this.handleKeyDown(e)}
               onChange={e => this.handleInput("checkPassword", e)}
               type="password"
