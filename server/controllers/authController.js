@@ -44,7 +44,7 @@ module.exports = {
       email: userData[0].email,
       username: userData[0].username,
       imgURL: userData[0].img_url,
-      score: userData[0].score
+      score: userData[0].score,
     };
     res.status(200).send({
       message: "Logged In",

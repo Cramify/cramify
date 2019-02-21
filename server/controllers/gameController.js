@@ -54,7 +54,6 @@ module.exports = {
     deleteOpenRoom: async (req,res)=>{
         const db = req.app.get('db');
         const {roomID} = req.params;
-        // const {id} = req.session.user;
         try{
             const deleteOpenRoom = await db.delete_open_room({game_code: roomID})
             res.status(200).send(deleteOpenRoom)
