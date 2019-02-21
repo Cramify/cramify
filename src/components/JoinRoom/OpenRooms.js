@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import './OpenRooms.scss'
 
 
 export default class OpenRooms extends Component {
@@ -27,15 +28,16 @@ export default class OpenRooms extends Component {
         const rooms = this.state.rooms.map(room => {
             console.log(room)
             return(
-                <div key={room.room_id}>
-                    <h1>{room.game_code}</h1>
-            <button onClick={()=>this.props.openRoomJoin(room.game_code)}>Join Current Game</button>
+                <div className='game' key={room.room_id}>
+                    <h1 className='gameCode'>{room.game_code}</h1>
+                    <button className='joinBtn' onClick={()=>this.props.openRoomJoin(room.game_code)}>Join Game</button>
                 </div>
             )
         })
         return(
-            <div>Open Rooms
-                    {rooms}
+            <div className='openRoom'>
+                <h1 className='openTitle'>Open Rooms</h1>
+                {rooms}
             </div>
         )
     }
