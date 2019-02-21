@@ -2,13 +2,13 @@
 
 .waiting-room {
   background: linear-gradient(45deg, #006bf6, #6cabfe);
-  padding: 100px;
+  padding: 100px 100px 50px 100px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
   font-family: $mainFont;
   color: $white;
   h1,
@@ -34,6 +34,11 @@
       font-size: .9em;
     }
   }
+  .beginButtonHolder {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+  }
   .player-list {
     margin-top: 3em;
     text-align: center;
@@ -44,6 +49,7 @@
     }
     h4 {
       font-size: 1.2em;
+      padding: 0rem 1rem 1rem 1rem;
     }
   }
   .answers {
@@ -75,4 +81,65 @@
 }
 .custom-alert {
   font-family: $mainFont;
+}
+
+@media(max-width: 1024px){
+  .waiting-room {
+    height: auto;
+
+    h2 {
+      font-size: 3rem;
+    }
+
+    h3 {
+      font-size: 2rem;
+    }
+
+    .waiting-room-heading {
+
+      h4 {
+        font-size: 1.2rem;
+      }
+    }
+
+    .player-list{
+
+      h3 {
+        font-size: 2rem;
+      }
+
+      h4 {
+        font-size: 1.7rem;
+      }
+    }
+
+  }
+}
+
+@media(max-width: 414px){
+  .waiting-room {
+    padding: 0px;
+
+    h2 {
+      margin-top: 3rem;
+      padding: 1rem;
+      font-size: 2rem;
+    }
+
+    h4 {
+      padding: 1rem;
+    }
+
+    .player-list {
+
+      h3 {
+        margin-bottom: 1rem;
+      }
+
+      h4 {
+        font-size: 1.5rem;
+        // padding-top: 0rem;
+      }
+    }
+  }
 }
