@@ -4,7 +4,7 @@ module.exports = {
   register: async (req, res) => {
     const db = req.app.get("db");
     const { email, username, img_url, password } = req.body;
-    // const img = `https://robohash.org/user/${username}`
+    const img = `https://robohash.org/user/${username}`
     //check if email, username exists
 
     const userEmail = await db.find_email({ email });
