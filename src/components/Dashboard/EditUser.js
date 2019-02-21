@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { updateUser } from "../../ducks/reducer";
 import "../../modal.scss";
 import Swal from "sweetalert2";
-
+import {withRouter} from 'react-router-dom';
 class EditUser extends Component {
   state = {
     username: "",
@@ -72,7 +72,32 @@ class EditUser extends Component {
     this.props.toggleFn();
   };
 
+  deleteUser = () => {
+    Swal.fire({
+      title: `Are you sure you'd like to delete your account?`,
+      type: 'question',
+      showConfirmButton: true,
+      showCancelButton: true,
+      cancelButtonText: 'Cancel'
+    })
+    .then(result => {
+      if (result.value) {
+        console.log('result has a value')
+        axios.delete(`/auth/user/delete`)
+        Swal.fire({
+          title: `You're account has successfully been deleted!`,
+          type: 'success',
+          timer: 1500,
+          showConfirmButton: false
+        })
+        this.props.history.push('/')
+        this.props.updateUser({user: {}})
+      }
+    })
+  }
+
   render() {
+    console.log(this.props)
     return (
       <div className="modal">
         <div className="content">
@@ -105,7 +130,7 @@ class EditUser extends Component {
             />
             <input
               onKeyDown={e => this.handleKeyDown(e)}
-              placeholder="Current Password"
+              placeholder='Current Password (required)'
               onChange={e => this.handleInput("oldPassword", e)}
               type="password"
             />
@@ -121,13 +146,16 @@ class EditUser extends Component {
               onChange={e => this.handleInput("passwordCheck", e)}
               type="password"
             />
-            <button
-              className="button"
-              style={{ marginTop: "1rem" }}
-              onClick={this.saveChanges}
-            >
-              Save
-            </button>
+            <div className='edit-options'>
+              <button className='delete' onClick={() => this.deleteUser(this.props.user.id)}>Delete</button>
+              <button
+                className="button"
+                style={{ marginTop: "1rem" }}
+                onClick={this.saveChanges}
+              >
+                Save
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -142,4 +170,4 @@ const mapStateToProps = store => {
 export default connect(
   mapStateToProps,
   { updateUser }
-)(EditUser);
+)(withRouter(EditUser));

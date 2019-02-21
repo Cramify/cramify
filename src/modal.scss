@@ -57,6 +57,7 @@ $fontColor: rgb(24, 29, 66);
       margin-top: 1.2em;
     }
     .button {
+      margin-top: 1rem;
       display: flex;
       font-size: 1rem;
       background: transparent;
@@ -113,6 +114,31 @@ $fontColor: rgb(24, 29, 66);
       outline: none;
       background-color: #6CABFE;
       border-radius: 5px;
+    }
+  }
+  .edit-options {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .delete {
+    margin-top: 1rem;
+    display: flex;
+    font-size: 1rem;
+    background: transparent;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    padding: .5em 1.6em;
+    border: none;
+    border-radius: .55em;
+    transition: .2s;
+    cursor: pointer;
+    &:hover {
+      opacity: 0.8;
+      color: #FFED17;
     }
   }
 }
