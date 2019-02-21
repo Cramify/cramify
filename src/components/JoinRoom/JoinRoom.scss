@@ -31,6 +31,7 @@
   }
   > h2 {
     font-size: 5em;
+    margin-bottom: 10px;
   }
   > input {
     font-size: 4em;
@@ -84,6 +85,152 @@
       color: $fontColor;
       cursor: pointer;
       transition: 0.3s;
+    }
+  }
+}
+
+@media(max-width: 1024px){
+  .join-room {
+    height: auto;
+
+    .back-button {
+      margin-top: 25px;
+    }
+
+    h2 {
+      font-size: 7rem;
+    }
+
+    .guest-name-input {
+      font-size: 3rem;
+    }
+
+    input {
+      font-size: 5rem;
+    }
+  }
+}
+
+@media(max-width: 768px){
+  .join-room {
+    height: auto;
+    
+    .back-button {
+      margin-top: 25px;
+    }
+
+    h2 {
+      font-size: 5.5rem;
+    }
+
+    input {
+      font-size: 4.3rem;
+    }
+
+    .guest-name-input {
+      font-size: 2.5rem;
+    }
+  }
+}
+@media(max-width: 414px){
+  .join-room{
+    height: auto;
+
+    .back-button {
+      margin-top: 25px;
+    }
+
+    h2 {
+      font-size: 3.3rem;
+    }
+  
+    input {
+      font-size: 2.4em;
+    }
+  
+    .guest-name-input {
+      font-size: 1.5em;
+    }
+  } 
+}
+
+@media(max-width: 411px){
+  .join-room {
+    height: auto;
+
+    h2 {
+      font-size: 3.5rem;
+    }
+
+    input {
+      font-size: 2.3rem;
+    }
+  }
+}
+
+@media(max-width: 375px){
+  .join-room {
+    height: auto;
+
+    .back-button {
+      margin-top: 25px;
+    }
+
+    > input {
+      font-size: 2.1em;
+    }
+
+    .guest-name-input {
+      font-size: 1.4em;
+    }
+  }
+}
+
+@media(max-width: 360px){
+  .join-room {
+    height: auto;
+
+    h2 {
+      font-size: 3rem;
+    }
+
+    input {
+      font-size: 2rem;
+    }
+
+    .guest-name-input {
+      font-size: 1.3rem;
+    }
+  }
+}
+
+@media(max-width: 320px){
+  .join-room {
+    height: auto;
+
+    .back-button {
+      margin-top: 25px;
+      height: 2rem;
+      width: 4rem;
+      font-size: 1rem;
+    }
+
+    h2 {
+      font-size: 2.5rem;
+    }
+    
+    .guest-name-input {
+      font-size: 1rem;
+    }
+
+    .join-button {
+      height: 2rem;
+      width: 4rem;
+      font-size: 1rem;
+    }
+
+    input {
+      font-size: 1.7rem;
     }
   }
 }
