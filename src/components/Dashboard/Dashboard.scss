@@ -59,7 +59,7 @@
   .game-buttons {
     display: flex;
     justify-content: center;
-    margin: 1rem 1rem 3.5rem 1rem;
+    margin: 1rem;
     a {
       text-decoration: none;
     }
@@ -91,7 +91,7 @@
   .my-sets {
     position: relative;
     padding: 1em;
-    height: 60%;
+    height: 75%;
     margin: 1em;
     width: 20em;
     background: $lightGray;

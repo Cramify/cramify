@@ -21,11 +21,9 @@ class JoinRoom extends Component {
 
   componentDidMount = async () => {
     const res = await axios.get('/game/rooms');
-    console.log(res.data)
     this.setState({
       openRooms: res.data
     })
-    console.log(this.state.openRooms)
 
     if (!this.props.user.id) {
       try {
