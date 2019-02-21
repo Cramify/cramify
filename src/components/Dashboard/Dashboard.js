@@ -28,6 +28,10 @@ class DashBoard extends Component {
   componentDidMount = async () => {
     // check if user is logged in, else move to landing
     const user = await axios.get('/auth/user')
+    console.log(user.data)
+    this.setState({
+      imgURL: user.data.imgURL
+    })
     if (!user.data) return this.props.history.push('/')
     
     // get a random room id
@@ -130,7 +134,7 @@ class DashBoard extends Component {
           <div className="left-container">
             <div className="user-info">
               <div className="profile-pic">
-                <img src="" alt="" />
+                <img className="user-img" src={this.state.imgURL} alt="" />
               </div>
               <h1>{this.props.user.username}</h1>
               <h2>Rank: {this.state.ranking}</h2>
