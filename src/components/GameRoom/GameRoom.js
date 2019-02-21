@@ -33,13 +33,6 @@ class GameRoom extends Component {
     this.socket.on("set myid on state", data => this.updateMyID(data));
     this.socket.on('next question', data => this.nextQuestion())
 
-    if (window.performance) {
-      if (performance.navigation.type == 1) {
-        if(this.props.creator){
-          axios.delete(`/game/room/delete/${this.props.roomID}`)
-        }
-      } 
-    }
   }
 
   componentDidMount = async () => {
