@@ -127,15 +127,14 @@ export default class EditSet extends Component {
                 Confirm
               </button>
             </div>
-            <div>{userQuestions}</div>
+            <div className="user-questions">{userQuestions}</div>
           </>
         </div>
-        <hr />
         <div className="question-list">
           {this.state.limitReached === false && (
             <>
               <h2>All Questions</h2>
-              <div>{allQuestions}</div>
+              <div className="all-questions">{allQuestions}</div>
             </>
           )}
         </div>
