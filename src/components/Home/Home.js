@@ -16,7 +16,8 @@ class Home extends Component {
     this.state = {
       register: false,
       login: false,
-      leaderboard: []
+      leaderboard: [],
+      hamburger: false
     };
   }
 
@@ -32,6 +33,7 @@ class Home extends Component {
   };
 
   registerToggle = () => {
+    if (this.state.hamburger) this.hamburgerToggle()
     this.setState({
       register: !this.state.register
     });
@@ -39,10 +41,15 @@ class Home extends Component {
   };
 
   loginToggle = () => {
+    if (this.state.hamburger) this.hamburgerToggle()
     this.setState({
       login: !this.state.login
     });
     document.getElementById("login-input").focus();
+  };
+
+  hamburgerToggle = () => {
+    this.setState({ hamburger: !this.state.hamburger });
   };
 
   logout = () => {
@@ -52,8 +59,6 @@ class Home extends Component {
 
   render() {
     const { register, login } = this.state;
-    // const props = useSpring({ opacity: 1, from: { opacity: 0 } })
-
     return (
       <div className="home">
         <div className="triangle-container">
@@ -61,20 +66,36 @@ class Home extends Component {
         </div>
         <div className="header">
           <Link to="/">
-            <h1>Cramify</h1>
+            <h1 className="logo">Cramify</h1>
           </Link>
-          <div>
+          <div onClick={this.hamburgerToggle} className="hamburger">
+            <i className="fas fa-bars fa-2x" />
+          </div>
+          <div
+            className={
+              this.state.hamburger ? "show button-group" : "button-group"
+            }
+          >
             {this.props.user.id ? (
               <>
-                <div onClick={() => this.props.history.push("/dashboard")}>
+                <div
+                  className="button"
+                  onClick={() => this.props.history.push("/dashboard")}
+                >
                   Dashboard
                 </div>
-                <div onClick={() => this.logout()}>Logout</div>
+                <div className="button" onClick={() => this.logout()}>
+                  Logout
+                </div>
               </>
             ) : (
               <>
-                <div onClick={() => this.registerToggle()}>Register</div>
-                <div onClick={() => this.loginToggle()}>Login</div>
+                <div className="button" onClick={() => this.registerToggle()}>
+                  Register
+                </div>
+                <div className="button" onClick={() => this.loginToggle()}>
+                  Login
+                </div>
               </>
             )}
           </div>

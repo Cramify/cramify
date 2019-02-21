@@ -31,15 +31,7 @@ class GameRoom extends Component {
     this.socket.on("run begin function", data => this.startGame());
     this.socket.on("display points", data => this.displayPoints(data));
     this.socket.on("set myid on state", data => this.updateMyID(data));
-    this.socket.on('next question', data => this.nextQuestion())
-
-    if (window.performance) {
-      if (performance.navigation.type == 1) {
-        if(this.props.creator){
-          axios.delete(`/game/room/delete/${this.props.roomID}`)
-        }
-      } 
-    }
+    this.socket.on('next question', data => this.nextQuestion());
   }
 
   componentDidMount = async () => {
@@ -68,6 +60,7 @@ class GameRoom extends Component {
         }
       }
     }
+
     // Get user info, if none exists set as guest
     if (this.props.user.username) {
       await this.setState({
@@ -100,10 +93,13 @@ class GameRoom extends Component {
         setID: this.state.setID
       });
     }
+
   };
 
   componentWillUnmount = async () => {
+  
     if (this.props.creator) {
+      axios.delete(`/game/room/delete/${this.props.roomID}`)
       this.props.destroyCreator();
       await this.socket.emit("host has left", { room: this.state.roomID });
     }
