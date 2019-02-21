@@ -4,7 +4,7 @@ import { updateRoomID, updateUser, nameGuest } from "../../ducks/reducer";
 import axios from 'axios';
 import './JoinRoom.scss';
 import OpenRooms from './OpenRooms';
-import Swal from 'sweetalert2';
+
 
 class JoinRoom extends Component {
   constructor(props) {
