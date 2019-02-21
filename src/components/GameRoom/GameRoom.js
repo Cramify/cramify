@@ -218,6 +218,11 @@ class GameRoom extends Component {
               {this.props.creator ? <h2>Waiting for More Players</h2> : <h2>Waiting for Game to Start</h2>}
               <h3>Room ID: {this.props.roomID}</h3>
               <h4>Share this number so others can join the game!</h4>
+              <div className='beginButtonHolder'>
+                {this.props.creator && (
+                  <button onClick={this.startGame}>Begin!</button>
+                )}
+              </div>
               <div className="player-list">
                 <h3>Players</h3>
                 {users.map((user, i) => (
@@ -225,9 +230,6 @@ class GameRoom extends Component {
                 ))}
               </div>
             </div>
-            {this.props.creator && (
-              <button onClick={this.startGame}>Begin!</button>
-            )}
           </div>
         )}
 
