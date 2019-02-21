@@ -25,7 +25,6 @@ export default class OpenRooms extends Component {
     
     render(){
         const rooms = this.state.rooms.map(room => {
-            console.log(room)
             return(
                 <div key={room.room_id}>
                     <h1>{room.game_code}</h1>

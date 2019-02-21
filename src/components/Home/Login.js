@@ -43,7 +43,6 @@ class Login extends Component {
     const { email, password } = this.state;
     try {
       const res = await axios.post("/auth/login", { email, password });
-      console.log(res.data)
       if (!res.data.loggedIn) return alert(res.data.message)
       this.props.history.push("/dashboard");
       this.props.updateUser(res.data.userData);
