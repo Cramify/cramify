@@ -50,6 +50,7 @@ let playerID = 1;// used in sockets for guest ID
 // Socket.io Listeners
 io.on("connection", socket => {
   console.log("connected to socket");
+  let gameInterval = null;
 
   //Join Room
   socket.on("join room", data => {
@@ -94,7 +95,15 @@ io.on("connection", socket => {
   // begin the game
   socket.on('game start', data => {
     socket.to(data.room).broadcast.emit('run begin function', data)
+    gameInterval = setInterval(() => {
+      io.to(data.room).emit('next question', data)
+    }, 20000)
+
     // console.log('game start')
+  })
+
+  socket.on('end timer', data => {
+    clearInterval(gameInterval)
   })
 
   // host has left, kick everyone out

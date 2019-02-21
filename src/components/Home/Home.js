@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Register from "./Register";
 import Login from "./Login";
-import Leaderboard from '../Leaderboard/Leaderboard'
+import Leaderboard from "../Leaderboard/Leaderboard";
 import "./Home.scss";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -35,19 +35,19 @@ class Home extends Component {
     this.setState({
       register: !this.state.register
     });
-    document.getElementById('register-input').focus();
+    document.getElementById("register-input").focus();
   };
 
   loginToggle = () => {
     this.setState({
       login: !this.state.login
     });
-    document.getElementById('login-input').focus();
+    document.getElementById("login-input").focus();
   };
 
   logout = () => {
     axios.post("/auth/logout");
-    this.props.updateUser({})
+    this.props.updateUser({});
   };
 
   render() {
@@ -66,17 +66,17 @@ class Home extends Component {
           <div>
             {this.props.user.id ? (
               <>
-                <div onClick={() => this.logout()}>Logout</div>
                 <div onClick={() => this.props.history.push("/dashboard")}>
                   Dashboard
                 </div>
+                <div onClick={() => this.logout()}>Logout</div>
               </>
             ) : (
               <>
                 <div onClick={() => this.registerToggle()}>Register</div>
                 <div onClick={() => this.loginToggle()}>Login</div>
               </>
-            )} 
+            )}
           </div>
         </div>
         <div className="hero">
@@ -111,7 +111,7 @@ class Home extends Component {
             <Login logFn={this.loginToggle} regFn={this.registerToggle} />
           </div>
         </div>
-        <Leaderboard/>
+        <Leaderboard />
       </div>
     );
   }
