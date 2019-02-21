@@ -34,7 +34,6 @@ class GameRoom extends Component {
   }
 
   componentDidMount = async () => {
-    const res = await axios.get('/game/rooms');  
     if (this.props.guestName) this.setState({currentUser: this.props.guestName})
     if (this.props.roomID === null) {
       Swal.fire({
