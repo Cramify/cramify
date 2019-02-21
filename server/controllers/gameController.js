@@ -33,7 +33,6 @@ module.exports = {
             const currentUserRanking = usersArrByRank[currentUserIndex].rnum;
             res.status(200).send(currentUserRanking)
         } catch(e){console.log(e)}
-
     },
     getAllRooms: async (req, res) => {
         const db = req.app.get('db')
