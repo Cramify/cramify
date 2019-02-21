@@ -4,7 +4,9 @@ module.exports = {
   register: async (req, res) => {
     const db = req.app.get("db");
     const { email, username, img_url, password } = req.body;
+    // const img = `https://robohash.org/user/${username}`
     //check if email, username exists
+
     const userEmail = await db.find_email({ email });
     if (userEmail[0]) {
       return res.status(200).send({message: "Email already in use"});
@@ -15,7 +17,7 @@ module.exports = {
     }
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(password, salt);
-    const newUser = await db.create_user({ email, username, img_url, hash });
+    const newUser = await db.create_user({ email, username, img_url: img, hash });
     req.session.user = {
       id: newUser[0].user_id,
       email: newUser[0].email,

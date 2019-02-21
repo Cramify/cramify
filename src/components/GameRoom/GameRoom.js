@@ -110,7 +110,9 @@ class GameRoom extends Component {
       users: this.state.users,
       setID: this.state.setID
     });
-    await axios.delete(`/game/room/delete/${this.props.roomID}`)
+    if(this.props.creator){
+      await axios.delete(`/game/room/delete/${this.props.roomID}`)
+    }
 
   };
 
