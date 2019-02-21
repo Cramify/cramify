@@ -31,10 +31,10 @@ class GameRoom extends Component {
     this.socket.on("run begin function", data => this.startGame());
     this.socket.on("display points", data => this.displayPoints(data));
     this.socket.on("set myid on state", data => this.updateMyID(data));
+    this.socket.on('next question', data => this.nextQuestion())
   }
 
   componentDidMount = async () => {
-    const res = await axios.get('/game/rooms');  
     if (this.props.guestName) this.setState({currentUser: this.props.guestName})
     if (this.props.roomID === null) {
       Swal.fire({
@@ -159,11 +159,12 @@ class GameRoom extends Component {
   };
 
   nextQuestion = () => {
+    if (this.state.currentQuestion + 2 > this.state.set.length) return this.socket.emit('end timer')
     this.setState({
       currentQuestion: this.state.currentQuestion + 1,
       questionDisplay: !this.state.questionDisplay
     });
-    console.log(this.state.set.length)
+    // console.log(this.state.set.length)
     if (this.state.currentQuestion + 2 > this.state.set.length) {
       //get rid of the timer
       return this.setState({ showTimer: false, questionDisplay: true });
