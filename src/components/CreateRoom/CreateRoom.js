@@ -47,8 +47,8 @@ class CreateRoom extends Component {
     let sets = this.state.sets.map((set, i) => {
       return (
         <div className='set' key={i}>
-          {set.set_name} {/* Seperate sets by admin/user*/}
-        <div className='create-button' onClick={() => this.createRoom(set.set_id)}>Create Room</div>
+          <div className='set-name'>{set.set_name}</div> {/* Seperate sets by admin/user*/}
+          <div className='create-button' onClick={() => this.createRoom(set.set_id)}>Create Room</div>
         </div>
       )
     })
