@@ -2,12 +2,12 @@
 
 .dashboard-page {
   font-family: $mainFont;
-  height: 100vh;
+  min-height: 100vh;
   .dashboard {
     display: flex;
     justify-content: center;
-    height: 100%;
-    .user-img{
+    min-height: 100%;
+    .user-img {
       width: inherit;
     }
   }
@@ -93,8 +93,8 @@
   width: 20em;
   .my-sets {
     position: relative;
-    padding: 1em;
-    height: 75%;
+    padding: 1em 1em 5em 1em;
+    min-height: 75%;
     margin: 1em;
     width: 20em;
     background: $lightGray;
@@ -112,7 +112,7 @@
         transform: translate(-50%, -50%);
         border: solid 1px #0d89f3;
         border-radius: 0.5em;
-        padding: 0.5em .6em;
+        padding: 0.5em 0.6em;
         font-size: 1rem;
         width: auto;
         transition: 0.4s;
@@ -155,7 +155,7 @@
   }
 }
 
-@media(max-width: 915px) {
+@media (max-width: 915px) {
   .left-container > .user-info > .profile-pic {
     position: absolute;
     left: 50%;
@@ -166,5 +166,48 @@
   }
   .dashboard-page > .dashboard {
     margin-top: 4rem;
+  }
+}
+
+@media (max-width: 630px) {
+  html {
+    padding: 0;
+    margin: 0;
+  }
+  .dashboard-page {
+    .dashboard {
+      margin-top: 2rem;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      .user-info {
+        min-width: auto;
+      }
+      .left-container,
+      .right-container {
+        padding: 0;
+        margin: 0;
+        display: flex;
+        width: 100%;
+        max-width: 90vw;
+      }
+      .left-container {
+        .leaderboard-container {
+          display: none;
+        }
+      }
+      .right-container {
+        height: auto;
+        .my-sets {
+          width: 100%;
+          min-height: 10rem;
+          height: 100%;
+          a .create-set-btn {
+            width: 90%;
+            text-align: center;
+          }
+        }
+      }
+    }
   }
 }
