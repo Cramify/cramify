@@ -138,6 +138,7 @@ class DashBoard extends Component {
               </div>
               <h1>{this.props.user.username}</h1>
               <h2>Rank: {this.state.ranking}</h2>
+              <h2>Score: {this.props.user.score}</h2>
               <h4 onClick={this.logout}>Logout</h4>
               <h4 onClick={this.toggleEdit}>Edit Account</h4>
             </div>

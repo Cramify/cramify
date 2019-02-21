@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "./CreateSet.scss";
+import Header from '../Header/Header'
 import Swal from "sweetalert2";
 
 export default class CreateSet extends Component {
@@ -137,6 +138,8 @@ export default class CreateSet extends Component {
       );
     });
     return (
+        <>
+        <Header/>
       <div className="create-set-page">
         <div className="question-list">
           {this.state.limitReached === false && (
@@ -182,6 +185,7 @@ export default class CreateSet extends Component {
           <h1>{set}</h1>
         </div>
       </div>
+      </>
     );
   }
 }

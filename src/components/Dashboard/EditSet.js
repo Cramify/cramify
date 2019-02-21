@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "./EditSet.scss";
+import Header from '../Header/Header'
 import Swal from "sweetalert2";
 
 export default class EditSet extends Component {
@@ -115,6 +116,8 @@ export default class EditSet extends Component {
       );
     });
     return (
+        <>
+      <Header />
       <div className="edit-set-page">
         <div className="question-list">
           <>
@@ -137,6 +140,7 @@ export default class EditSet extends Component {
           )}
         </div>
       </div>
+      </>
     );
   }
 }
