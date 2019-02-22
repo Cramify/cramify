@@ -106,7 +106,7 @@
     }
 
     input {
-      font-size: 5rem;
+      font-size: 4rem;
     }
   }
 }
@@ -129,6 +129,15 @@
 
     .guest-name-input {
       font-size: 2rem;
+    }
+  }
+}
+
+@media(max-width: 715px){
+  .join-room{
+
+    input {
+      font-size: 3rem;
     }
   }
 }
