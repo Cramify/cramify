@@ -38,8 +38,6 @@ export default class Question extends Component{
             correctAnswer: this.props.questionData.correct_answer,
             startTime: Date.now()
         })
-
-
     }
 
     answerQuestion = (num) => {
@@ -51,11 +49,10 @@ export default class Question extends Component{
             startTime: null
         })
         if(this.state.answerArray[num-1] === this.state.correctAnswer){
-            this.props.updatePts(this.props.playerID, scoreToAdd)
+            this.props.updatePts(this.props.playerID, scoreToAdd, 'correct')
         } else {
-            this.props.updatePts(this.props.playerID, 0)
+            this.props.updatePts(this.props.playerID, 0, 'incorrect')
         }
-        
     }
 
     render(){

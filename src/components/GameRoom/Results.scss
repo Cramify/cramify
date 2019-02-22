@@ -162,6 +162,15 @@ $duration: 1000;
   }
 }
 
+.correct-answer{
+  background: linear-gradient(45deg, #3d6cb9, #00d1ff);
+}
+.incorrect-answer{
+  // display: none;
+  background: rgb(184, 0, 55);
+  background: linear-gradient(45deg, #b93d3d, #ff0000)
+}
+
 @media(max-width: 360px){
   
 }
