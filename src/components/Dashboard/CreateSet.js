@@ -13,7 +13,8 @@ export default class CreateSet extends Component {
       questions: [],
       setID: {},
       limitReached: false,
-      category: ""
+      category: "",
+      setToggle: false
     };
   }
 
@@ -103,6 +104,11 @@ export default class CreateSet extends Component {
     this.setState({
       questions: [...this.state.questions, backToQuestions[0][0]]
     });
+    if (this.state.set.length < 20) {
+      this.setState({
+        limitReached: false
+      })
+    }
   };
 
   handleChange = async event => {
@@ -110,7 +116,14 @@ export default class CreateSet extends Component {
     await this.sortByCategory();
   };
 
+  handlePageToggle = () => {
+    this.setState({
+      setToggle: !this.state.setToggle
+    })
+  }
+
   render() {
+    console.log(this.state.setToggle)
     let questions = this.state.questions.map((question, i) => {
       return (
         <div
@@ -141,7 +154,9 @@ export default class CreateSet extends Component {
         <>
         <Header/>
       <div className="create-set-page">
-        <div className="question-list">
+      
+        <div className={!this.state.setToggle ? "question-list" : "question-list hidden"} id='questions-to-add'>
+          <button onClick={() => this.handlePageToggle()} className='toggle-button'>To Set</button>
           {this.state.limitReached === false && (
             <div>
               <div
@@ -156,12 +171,13 @@ export default class CreateSet extends Component {
                   onChange={e => this.handleChange(e)}
                   value={this.state.category}
                 >
+                  <option value="">Select A Category</option>
                   <option value="Javascript">Javascript</option>
                   <option value="HTML">HTML</option>
                   <option value="CSS">CSS</option>
                   <option value="Computer Science">Computer Science</option>
+                {/* <div className="select_arrow" /> */}
                 </select>
-                <div className="select_arrow" />
               </div>
               {<h1>{questions}</h1>}
               {/* Use a ternary to conditionally show based on category */}
@@ -169,10 +185,17 @@ export default class CreateSet extends Component {
           )}
         </div>
 
-        <div className="question-list">
+        <div className={this.state.setToggle ? "question-list" : "question-list hidden"} id='your-questions'>
+          <button onClick={() => this.handlePageToggle()} className='toggle-button'>To Questions</button>
           <h2 className="title">Your Questions:</h2>{" "}
           {/*Change 'your questions' to the actual name of set created in Dashboard */}
           <div className="user-input">
+            {this.state.setToggle ? <div
+              onClick={() => this.props.history.push("/dashboard")}
+              className="back-button"
+            > 
+              Back
+            </div> : null}
             <input
               onKeyDown={e => this.handleKeyDown(e)}
               onChange={e => this.handleInput("setName", e)}
