@@ -28,7 +28,6 @@ class DashBoard extends Component {
   componentDidMount = async () => {
     // check if user is logged in, else move to landing
     const user = await axios.get('/auth/user')
-    console.log(user.data)
     this.setState({
       imgURL: user.data.imgURL
     })

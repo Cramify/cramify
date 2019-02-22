@@ -1,7 +1,7 @@
 @import '../../sassVars.scss';
 
 .join-room {
-  height: 100vh;
+  min-height: 100vh;
   font-family: $mainFont;
   display: flex;
   flex-direction: column;
@@ -132,6 +132,16 @@
     }
   }
 }
+
+@media(min-width: 415px){
+  .join-room {
+
+    input {
+      font-size: 3rem;
+    }
+  }
+}
+
 @media(max-width: 414px){
   .join-room{
     height: auto;
