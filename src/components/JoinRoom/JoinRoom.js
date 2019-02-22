@@ -48,21 +48,6 @@ class JoinRoom extends Component {
   } 
 
   openRoomJoin = async (gameCode) => {
-    // const res = await axios.get('/game/rooms');
-    // eslint-disable-next-line
-      // this.state.openRooms.map((room, i)=>{
-      //   if(!room.game_code){
-      //     return Swal.fire({
-      //       title: 'This Game Must Have Started!',
-      //       text: `Don't worry, we'll send you back where you came from.`,
-      //       timer: 2500,
-      //       showConfirmButton: false,
-      //       type: 'error',
-      //       customClass: 'custom-alert'
-      //     })
-      //   }
-      // })
-        
       await this.setState({
         roomID: gameCode
       })
