@@ -18,6 +18,7 @@ const ac = require("./controllers/authController");
 const gc = require("./controllers/gameController")
 
 //Middleware
+app.use(express.static(`${__dirname}/../build`));
 app.use(express.json());
 app.use(
   session({
