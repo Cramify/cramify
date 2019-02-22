@@ -27,7 +27,7 @@ class GameRoom extends Component {
       questionGrade: null,
       pointsWon: 0
     };
-    this.socket = io.connect({ secure: true });
+    this.socket = io.connect(':4000');
     this.socket.on("display name response", data => this.displayName(data));
     this.socket.on("update users array", data => this.updateUsersArr(data));
     this.socket.on("run begin function", data => this.startGame());
@@ -98,12 +98,12 @@ class GameRoom extends Component {
 
   };
 
-  componentWillUnmount = async () => {
+  componentWillUnmount = () => {
   
     if (this.props.creator) {
       axios.delete(`/game/room/delete/${this.props.roomID}`)
       this.props.destroyCreator();
-      await this.socket.emit("host has left", { room: this.state.roomID });
+    //  this.socket.emit("host has left", { room: this.state.roomID });
     }
     // eslint-disable-next-line
     this.state.users.map((user, i) => {
@@ -117,7 +117,7 @@ class GameRoom extends Component {
       setID: this.state.setID
     });
     if(this.props.creator){
-      await axios.delete(`/game/room/delete/${this.props.roomID}`)
+      axios.delete(`/game/room/delete/${this.props.roomID}`)
     }
 
   };
@@ -230,8 +230,8 @@ class GameRoom extends Component {
               </div>
               <div className="player-list">
                 <h3>Players</h3>
-                {users.map((user, i) => (
-                  <h4 key={i}>{user.username}</h4>
+                {users.map((user, i) => ( 
+                  <h4 key={`user: ${i}`}>{user.username}</h4>
                 ))}
               </div>
             </div>

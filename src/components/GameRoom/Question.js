@@ -57,10 +57,10 @@ export default class Question extends Component{
 
     render(){
         const answers = this.state.answerArray.map((answer, i) => (
-            <button onClick={() => this.answerQuestion(i+1)}>{this.state.answerArray[i]}</button>
+            <button key={`answer ${i}`} onClick={() => this.answerQuestion(i+1)}>{this.state.answerArray[i]}</button>
         ))
         const disabledAnswers = this.state.answerArray.map((answer, i) => (
-            <button disabled>{this.state.answerArray[i]}</button>
+            <button key={`disabled ${i}`} disabled>{this.state.answerArray[i]}</button>
         ))
         return(
             <div className='question'>
