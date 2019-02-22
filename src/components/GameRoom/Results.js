@@ -54,19 +54,20 @@ class Results extends Component {
             {this.props.questionData.correct_answer}
           </h2>
         </div>
-
-        <h1 className="results-score">Scores</h1>
-        <div className="ranking">
-          <h2>
-            {this.props.usersArr.sort((a,b) => b.points - a.points).map(user => {
-              return (
-                <div className="player-scores" key={user.playerID}>
-                  <p className="results-player-info">{user.username}</p>
-                  <p className="results-player-info">{user.points}</p>
-                </div>
-              );
-            })}
-          </h2>
+        <div className='score-holder'>
+          <h1 className="results-score">Scores</h1>
+          {/* <div className="ranking"> */}
+            {/* <h2> */}
+              {this.props.usersArr.sort((a,b) => b.points - a.points).map(user => {
+                return (
+                  <div className="player-scores" key={user.playerID}>
+                    <p className="results-player-info">{user.username}</p>
+                    <p className="results-player-info">{user.points}</p>
+                  </div>
+                );
+              })}
+          {/* </div> */}
+          {/* </h2> */}
           <br />
         </div>
       {!this.props.timerDisplay && (
