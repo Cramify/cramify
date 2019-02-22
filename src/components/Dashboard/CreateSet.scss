@@ -59,7 +59,7 @@
       border: 1px #0d89f3 solid;
       height: 2.5em;
       width: 6em;
-      
+      color: $fontColor;
     }
     .question-to-display {
       display: flex;
@@ -128,7 +128,7 @@
   outline: 0;
   border: 1px outset #0d89f3;
   border-radius: 36px;
-  background: #e6e6e6;
+  background: transparent;
   color: #4b4c53;
   appearance: none;
   transition: .2s;
@@ -237,20 +237,20 @@
       padding: 0;
       width: 5.4em;
       top: 5.65em;
-      height: 2.2em;
+      height: 2.45em;
       font-size: 0.7rem;
     }
     .back-button {
       font-size: 0.75rem;
       top: 2.25em;
-      height: 1.85em;
+      height: 2.3em;
       width: 4em;
     }
     div {
       select {
       padding: 3px;
       min-width: 120px;
-      height: 1.85em;
+      height: 2.3em;
       }
       // .select_arrow {
       //   right: 34px;
