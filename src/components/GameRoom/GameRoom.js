@@ -24,6 +24,8 @@ class GameRoom extends Component {
       myID: null,
       currentQuestion: 0,
       showTimer: true,
+      questionGrade: null,
+      pointsWon: 0
     };
     this.socket = io.connect(":4000");
     this.socket.on("display name response", data => this.displayName(data));
@@ -185,7 +187,10 @@ class GameRoom extends Component {
     });
   };
 
-  updatePoints = (playerID, pts) => {
+  updatePoints = (playerID, pts, answer) => {
+    if (answer==='correct') this.setState({questionGrade: 'correct'})
+    if (answer==='incorrect') this.setState({questionGrade: 'incorrect'})
+    this.setState({pointsWon: pts})
     const index = this.state.users.findIndex((user, i) => {
       return user.playerID === playerID;
     });
@@ -251,6 +256,8 @@ class GameRoom extends Component {
             timerDisplay={showTimer}
             usersArr={this.state.users}
             myID={this.state.myID}
+            questionGrade={this.state.questionGrade}
+            pointsWon={this.state.pointsWon}
           />
         ) : null}
       </div>

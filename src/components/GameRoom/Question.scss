@@ -9,10 +9,11 @@ $secondaryColors: rgb(236, 100, 85), rgb(255, 251, 167), rgb(115, 245, 143),
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
   font-family: $mainFont;
   color: white;
   text-align: center;
+  padding: 1rem;
   h1,
   h2 {
     font-size: 2em;
@@ -38,6 +39,9 @@ $secondaryColors: rgb(236, 100, 85), rgb(255, 251, 167), rgb(115, 245, 143),
     font-size: 1.5rem;
     cursor: pointer;
     transition: 0.5s;
+    &:hover {
+      opacity: .9;
+    }
     @for $i from 1 through 4 {
       &:nth-of-type(4n + #{$i}) {
         background: nth($primaryColors, $i);

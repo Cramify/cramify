@@ -4,7 +4,7 @@ $secondaryFont: 'Merriweather', serif;
 $fontColor: rgb(24, 29, 66);
 
 .modal-container {
-  z-index: 2;
+  z-index: 6;
   color: white;
   position: absolute;
   top: 0;
@@ -153,7 +153,8 @@ $fontColor: rgb(24, 29, 66);
       min-width: 100vw;
       margin: 0;
       i {
-        right: 1.4rem;
+        top: 1rem;
+        right: 1.5rem;
       }
     }
   }
