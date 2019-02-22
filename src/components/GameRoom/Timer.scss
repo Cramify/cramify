@@ -1,0 +1,16 @@
+.react-countdown-clock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media(max-width: 500px) {
+  .react-countdown-clock {
+    height: 70px;
+    width: 70px;
+    canvas {
+    height: 70px !important;
+    width: 70px !important;
+  }
+}
+}

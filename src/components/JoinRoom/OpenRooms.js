@@ -20,7 +20,6 @@ export default class OpenRooms extends Component {
         this.setState({
             rooms: res.data
         })
-        console.log(this.state.rooms)
     }
     
     
