@@ -75,10 +75,12 @@ $duration: 1000;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  height: 100vh;
+  height: auto;
+  min-height: 100vh;
   width: 100vw;
   font-family: $mainFont;
   color: aliceblue;
+  text-align: center;
 }
 
 .question-info {
@@ -87,19 +89,22 @@ $duration: 1000;
 }
 
 .results-question-display {
-  // margin-top: 2rem;
   font-size: 3rem;
   color: aliceblue;
-  display: flex;
-  justify-content: center;
+  // display: flex;
+  // justify-content: center;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
 .results-answer-display {
   font-size: 1.7em;
   color: #FFED17;
-  display: flex;
-  justify-content: center;
+  display: inline-block;
   margin-top: 1.7rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-bottom: 2rem;
 };
 
 .timer {
@@ -114,10 +119,19 @@ $duration: 1000;
   overflow: auto;
 }
 
+.score-holder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+}
+
 .results-score {
   color: aliceblue;
   font-size: 3rem;
-  margin-top: 5rem;
+  height: auto;
+  margin-bottom: 4rem;
 }
 
 .player-scores {
@@ -145,6 +159,7 @@ $duration: 1000;
   color: $fontColor;
   justify-content: center;
   align-items: center;
+  margin-bottom: 1.5rem;
   padding: .5em 1.6em;
   border: none;
   border-radius: .55em;
@@ -162,6 +177,55 @@ $duration: 1000;
   }
 }
 
-@media(max-width: 360px){
-  
+@media(max-width: 1024px){
+  .player-scores {
+    width: 50vw;
+  }
+}
+
+@media(max-width: 320px){
+  .question-info {
+    margin-top: 2rem;
+  }
+
+  .results-question-display {
+    font-size: 1.7rem;
+  }
+
+  .results-answer-display {
+    font-size: 1.3rem;
+  }
+
+  .results-score {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .player-scores {
+    width: 80vw;
+  }
+}
+
+
+@media(max-width: 414px){
+  .question-info {
+    margin-top: 2rem;
+  }
+
+  .results-question-display {
+    font-size: 1.7rem;
+  }
+
+  .results-answer-display {
+    font-size: 1.3rem;
+  }
+
+  .results-score {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .player-scores {
+    width: 70vw;
+  }
 }
