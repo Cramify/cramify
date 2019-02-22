@@ -38,13 +38,6 @@ class Results extends Component {
   render() {
     return (
       <div className="results">
-        {/* {this.props.timerDisplay ? (
-          <div className='timer'>
-          <Timer timerFn={this.props.nextQFn} time={5} size={100}/>
-          </div>
-        ) : (
-          <p />
-        )} */}
         <div className="question-info">
           <h1 className="results-question-display">
             {this.props.questionData.question}
@@ -71,7 +64,6 @@ class Results extends Component {
           <br />
         </div>
       {!this.props.timerDisplay && (
-        // TODO: Add points to db on this button click
         <div>
           <Confetti />
           {this.props.user.id ? (
