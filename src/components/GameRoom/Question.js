@@ -38,8 +38,6 @@ export default class Question extends Component{
             correctAnswer: this.props.questionData.correct_answer,
             startTime: Date.now()
         })
-
-
     }
 
     answerQuestion = (num) => {
@@ -51,11 +49,10 @@ export default class Question extends Component{
             startTime: null
         })
         if(this.state.answerArray[num-1] === this.state.correctAnswer){
-            this.props.updatePts(this.props.playerID, scoreToAdd)
+            this.props.updatePts(this.props.playerID, scoreToAdd, 'correct')
         } else {
-            this.props.updatePts(this.props.playerID, 0)
+            this.props.updatePts(this.props.playerID, 0, 'incorrect')
         }
-        
     }
 
     render(){
@@ -70,7 +67,7 @@ export default class Question extends Component{
                 <h1>Question:</h1>
                 <h2>{this.props.questionData.question}</h2>
                 {/* Timer Display */}
-                <Timer timerFn={this.props.toResFn} time={1} size={100}/>
+                <Timer timerFn={this.props.toResFn} time={15} size={100}/>
                 {/* Display Answers. If user has answered, disable buttons */}
                 {!this.state.didAnswer ? (
                     <div className='answers'>

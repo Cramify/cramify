@@ -32,12 +32,21 @@ class Results extends Component {
           points: Number(this.props.usersArr[index].points)
         });
       }
+    } else {
+      Swal.fire({
+        title: this.props.questionGrade === 'correct' ? `Won ${this.props.pointsWon} points!` : `Aw, man!`,
+        text: this.props.questionGrade === 'correct' ? `Nice!` : `You'll get the next one!`,
+        type: this.props.questionGrade === 'correct' ? `success` : `error`,
+        showCancelButton: false,
+        showConfirmButton: false,
+        timer: 1400
+      });
     }
   }
 
   render() {
     return (
-      <div className="results">
+      <div className={this.props.questionGrade === 'correct' ? "results correct-answer" : "results incorrect-answer"}>
         <div className="question-info">
           <h1 className="results-question-display">
             {this.props.questionData.question}
