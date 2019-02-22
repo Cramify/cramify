@@ -55,6 +55,7 @@ class Home extends Component {
   logout = () => {
     axios.post("/auth/logout");
     this.props.updateUser({});
+    if (this.state.hamburger) this.hamburgerToggle()    
   };
 
   render() {

@@ -1,9 +1,10 @@
-@import '../../sassVars.scss';
-$primaryColors: #FF1800, #FFF100, #00FF38, #8B13FF;
-$secondaryColors: rgb(236, 100, 85), rgb(255, 251, 167), rgb(115, 245, 143), rgb(185, 110, 255);
+@import "../../sassVars.scss";
+$primaryColors: #ff1800, #fff100, #00ff38, #8b13ff;
+$secondaryColors: rgb(236, 100, 85), rgb(255, 251, 167), rgb(115, 245, 143),
+  rgb(185, 110, 255);
 
 .question {
-  background: linear-gradient(45deg, #006BF6, #6CABFE);
+  background: linear-gradient(45deg, #006bf6, #6cabfe);
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -11,7 +12,9 @@ $secondaryColors: rgb(236, 100, 85), rgb(255, 251, 167), rgb(115, 245, 143), rgb
   height: 100vh;
   font-family: $mainFont;
   color: white;
-  h1, h2 {
+  text-align: center;
+  h1,
+  h2 {
     font-size: 2em;
   }
   h1 {
@@ -28,19 +31,49 @@ $secondaryColors: rgb(236, 100, 85), rgb(255, 251, 167), rgb(115, 245, 143), rgb
     box-shadow: 0px 0px 20px #333;
     border-radius: 5px;
     width: 40%;
-    height: 100px;
+    height: auto;
+    min-height: 5rem;
     border: none;
     margin: 25px;
     font-size: 1.5rem;
     cursor: pointer;
-    transition: .5s;
+    transition: 0.5s;
     @for $i from 1 through 4 {
-      &:nth-of-type(4n+#{$i}) {
+      &:nth-of-type(4n + #{$i}) {
         background: nth($primaryColors, $i);
         &:disabled {
           background: nth($secondaryColors, $i);
-        };
-      };
-    };
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .question {
+    height: auto;
+    min-height: 100vh;
+    padding: 0.5rem;
+    h2 {
+      font-size: 1.4rem;
+    }
+    button {
+      font-size: 1.2rem;
+      width: 90vw;
+      margin: 0.5rem 0;
+    }
+  }
+}
+
+@media (max-width: 320px) {
+  .question {
+    h2 {
+      font-size: 1.2rem;
+    }
+    button {
+      font-size: 1rem;
+      width: 90vw;
+      margin: 0.3rem 0;
+    }
   }
 }

@@ -19,6 +19,7 @@
     justify-content: center;
     padding: 1em;
   }
+  
   .question-list {
     max-height: 50%;
     overflow-y: scroll;
@@ -45,13 +46,19 @@
         margin-left: 0;
       }
     }
+    .set-toggle{
+      width: 20px;
+      height: 20px;
+      background-color: green;
+    }
   }
 }
 
 .confirm-btn-holder {
   display: flex;
   justify-content: center;
-  margin-bottom: 15px;
+  margin-bottom: 3rem;
+
 }
 
 .confirm-btn {
@@ -72,4 +79,21 @@
     color: rgb(116, 116, 116);
     cursor: pointer;
   }
+}
+
+@media(min-width: 581px){
+  .set-toggle{
+    display:none;
+  }
+}
+
+@media(max-width: 580px) {
+  .edit-set-page > .hidden{
+    display: none;
+  }
+  .edit-set-page .question-list{
+    width: 100vw;
+    height: 100%;
+  }
+
 }

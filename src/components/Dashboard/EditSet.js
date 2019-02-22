@@ -14,7 +14,8 @@ export default class EditSet extends Component {
       questions: [],
       setID: {},
       junctionID: {},
-      limitReached: false
+      limitReached: false,
+      setToggle: false
     };
   }
 
@@ -48,6 +49,12 @@ export default class EditSet extends Component {
       [prop]: e.target.value
     });
   };
+
+  handleToggle = () => {
+    this.setState({
+      setToggle: !this.state.setToggle
+    })
+  }
 
   checkQuestions = () => {
     if (!this.state.set[0] || !this.state.set[1]) {
@@ -119,26 +126,33 @@ export default class EditSet extends Component {
         <>
       <Header />
       <div className="edit-set-page">
-        <div className="question-list">
+    
           <>
-            <h2>User Set</h2>
-            <div className="confirm-btn-holder">
-              <button className="confirm-btn" onClick={this.checkQuestions}>
-                Confirm
-              </button>
-            </div>
-            <div>{userQuestions}</div>
+             <div className={this.state.setToggle ? 'question-list' : 'question-list hidden'} id='user-set'>
+              <>
+              <button className='set-toggle' onClick={this.handleToggle}></button>
+                <h2>User Set</h2>
+                <div className="confirm-btn-holder">
+                  <button className="confirm-btn" onClick={this.checkQuestions}>
+                    Confirm
+                  </button>
+                </div>
+                <div className="user-questions">{userQuestions}</div>
+              </>
+            </div> 
           </>
-        </div>
-        <hr />
-        <div className="question-list">
-          {this.state.limitReached === false && (
+
             <>
-              <h2>All Questions</h2>
-              <div>{allQuestions}</div>
-            </>
-          )}
-        </div>
+              <div className={!this.state.setToggle ? 'question-list' : 'question-list hidden'} id='all-question-set'>
+              <button className='set-toggle' onClick={this.handleToggle}></button>
+                {this.state.limitReached === false && (
+                  <>
+                    <h2>All Questions</h2>
+                    <div className="all-questions">{allQuestions}</div>
+                  </>
+                )}
+              </div>
+          </>
       </div>
       </>
     );

@@ -83,6 +83,7 @@ $duration: 1000;
 
 .question-info {
   margin-top: 5rem;
+  text-align: center;
 }
 
 .results-question-display {
@@ -159,4 +160,8 @@ $duration: 1000;
     background: #ea3546;
     outline: none;
   }
+}
+
+@media(max-width: 360px){
+  
 }
