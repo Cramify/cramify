@@ -126,11 +126,10 @@ export default class EditSet extends Component {
         <>
       <Header />
       <div className="edit-set-page">
-    
           <>
              <div className={this.state.setToggle ? 'question-list' : 'question-list hidden'} id='user-set'>
               <>
-              <button className='set-toggle' onClick={this.handleToggle}></button>
+              <button className='set-toggle' onClick={this.handleToggle}>All Questions</button>
                 <h2>User Set</h2>
                 <div className="confirm-btn-holder">
                   <button className="confirm-btn" onClick={this.checkQuestions}>
@@ -141,10 +140,9 @@ export default class EditSet extends Component {
               </>
             </div> 
           </>
-
             <>
               <div className={!this.state.setToggle ? 'question-list' : 'question-list hidden'} id='all-question-set'>
-              <button className='set-toggle' onClick={this.handleToggle}></button>
+              <button className='set-toggle' onClick={this.handleToggle}>Your Set</button>
                 {this.state.limitReached === false && (
                   <>
                     <h2>All Questions</h2>
