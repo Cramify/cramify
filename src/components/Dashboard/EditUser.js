@@ -97,7 +97,6 @@ class EditUser extends Component {
   }
 
   render() {
-    console.log(this.props)
     return (
       <div className="modal">
         <div className="content">
