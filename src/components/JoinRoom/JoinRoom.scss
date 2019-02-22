@@ -98,11 +98,11 @@
     }
 
     h2 {
-      font-size: 7rem;
+      font-size: 5rem;
     }
 
     .guest-name-input {
-      font-size: 3rem;
+      font-size: 2rem;
     }
 
     input {
@@ -120,7 +120,7 @@
     }
 
     h2 {
-      font-size: 5.5rem;
+      font-size: 4.5rem;
     }
 
     input {
@@ -128,12 +128,25 @@
     }
 
     .guest-name-input {
-      font-size: 2.5rem;
+      font-size: 2rem;
     }
   }
 }
 
-@media(min-width: 415px){
+@media(max-width: 515px){
+  .join-room {
+
+    input {
+      font-size: 2.5rem;
+    }
+
+    .guest-name-input {
+      font-size: 1.8rem;
+    }
+  }
+}
+
+@media(max-width: 415px){
   .join-room {
 
     input {
