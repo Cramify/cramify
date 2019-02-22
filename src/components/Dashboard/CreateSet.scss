@@ -48,6 +48,19 @@
     width: 50vw;
     padding: 1rem;
     position: relative;
+    .toggle-button {
+      position: absolute;
+      right: 0;
+      height: 3rem;
+      width: 6rem;
+      margin: 0.4rem;
+      border-radius: 0.4em;
+      background: transparent;
+      border: 1px #0d89f3 solid;
+      height: 2.5em;
+      width: 6em;
+      
+    }
     .question-to-display {
       display: flex;
       // flex-direction: row;
@@ -113,7 +126,7 @@
   cursor: pointer;
   padding: 0 21px;
   outline: 0;
-  border: 1px outset #4b4c53;
+  border: 1px outset #0d89f3;
   border-radius: 36px;
   background: #e6e6e6;
   color: #4b4c53;
@@ -135,8 +148,7 @@
   pointer-events: none;
 }
 .select_arrow {
-  position: absolute;
-  top: 9px;
+  position: relative;
   right: 23px;
   width: 0px;
   height: 0px;
@@ -154,4 +166,118 @@
 }
 .select select:disabled ~ .select_arrow {
   border-top-color: #cccccc;
+}
+
+@media(max-width: 955px) {
+  .create-set-page .question-list .back-button {
+    margin-top: 3.7em;
+    margin-bottom: 0;
+  }
+}
+
+@media(min-width: 760px) {
+  .create-set-page .toggle-button {
+    display: none;
+  }
+}
+
+@media(max-width: 760px) {
+  .create-set-page .hidden {
+    display: none;
+  }
+  .create-set-page .question-list {
+    width: 70vw;
+  }
+}
+
+@media(max-width: 640px) {
+  .create-set-page .question-list .title {
+    font-size: 1.7rem;
+  }
+}
+
+@media(max-width: 570px) {
+  .create-set-page .question-list .title {
+    font-size: 1.4rem;
+  }
+}
+
+@media(max-width: 520px) {
+  .create-set-page .question-list {
+    width: 100%;
+    .toggle-button {
+      padding: 0;
+      width: 5.4em;
+      top: 4.8em;
+      height: 2.2em;
+    }
+    div {
+      select {
+      padding: 0 10px;
+      width: 69%;
+      font-size: 0.8rem;
+      height: 2.2em;
+      }
+      .select_arrow {
+        right: 48px;
+      }
+    }
+  }
+  .select {
+    margin-left: 3.6rem;
+  }
+}
+
+@media(max-width: 475px) {
+  .create-set-page .question-list {
+    .question-to-display {
+      font-size: 0.75rem;
+    }
+    .toggle-button {
+      padding: 0;
+      width: 5.4em;
+      top: 5.65em;
+      height: 2.2em;
+      font-size: 0.7rem;
+    }
+    .back-button {
+      font-size: 0.75rem;
+      top: 2.25em;
+      height: 1.85em;
+      width: 4em;
+    }
+    div {
+      select {
+      padding: 3px;
+      min-width: 120px;
+      height: 1.85em;
+      }
+      // .select_arrow {
+      //   right: 34px;
+      // }
+    }
+  }
+  .select {
+    margin-left: 4.5rem;
+    width: 50%;
+  }
+}
+
+@media (max-width: 414px) {
+  .select {
+    margin-left: 3.5rem;
+  }
+}
+
+@media (max-width: 350px) {
+  .create-set-page .question-list {
+    div {
+      select {
+      min-width: 105px;
+      }
+    }
+    .select {
+      margin-left: 3rem;
+    }
+  }
 }
