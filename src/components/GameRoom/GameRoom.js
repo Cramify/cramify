@@ -25,7 +25,8 @@ class GameRoom extends Component {
       currentQuestion: 0,
       showTimer: true,
       questionGrade: null,
-      pointsWon: 0
+      pointsWon: 0,
+      rooms: []
     };
     this.socket = io.connect(':4000');
     this.socket.on("display name response", data => this.displayName(data));
@@ -62,6 +63,19 @@ class GameRoom extends Component {
         }
       }
     }
+    
+    const rooms = await axios.get('/game/rooms');
+    const roomArr = [];
+    roomArr.push(rooms)
+    // eslint-disable-next-line 
+    roomArr.map((room, i) => {
+      if(room.room_id === this.props.roomID){
+        this.setState({rooms: room[i]})
+      }
+    })
+
+    console.log(this.state.rooms)
+
 
     // Get user info, if none exists set as guest
     if (this.props.user.username) {
@@ -80,7 +94,9 @@ class GameRoom extends Component {
     await this.socket.emit("display name", {
       room: this.props.roomID,
       username: this.state.currentUser,
-      setID: this.state.setID
+      setID: this.state.setID,
+      roomName: this.state.rooms
+      // roomName: this.state.rooms
     });
   };
 
@@ -221,6 +237,7 @@ class GameRoom extends Component {
           <div className="waiting-room">
             <div className="waiting-room-heading">
               {this.props.creator ? <h2>Waiting for More Players</h2> : <h2>Waiting for Game to Start</h2>}
+              <h2>Room Name</h2>
               <h3>Room ID: {this.props.roomID}</h3>
               <h4>Share this number so others can join the game!</h4>
               <div className='beginButtonHolder'>

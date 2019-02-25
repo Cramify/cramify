@@ -96,17 +96,20 @@ class DashBoard extends Component {
     });
   };
 
-  createRoom = setID => {
+  createRoom = async (setID, setName) => {
+
+    await axios.post('/game/room/add', {roomID: this.state.roomID, setName})
     this.props.updateRoomID(this.state.roomID);
     this.props.updateCreator();
     this.props.history.push(`/gameroom?${setID}`);
+
   };
 
   render() {
     let sets = this.state.sets.map((set, i) => {
       return (
         <div
-          onClick={() => this.createRoom(set.set_id)}
+          onClick={() => this.createRoom(set.set_id, set.set_name)}
           className="set-card"
           key={i}
         >
