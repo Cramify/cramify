@@ -19,7 +19,8 @@ module.exports = {
             let currentUserScore = await db.get_user_score({id: Number(id)});
             let newTotalPoints = currentUserScore[0].score + points;
             let updatedPoints = await db.edit_score({score: newTotalPoints, id: id})
-            res.status(200).send(updatedPoints)
+            req.session.user.score += points;
+            res.status(200).send(req.session.user)
         }
     },
     getRanking: async (req, res) => {
