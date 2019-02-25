@@ -65,7 +65,7 @@ class Results extends Component {
             {/* <h2> */}
               {this.props.usersArr.sort((a,b) => b.points - a.points).map(user => {
                 return (
-                  <div className="player-scores" key={user.playerID}>
+                  <div className="player-scores" key={` user: ${user.playerID}`}>
                     <p className="results-player-info">{user.username}</p>
                     <p className="results-player-info">{user.points}</p>
                   </div>
