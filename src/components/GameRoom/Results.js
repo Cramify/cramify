@@ -4,6 +4,7 @@ import Confetti from './Confetti';
 import {Link} from 'react-router-dom'
 import axios from 'axios';
 import {connect} from 'react-redux';
+import {updateUser} from '../../ducks/reducer';
 import Swal from 'sweetalert2'
 
 
@@ -29,9 +30,10 @@ class Results extends Component {
         return this.props.myID === user.playerID;
       });
       if (this.props.user !== {}) {
-        await axios.put(`./user/points/${this.props.user.id}`, {
+        const updatedUserPoints = await axios.put(`./user/points/${this.props.user.id}`, {
           points: Number(this.props.usersArr[index].points)
         });
+        this.props.updateUser(updatedUserPoints.data)
       }
     } else {
       Swal.fire({
@@ -46,6 +48,7 @@ class Results extends Component {
   }
 
   render() {
+    console.log(this.props.user)
     return (
       <div className={this.props.questionGrade === 'correct' ? "results correct-answer" : "results incorrect-answer"}>
         <div className="question-info">
@@ -94,4 +97,4 @@ class Results extends Component {
 
 const mapStateToProps = store => store;
 
-export default connect(mapStateToProps)(Results);
+export default connect(mapStateToProps, {updateUser})(Results);
