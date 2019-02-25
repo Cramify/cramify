@@ -27,6 +27,7 @@ export default class OpenRooms extends Component {
         const rooms = this.state.rooms.map(room => {
             return(
                 <div className='game' key={room.room_id}>
+                    <h1 className='gameCode'>{room.room_name}</h1>
                     <h1 className='gameCode'>{room.game_code}</h1>
                     <button className='joinBtn' onClick={()=>this.props.openRoomJoin(room.game_code)}>Join Game</button>
                 </div>

@@ -45,9 +45,10 @@ module.exports = {
     addOpenRoom: async (req,res) => {
         const db = req.app.get('db');
         const {id} = req.session.user;
-        const {roomID} = req.body;
+        const {roomID, setName} = req.body;
+        console.log(req.body)
         try{
-            const addRooms = await db.add_open_rooms({room_id: roomID, user_id: id})
+            const addRooms = await db.add_open_rooms({room_id: roomID, user_id: id, room_name: setName})
             res.status(200).send(addRooms)
         }catch(e){console.log(e)}
     },

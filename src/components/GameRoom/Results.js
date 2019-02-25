@@ -9,6 +9,7 @@ import Swal from 'sweetalert2'
 
 
 class Results extends Component {
+  
   async componentDidMount() {
     if (!this.props.timerDisplay) {
       let leader = await this.props.usersArr.sort(function(a, b) {

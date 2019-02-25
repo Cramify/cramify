@@ -8,9 +8,8 @@ class CreateRoom extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      roomName: "",
       sets: [],
-      roomID: null
+      roomID: null,
     };
   }
 
@@ -30,9 +29,9 @@ class CreateRoom extends Component {
     })
   };
 
-  createRoom = async (setID) => {
+  createRoom = async (setID, setName) => {
     this.props.updateRoomID(this.state.roomID);
-      await axios.post('/game/room/add', {roomID: this.state.roomID})
+      await axios.post('/game/room/add', {roomID: this.state.roomID, setName})
     this.props.updateCreator();
     this.props.history.push(`/gameroom?${setID}`);
   };
@@ -48,7 +47,7 @@ class CreateRoom extends Component {
       return (
         <div className='set' key={i}>
           <div className='set-name'>{set.set_name}</div> {/* Seperate sets by admin/user*/}
-          <div className='create-button' onClick={() => this.createRoom(set.set_id)}>Create Room</div>
+          <div className='create-button' onClick={() => this.createRoom(set.set_id, set.set_name)}>Create Room</div>
         </div>
       )
     })
