@@ -27,7 +27,7 @@ class GameRoom extends Component {
       questionGrade: null,
       pointsWon: 0
     };
-    this.socket = io.connect(':4000');
+    this.socket = io.connect({secure: true});
     this.socket.on("display name response", data => this.displayName(data));
     this.socket.on("update users array", data => this.updateUsersArr(data));
     this.socket.on("run begin function", data => this.startGame());

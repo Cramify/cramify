@@ -98,7 +98,7 @@ io.on("connection", socket => {
     socket.to(data.room).broadcast.emit('run begin function', data)
     gameInterval = setInterval(() => {
       io.to(data.room).emit('next question', data)
-    }, 20000)
+    }, 25000)
 
     // console.log('game start')
   })
