@@ -190,31 +190,12 @@ $duration: 1000;
   }
 }
 
-@media(max-width: 320px){
-  .question-info {
-    margin-top: 2rem;
-  }
-
-  .results-question-display {
-    font-size: 1.7rem;
-  }
-
-  .results-answer-display {
-    font-size: 1.3rem;
-  }
-
-  .results-score {
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .player-scores {
-    width: 80vw;
-  }
-}
-
-
 @media(max-width: 414px){
+  .results {
+    min-height: 100vh;
+    padding: 50px 1rem;
+    justify-content: flex-start;
+  }
   .question-info {
     margin-top: 2rem;
   }
@@ -234,5 +215,33 @@ $duration: 1000;
 
   .player-scores {
     width: 70vw;
+  }
+}
+
+@media(max-width: 320px){
+  .results {
+    min-height: 100vh;
+    padding: 50px 1rem;
+    justify-content: flex-start;
+  }
+  .question-info {
+    margin-top: 2rem;
+  }
+
+  .results-question-display {
+    font-size: 1.7rem;
+  }
+
+  .results-answer-display {
+    font-size: 1.3rem;
+  }
+
+  .results-score {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .player-scores {
+    width: 80vw;
   }
 }

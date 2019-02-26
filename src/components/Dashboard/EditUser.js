@@ -108,8 +108,8 @@ class EditUser extends Component {
           <div className="user-input">
             <input
               id="edit-user-input"
-              onKeyDown={e => this.handleKeyDown(e)}
               value={this.state.username}
+              onKeyDown={e => this.handleKeyDown(e)}
               placeholder="Username"
               onChange={e => this.handleInput("username", e)}
               type="text"

@@ -73,6 +73,9 @@ module.exports = {
     if (newPassword) {
       const salt = bcrypt.genSaltSync(10)
       hash = bcrypt.hashSync(newPassword, salt)
+    } else {
+      const salt = bcrypt.genSaltSync(10)
+      hash = bcrypt.hashSync(oldPassword, salt)
     }
     const result = await db.edit_account({
       email,

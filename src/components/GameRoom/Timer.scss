@@ -4,13 +4,15 @@
   align-items: center;
 }
 
-@media(max-width: 500px) {
+@media (max-width: 500px) {
   .react-countdown-clock {
     height: 70px;
     width: 70px;
     canvas {
-    height: 70px !important;
-    width: 70px !important;
+      height: 70px !important;
+      width: 70px !important;
+      margin: 0;
+      padding: 0;
+    }
   }
-}
 }

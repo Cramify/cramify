@@ -58,9 +58,9 @@ $secondaryColors: rgb(236, 100, 85), rgb(255, 251, 167), rgb(115, 245, 143),
 
 @media (max-width: 500px) {
   .question {
-    height: auto;
     min-height: 100vh;
-    padding: 0.5rem;
+    padding: 50px 1rem;
+    justify-content: flex-start;
     h2 {
       font-size: 1.4rem;
     }
@@ -68,12 +68,19 @@ $secondaryColors: rgb(236, 100, 85), rgb(255, 251, 167), rgb(115, 245, 143),
       font-size: 1.2rem;
       width: 90vw;
       margin: 0.5rem 0;
+      min-height: 2rem;
+      padding: 1rem;
     }
   }
 }
 
 @media (max-width: 320px) {
   .question {
+    padding: 50px 1rem;
+    justify-content: flex-start;
+    h1 {
+      display: none;
+    }
     h2 {
       font-size: 1.2rem;
     }
@@ -81,6 +88,7 @@ $secondaryColors: rgb(236, 100, 85), rgb(255, 251, 167), rgb(115, 245, 143),
       font-size: 1rem;
       width: 90vw;
       margin: 0.3rem 0;
+      padding: 1rem;
     }
   }
 }
