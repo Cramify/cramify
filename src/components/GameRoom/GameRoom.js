@@ -27,7 +27,7 @@ class GameRoom extends Component {
       questionGrade: null,
       pointsWon: 0
     };
-    this.socket = io.connect({ secure: true });
+    this.socket = io.connect(':4000');
     this.socket.on("display name response", data => this.displayName(data));
     this.socket.on("update users array", data => this.updateUsersArr(data));
     this.socket.on("run begin function", data => this.startGame());
@@ -103,7 +103,7 @@ class GameRoom extends Component {
     if (this.props.creator) {
       axios.delete(`/game/room/delete/${this.props.roomID}`)
       this.props.destroyCreator();
-      await this.socket.emit("host has left", { room: this.state.roomID });
+      // await this.socket.emit("host has left", { room: this.state.roomID });
     }
     // eslint-disable-next-line
     this.state.users.map((user, i) => {

@@ -15,6 +15,9 @@ export default class Question extends Component{
     }
 
     componentDidMount = () => {
+        window.addEventListener('load', () => {
+            window.scrollTo(0,1)
+        })
         let answers = [];
         let newAnswers = [];
         if (this.props.questionData.answer_4) {

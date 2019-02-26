@@ -123,7 +123,6 @@ export default class CreateSet extends Component {
   }
 
   render() {
-    console.log(this.state.setToggle)
     let questions = this.state.questions.map((question, i) => {
       return (
         <div
