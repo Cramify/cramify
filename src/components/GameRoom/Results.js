@@ -4,10 +4,12 @@ import Confetti from './Confetti';
 import {Link} from 'react-router-dom'
 import axios from 'axios';
 import {connect} from 'react-redux';
+import {updateUser} from '../../ducks/reducer';
 import Swal from 'sweetalert2'
 
 
 class Results extends Component {
+  
   async componentDidMount() {
     if (!this.props.timerDisplay) {
       let leader = await this.props.usersArr.sort(function(a, b) {
@@ -28,9 +30,10 @@ class Results extends Component {
         return this.props.myID === user.playerID;
       });
       if (this.props.user !== {}) {
-        await axios.put(`./user/points/${this.props.user.id}`, {
+        const updatedUserPoints = await axios.put(`./user/points/${this.props.user.id}`, {
           points: Number(this.props.usersArr[index].points)
         });
+        this.props.updateUser(updatedUserPoints.data)
       }
     } else {
       Swal.fire({
@@ -45,15 +48,9 @@ class Results extends Component {
   }
 
   render() {
+    console.log(this.props.user)
     return (
       <div className={this.props.questionGrade === 'correct' ? "results correct-answer" : "results incorrect-answer"}>
-        {/* {this.props.timerDisplay ? (
-          <div className='timer'>
-          <Timer timerFn={this.props.nextQFn} time={5} size={100}/>
-          </div>
-        ) : (
-          <p />
-        )} */}
         <div className="question-info">
           <h1 className="results-question-display">
             {this.props.questionData.question}
@@ -69,7 +66,7 @@ class Results extends Component {
             {/* <h2> */}
               {this.props.usersArr.sort((a,b) => b.points - a.points).map(user => {
                 return (
-                  <div className="player-scores" key={user.playerID}>
+                  <div className="player-scores" key={` user: ${user.playerID}`}>
                     <p className="results-player-info">{user.username}</p>
                     <p className="results-player-info">{user.points}</p>
                   </div>
@@ -80,7 +77,6 @@ class Results extends Component {
           <br />
         </div>
       {!this.props.timerDisplay && (
-        // TODO: Add points to db on this button click
         <div>
           <Confetti />
           {this.props.user.id ? (
@@ -101,4 +97,4 @@ class Results extends Component {
 
 const mapStateToProps = store => store;
 
-export default connect(mapStateToProps)(Results);
+export default connect(mapStateToProps, {updateUser})(Results);

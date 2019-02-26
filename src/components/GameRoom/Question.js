@@ -10,7 +10,8 @@ export default class Question extends Component{
             question: [],
             correctAnswer: '',
             answerArray: [],
-            startTime: null
+            startTime: null,
+            showAnswers: false
         }
     }
 
@@ -58,26 +59,32 @@ export default class Question extends Component{
         }
     }
 
+    displayAnswers = () => {
+        this.setState({
+            showAnswers: !this.state.showAnswers
+        })
+    }
+
     render(){
         const answers = this.state.answerArray.map((answer, i) => (
-            <button onClick={() => this.answerQuestion(i+1)}>{this.state.answerArray[i]}</button>
+            <button key={`answer ${i}`} onClick={() => this.answerQuestion(i+1)}>{this.state.answerArray[i]}</button>
         ))
         const disabledAnswers = this.state.answerArray.map((answer, i) => (
-            <button disabled>{this.state.answerArray[i]}</button>
+            <button key={`disabled ${i}`} disabled>{this.state.answerArray[i]}</button>
         ))
         return(
             <div className='question'>
                 <h1>Question:</h1>
                 <h2>{this.props.questionData.question}</h2>
                 {/* Timer Display */}
-                <Timer timerFn={this.props.toResFn} time={15} size={100}/>
+                <Timer timerFn={!this.state.showAnswers ? this.displayAnswers : this.props.toResFn} time={!this.state.showAnswers ? 5 : 15} size={100}/>
                 {/* Display Answers. If user has answered, disable buttons */}
                 {!this.state.didAnswer ? (
-                    <div className='answers'>
+                    <div className={!this.state.showAnswers ? 'hideAnswers' : 'showAnswers'}>
                         {answers}
                     </div>
                     ) :
-                    <div className='answers'>
+                    <div className='showAnswers'>
                         {disabledAnswers}
                     </div>
                 }
