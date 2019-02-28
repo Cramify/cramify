@@ -46,8 +46,8 @@ export default class Question extends Component{
 
     answerQuestion = (num) => {
         const answerTime = Date.now();
-        const scoreToAdd = Math.floor((1600 - ((answerTime - this.state.startTime)) / 10))
-        // score to add is currently set for the logic of a 5 second timer (adds 175 points for correct answer + time left)
+        const scoreToAdd = Math.floor((2050 - ((answerTime - this.state.startTime)) / 10))
+        // score to add is currently set for the logic of a 5 second timer (adds 50 points for correct answer + time left)
         this.setState({
             didAnswer: true,
             startTime: null
